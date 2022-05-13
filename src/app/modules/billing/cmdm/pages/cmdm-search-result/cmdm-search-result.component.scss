@@ -1,0 +1,572 @@
+table {
+  width: 100%;
+}
+
+//mat-divider font
+.mat-divider {
+  border-top-color: #27ae60;
+  border-top-width: 1px;
+}
+
+//For each form fields.
+.form-control:hover {
+  border-color: #27ae60;
+  box-shadow: none;
+}
+.form-control:focus {
+  box-shadow: none;
+  border: 0.07rem solid #27ae60;
+}
+
+.mat-form-field:hover {
+  border-color: #27ae60;
+  box-shadow: none;
+}
+
+.mat-form-field:focus {
+  box-shadow: none;
+  border: 0.07rem solid #27ae60;
+}
+
+.contol-label {
+  padding-left: 0px;
+}
+.mat-content-label {
+  padding-top: 14px;
+  font-weight: 700;
+  font-size: 11.52px;
+}
+//for mat-date
+.date-form-control {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+  font-size: 11.52px;
+  justify-content: center;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+//for each field
+.form-control {
+  text-transform: uppercase;
+  width: 100%;
+  box-shadow: 0px 0.1rem 0.2rem #00000029;
+  border: 0.05rem solid #6a6868;
+  border-radius: 0px;
+  height: 1.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 11.52px;
+  text-transform: uppercase;
+}
+
+.form-control:disabled {
+  background-color: white;
+  border: none;
+  box-shadow: none;
+}
+
+mat-expansion-panel-header:hover {
+  background-color: white !important;
+}
+
+//for expansion panel
+.mat-expansion-panel-header {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: grey;
+  border-radius: 0px;
+  padding: 0px;
+}
+
+.mat-expansion-panel-header.mat-expanded {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #27ae60;
+  border-radius: 0px;
+  color: #27ae60;
+}
+
+.mat-card.header {
+  margin-left: 0px !important;
+  padding-left: 0px !important;
+}
+
+.no-padding {
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+    font-size: 12px;
+    justify-content: left;
+  }
+}
+
+.w-2per{
+  flex: 0 0 2% !important;
+}
+
+.w-5per{
+  flex: 0 0 5% !important;
+}
+
+.w-6per{
+  flex: 0 0 6% !important;
+}
+
+.w-8per{
+  flex: 0 0 8% !important;
+}
+
+.w-10per{
+  flex: 0 0 10% !important;
+}
+
+.w-9per{
+  flex: 0 0 9% !important;
+}
+
+.w-11per{
+  flex: 0 0 11% !important;
+}
+
+.w-16per{
+  flex: 0 0 16% !important;
+}
+
+.w-42per{
+  flex: 0 0 42% !important;
+}
+
+.w-50per{
+  flex: 0 0 50% !important;
+}
+.w-14per{
+  flex: 0 0 14% !important;
+}
+.w-12per{
+  flex: 0 0 20% !important;
+}
+
+.w-14per{
+  flex: 0 0 20% !important;
+}
+.w-20per{
+  flex: 0 0 20% !important;
+}
+
+.ng-select.ngSelectCustom {
+  position: absolute !important;
+  max-width: inherit !important;
+  min-width: 15%  !important;;
+  .ng-dropdown-panel {
+    width: auto !important;
+  }
+}
+
+hr.divider { 
+  margin-top: 0px;
+  margin-bottom: 5px;
+  }
+
+.mat-cell:first-of-type {
+  padding-left: 0px;
+}
+
+.mat-header-cell:first-of-type {
+  padding-left: 0px;
+}
+
+.mat-footer-cell:first-of-type {
+  padding-left: 0px;
+}
+
+// .mat-cell,
+// .mat-footer-cell {
+//   padding-right: 5px !important;
+// }
+
+.mat-footer-row,
+.mat-row {
+  min-height: 30px;
+//  text-transform: uppercase;
+  font-size: 11.52px !important;
+}
+
+.mat-paginator {
+  display: unset;
+}
+
+.mat-header-cell:last-of-type {
+  padding-right: 10px;
+}
+
+.mat-footer-cell:last-of-type {
+  padding-right: 10px;
+}
+
+.input-label {
+  font-weight: bold;
+  font-size: 11.52px !important;
+}
+
+// For label value fields
+.value-label{
+  font-size: 11.52px;
+  text-transform: uppercase;
+}
+
+.input-md1 {
+  padding-left: 0.6rem;
+}
+.toolbar-button {
+  padding: 0;
+}
+.mat-header-cell {
+  display: flex;  
+  justify-content: left;
+  background-color: #f3f3f3;
+  min-height: 40px;
+}
+.mat-header-row {
+  min-height: 25px;
+}
+
+.mat-cell,.mat-footer-cell {
+  // display: flex;
+  justify-content: left;
+  // min-height: 25px;
+  word-break: break-all;
+}
+::ng-deep .mat-datepicker-toggle-default-icon {
+  margin-bottom: 5px !important ;
+}
+
+h2 {
+  margin-bottom: 0px !important;
+  margin-left: 5px;
+}
+
+.input-value {
+  font-size: 11.52px;
+}
+
+/* focused color */
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: white;
+  box-shadow: none;
+  border: 0.07rem solid #27ae60;
+}
+
+/* focused color */
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: white;
+  box-shadow: none;
+  border: 0.07rem solid #27ae60;
+}
+
+::ng-deep {
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: white;
+    border: 0.05rem solid #6a6868;
+    box-shadow: 0px 0.1rem 0.2rem #00000029;
+    border-radius: 0px;
+    padding: 0px;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-flex {
+    padding: 0px !important;
+    height: 1.6rem !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0px !important;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-flex {
+    align-items: center !important;
+  }
+}
+// for small screen
+@media screen and (max-width: 960px) {
+  .mat-table {
+    border: 0;
+    vertical-align: middle;
+  }
+
+  .mat-table caption {
+    font-size: 1em;
+  }
+
+  .mat-table .mat-header-cell {
+    border: 10px solid;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .mat-table .mat-row {
+    border-bottom: 5px solid #ddd;
+    display: block;
+  }
+
+  .mat-table .mat-cell {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    text-align: right;
+    font-weight: bold;
+    min-height: 30px;
+    font-size: 11.52px !important;
+  }
+
+  .mat-cell.mat-column-expDt {
+    height: 60px !important;
+  }
+  .mat-cell.mat-column-expiryDt {
+    height: 60px !important;
+  }
+
+  .mat-table .mat-cell:before {
+    content: attr(data-label);
+    float: left;
+    text-transform: inherit;
+    font-weight: normal;
+    font-size: 11.52px !important;
+  }
+  .mat-table .mat-cell:last-child {
+    border-bottom: 0;
+  }
+  .mat-table .mat-cell:first-child {
+    margin-top: 4%;
+  }
+}
+
+//to mark the mandatory fields
+label.asterisk-if-mandatory::after {
+  content: " *";
+  color: red;
+}
+
+.row-color-green {
+  background-color: #ddffe4;
+}
+
+.amount-text-padding {
+  padding-right: 0.6rem;
+}
+
+.checkbox-margin {
+  margin: 0 10px;
+}
+
+.excel-img{
+  cursor:pointer;
+}
+
+.excel-label{
+  padding-left: 3px;
+  padding-bottom: 0px;
+  color: #27AE60;
+  font-size: 11.52px;
+}
+
+ //text wrap for tooltip
+ mat-cell>span.truncate-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+::ng-deep .custom-1-tooltip {
+   position: relative;
+   background-color: #27ae60;
+   word-wrap: break-word;
+   color: #f3f3f3;
+   text-align: center;
+   white-space: pre-line;
+   width: 220px;
+}
+
+//for tooltip
+::ng-deep .custom-tooltip {
+  background-color: #27ae60;
+  color: #f3f3f3;
+}
+
+// set table values
+.mat-cell.mat-column-lineNumber {
+  min-width: 5% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-lineNumber {
+  min-width: 5% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-billNumber {
+  min-width: 8% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-billNumber {
+  min-width: 8% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-waybillNumber {
+  min-width: 10% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-waybillNumber {
+  min-width: 10% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-billDt {
+  min-width: 8% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-billDt {
+  min-width: 8% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-outstandingAmt {
+  min-width: 5% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-outstandingAmt {
+  min-width: 5% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-actualoutstandingAmt {
+  min-width: 8% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-actualoutstandingAmt {
+  min-width: 8% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-collBr {
+  min-width: 10% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-collBr {
+  min-width: 10% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-amount {
+  min-width: 8% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-amount {
+  min-width: 8% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-reason {
+  min-width: 16% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-reason {
+  min-width: 16% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-remark {
+  min-width: 8% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-remark {
+  min-width: 8% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-taxableAmount {
+  min-width: 6% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-taxableAmount {
+  min-width: 6% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-sgst {
+  min-width: 4% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-sgst {
+  min-width: 4% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-cgst {
+  min-width: 4% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-cgst {
+  min-width: 4% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-igst {
+  min-width: 4% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-igst {
+  min-width: 4% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-footer-cell.mat-column-total {
+  min-width: 61.5% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-footer-cell.mat-column-totalAmount {
+  min-width: 15.5% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-footer-cell.mat-column-totalTaxableAmount {
+  min-width: 5% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-footer-cell.mat-column-totalSgst {
+  min-width: 5% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-footer-cell.mat-column-totalCgst {
+  min-width: 5% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-footer-cell.mat-column-gTotal {
+  min-width: 61.5% !important;
+  font-size: 11.52px !important;
+}

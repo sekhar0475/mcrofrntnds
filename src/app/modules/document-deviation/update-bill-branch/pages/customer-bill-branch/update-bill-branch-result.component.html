@@ -1,0 +1,82 @@
+<mat-accordion>
+    <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+        <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <span class="mat-content-label">Update Submission / Collection / Alternative Collection
+                Branch</span>
+        </mat-expansion-panel-header>
+        <hr class="divider">
+        <div class="form-row">
+            <div class="col-md-12 text-left">
+                <mat-table [dataSource]="dataSource" class="mat-elevation-z0" matSort>
+                    <!-- Checkbox Column -->
+                    <ng-container matColumnDef="select">
+                        <mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                [aria-label]="checkboxLabel()">
+                            </mat-checkbox>
+                        </mat-header-cell>
+                        <mat-cell data-label="Select" *matCellDef="let row">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
+                                [aria-label]="checkboxLabel(row)">
+                            </mat-checkbox>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!--  Bill Number Column -->
+                    <ng-container matColumnDef="billNumber">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Bill Number</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Bill Number">{{element.billNumber}}</mat-cell>
+                    </ng-container>
+
+                    <!-- MSA/SFX/RATE Card Column -->
+                    <ng-container matColumnDef="blngLevelValue">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>MSA/SFX/RATE Card</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="MSA/SFX/RATE Card">{{element.blngLevelValue}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Customer Name Column -->
+                    <ng-container matColumnDef="customerName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Customer Name</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Customer Name">{{element.customerName}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Submission Branch Column -->
+                    <ng-container matColumnDef="submsnBrName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Submission Branch</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Submission Branch">{{element.submsnBrName}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Collection Branch Column -->
+                    <ng-container matColumnDef="colBrName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Collection Branch</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Collection Branch">{{element.colBrName}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Alternative Branch column -->
+                    <ng-container matColumnDef="altrBrName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Alternative Branch</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Alternative Branch">{{element.altrBrName}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns">
+                    </mat-row>
+                </mat-table>
+            </div>
+        </div>
+        <div class="form-row" [style.margin-top]="'12px'">
+            <div class="col-md-12 text-center footer-button-padding" style="margin-bottom: 0.3rem;">
+                <button mat-raised-button color="primary" [disabled]="selection.selected.length === 0"
+                    (click)="changeBranch()">Change Branch</button>
+            </div>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

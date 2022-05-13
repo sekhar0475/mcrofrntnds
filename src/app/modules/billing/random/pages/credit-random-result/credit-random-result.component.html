@@ -1,0 +1,112 @@
+<mat-accordion>
+    <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+        <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <span class="mat-content-label">Random Waybills Result</span>
+        </mat-expansion-panel-header>
+        <hr class="divider">
+        <div class="form-row">
+            <div class="col-md-12 text-left">
+                <!-- <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                <input class="form-control input-md1" matInput type="text" placeholder="waybill numbers" [(ngModel)]="waybillNumbers">
+                <a mat-button style="margin-top: -10px;" (click)="applyFilter()">
+                    <img class="png-icon" src="../../../../../../assets/icons/icons8-circled-right-24.png"
+                      class="img-icon" />
+                  </a>
+                </div> -->
+
+                <!-- <hr class="green-border-heading"> -->
+                <mat-table [dataSource]="dataSource" class="mat-elevation-z0" matSort>
+
+                     <!-- Checkbox Column -->
+                     <ng-container matColumnDef="select">
+                        <mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                [aria-label]="checkboxLabel()">
+                            </mat-checkbox>
+                        </mat-header-cell>
+                        <mat-cell data-label="Select" *matCellDef="let row">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(row) : null"
+                                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                            </mat-checkbox>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Waybill Number Column -->
+                    <ng-container matColumnDef="waybillNumber">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Waybill Number</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Waybill Number">
+                            {{element.waybillNumber}}</mat-cell>
+                    </ng-container>
+
+                    <!-- Sfx Code Column -->
+                    <ng-container matColumnDef="sfxCode">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>SFX Code</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="SFX Code">{{element.sfxCode}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Pickup Date Column -->
+                    <ng-container matColumnDef="pickupDate">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Pickup Date</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Pickup Date">
+                            {{element.pickupDate | date:'dd-MMM-yyyy'}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Origin Column -->
+                    <ng-container matColumnDef="originCode">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Origin</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Origin">{{element.originCode}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Destination Column -->
+                    <ng-container matColumnDef="destinationCode">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Destination</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Destination">
+                            {{element.destinationCode}}</mat-cell>
+                    </ng-container>
+
+                    <!-- Qty Column -->
+                    <ng-container matColumnDef="qty">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Qty</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Qty"></mat-cell>
+                    </ng-container>
+
+                    <!-- Pkg Column -->
+                    <ng-container matColumnDef="pkg">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Pkg</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Pkg">{{element.pkg}}</mat-cell>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="weight">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Weight</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Weight">{{element.weight}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Amount Column -->
+                    <ng-container matColumnDef="outstandingAmount">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Amount</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Amount">
+                            {{element.outstandingAmount}}</mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedWayBillColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedWayBillColumns"></mat-row>
+                </mat-table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+            </div>
+        </div>
+        <div class="form-row" [style.margin-top]="'12px'">
+            <div class="col-md-12 text-center footer-button-padding" style="margin-bottom:0.3rem;">
+                <button mat-raised-button  (click)="reset()">Reset</button>
+                <button mat-raised-button style="margin-left: 0.3rem" (click)="submit()" color="primary">Submit</button>
+            </div>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

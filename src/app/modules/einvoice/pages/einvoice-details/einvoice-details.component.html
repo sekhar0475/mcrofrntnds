@@ -1,0 +1,583 @@
+<div class="inner-page-padding">
+    <h2 style="font-size:0.9rem;font-weight: 600;">Invoice Details</h2>
+
+    <app-breadcrumb></app-breadcrumb>
+
+    <form class="edit-invoice" #myForm="ngForm" [formGroup]="editFormGroup">
+
+        <mat-card fxLayout="column" fxFlexFill>
+            <mat-card-header></mat-card-header>
+            <mat-card-content>
+
+                <mat-accordion>
+                    <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+                        <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+                            <label class="asterisk-if-mandatory input-label mat-content-label">Document Details</label>
+                        </mat-expansion-panel-header>
+
+                        <div class="row" style="margin-top: 0.5rem">
+                            <!--Row-1 Column 1-->
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class="form-group">
+                                    <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                    <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                        <label class="asterisk-if-mandatory input-label">Document Number</label>
+                                    </div>
+                                    <div class=" col-lg-6 col-md-6 col-sm-6 customer-search" style="float: left">
+                                        <input class="form-control input-md2" name="documentNum"
+                                            formControlName="documentNumFC" placeholder="Document Number" readonly />
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Row 1 Column 2-->
+                            <div class="col-lg-4 col-md-4 col-sm-4">
+                                <div class=" col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class=" contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="asterisk-if-mandatory input-label">Document Date</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <mat-form-field appearance="outline" class="no-padding">
+                                        <input matInput class="date-form-control" [matDatepicker]="picker111"
+                                            formControlName="documentDateFC" placeholder="DD-MMM-YYYY">
+                                        <mat-datepicker-toggle matPrefix [for]="picker111"></mat-datepicker-toggle>
+                                        <mat-datepicker style="margin-bottom: 5px;" #picker111></mat-datepicker>
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.documentDateFC.invalid">
+
+                                            <div class="error"
+                                                *ngIf="editFormGroup.controls.documentDateFC.errors.required">
+                                                Mandatory
+                                                Field</div>
+                                        </div>
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+                <mat-accordion>
+                    <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+                        <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+
+                            <label class="asterisk-if-mandatory input-label mat-content-label">Seller Details</label>
+                        </mat-expansion-panel-header>
+
+                        <div class="row">
+                            <!-- Row 1 Column 1 -->
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label asterisk-if-mandatory">GSTIN</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1 " name="sellerGstin" matInput
+                                        placeholder="Seller GSTIN" formControlName="sellerGstinFC" />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.sellerGstinFC.invalid">
+                                       
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.sellerGstinFC.errors.GstinInvalid || editFormGroup.controls.sellerGstinFC.errors.GstinPatternInvalid">                                            should
+                                                LENGTH(15) OR FORMAT INCORRECT</div>
+                                     
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 1 Column 2 -->
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label asterisk-if-mandatory">Legal Name</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" name="sellerLegalName" matInput
+                                        placeholder="Legal Name" formControlName="sellerLegalNameFC" />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.sellerLegalNameFC.invalid">
+
+                                       
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.sellerLegalNameFC.errors.legalNameInvalid || editFormGroup.controls.sellerLegalNameFC.errors.legalNamePatternInvalid">
+                                            FORMAT OR TEXT LENGTH BTW 3 AND 100 </div>
+
+                                     
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 1 Column 3 -->
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label">Trade Name</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" name="sellerTradeName" matInput
+                                        placeholder="Trade Name" formControlName="sellerTradeNameFC" />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.sellerTradeNameFC.invalid">
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.sellerTradeNameFC.errors.tradeNameInvalid || editFormGroup.controls.sellerTradeNameFC.errors.tradeNamePatternInvalid">
+                                            LENGTH OR FORMAT INCORRECT</div>
+
+                                        
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label asterisk-if-mandatory">Address Line1</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" name="sellerAddressLine1" matInput
+                                        placeholder="Line 1" formControlName="sellerAddressLine1FC" />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.sellerAddressLine1FC.invalid">
+                                       
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.sellerAddressLine1FC.errors.address1Invalid || editFormGroup.controls.sellerAddressLine1FC.errors.addressPatternInvalid">
+                                            LENGTH OR FORMAT INCORRECT</div>
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label">Address Line2</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" name="sellerAddressLine2" matInput
+                                        placeholder="Line 2" formControlName="sellerAddressLine2FC" />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.sellerAddressLine2FC.invalid">
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.sellerAddressLine2FC.errors.address2Invalid || editFormGroup.controls.sellerAddressLine2FC.errors.addressPatternInvalid">
+                                            LENGTH OR FORMAT INCORRECT </div>
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label">Address Line3</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" name="sellerAddressLine3" matInput
+                                        placeholder="Line 3" formControlName="sellerAddressLine3FC" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label asterisk-if-mandatory">Location</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" name="sellerLocation" matInput
+                                        placeholder="Location" formControlName="sellerLocationFC" />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.sellerLocationFC.invalid">
+                                      
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.sellerLocationFC.errors.locationInvalid || editFormGroup.controls.sellerLocationFC.errors.addressPatternInvalid">
+                                            LENGTH(3-50) OR FORMAT INCORRECT</div>
+
+                                       
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label asterisk-if-mandatory">Pin</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" type="number" name="sellerPinCode" matInput
+                                        placeholder="Pin Code" formControlName="sellerPinCodeFC" />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.sellerPinCodeFC.invalid">
+                                        
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.sellerPinCodeFC.errors.pinInvalid"> PIN
+                                            should be between 100000 and 999999 </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label asterisk-if-mandatory">State Code</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" name="sellerStateCode" matInput
+                                        placeholder="State Code" formControlName="sellerStateCodeFC" />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.sellerStateCodeFC.invalid">
+                                       
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.sellerStateCodeFC.errors.stateCodeInvalid || editFormGroup.controls.sellerStateCodeFC.errors.stateCodePatternInvalid">
+                                            LENGTH (1-2) OR FORMAT INCORRECT</div>
+
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label">Phone</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" type="number" name="sellerPhone" matInput
+                                        placeholder="Phone" formControlName="sellerPhoneFC" />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.sellerPhoneFC.invalid">
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.sellerPhoneFC.errors.phoneInvalid"> Phone
+                                            number
+                                            should be between 6 and 12 characters</div>
+
+                                      
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label">Email</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" name="sellerEmail" matInput
+                                        placeholder="Email" formControlName="sellerEmailFC" />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.sellerEmailFC.invalid">                                      
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.sellerEmailFC.errors.email">
+                                            Email should
+                                            have correct format</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+                <mat-accordion>
+                    <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+                        <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+                            <label class="asterisk-if-mandatory input-label mat-content-label">Buyer Details</label>
+                        </mat-expansion-panel-header>
+
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label asterisk-if-mandatory">GSTIN</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" name="buyerGstin" matInput
+                                        placeholder="Buyer GSTIN" formControlName="buyerGstinFC" (blur)="updatePOS()"/>
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.buyerGstinFC.invalid">
+                                       
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.buyerGstinFC.errors.GstinInvalid || editFormGroup.controls.buyerGstinFC.errors.buyerGstinPatternInvalid">                                          should
+                                           LENGTH (15) OR FORMAT INCORRECT</div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label asterisk-if-mandatory">Legal Name</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" name="buyerLegalName" matInput
+                                        placeholder="Legal Name" formControlName="buyerLegalNameFC" />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.buyerLegalNameFC.invalid">
+
+                                        
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.buyerLegalNameFC.errors.legalNameInvalid || editFormGroup.controls.buyerLegalNameFC.errors.legalNamePatternInvalid">
+                                            LENGTH (3-100) OR FORMAT INCORRECT</div>
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label">Trade Name</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" name="buyerTradeName" matInput
+                                        placeholder="Trade Name" formControlName="buyerTradeNameFC" />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.buyerTradeNameFC.invalid">
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.buyerTradeNameFC.errors.tradeNameInvalid || editFormGroup.controls.buyerTradeNameFC.errors.tradeNamePatternInvalid">
+                                            LENGTH (3-100) OR FORMAT INCORRECT</div>
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label asterisk-if-mandatory">Address Line1</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" name="buyerAddressLine1" matInput
+                                        placeholder="Line 1" formControlName="buyerAddressLine1FC" />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.buyerAddressLine1FC.invalid">
+                                       
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.buyerAddressLine1FC.errors.address1Invalid || editFormGroup.controls.buyerAddressLine1FC.errors.addressPatternInvalid">
+                                            LENGTH (1-100) OR FORMAT INCORRECT</div>
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label">Address Line2</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" name="buyerAddressLine1" matInput
+                                        placeholder="Line 2" formControlName="buyerAddressLine2FC" />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.buyerAddressLine2FC.invalid">
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.buyerAddressLine2FC.errors.address2Invalid || editFormGroup.controls.buyerAddressLine2FC.errors.addressPatternInvalid">
+                                            LENGTH (3-50) OR FORMAT INCORRECT</div>
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label">Address Line3</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" name="buyerAddressLine3" matInput
+                                        placeholder="Line 3" formControlName="buyerAddressLine3FC" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label asterisk-if-mandatory">Location</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" name="buyerLocation" matInput
+                                        placeholder="Location" formControlName="buyerLocationFC" />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.buyerLocationFC.invalid">
+                                       
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.buyerLocationFC.errors.locationInvalid || editFormGroup.controls.buyerLocationFC.errors.addressPatternInvalid">
+                                            LENGTH (3-50) OR FORMAT INCORRECT</div>
+
+                                      
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label asterisk-if-mandatory">Pin</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" type="number" name="buyerPinCode" matInput
+                                        placeholder="Pin Code" formControlName="buyerPinCodeFC"
+                                        (blur)="getStateCode()" />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.buyerPinCodeFC.invalid">
+                                       
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.buyerPinCodeFC.errors.pinInvalid"> PIN
+                                            should be between 100000 and 999999 </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label asterisk-if-mandatory">State Code</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" name="buyerStateCode" matInput
+                                        placeholder="State Code" formControlName="buyerStateCodeFC" readonly />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.buyerStateCodeFC.invalid">
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.buyerStateCodeFC.errors.required"> Mandatory
+                                            Field</div>
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.buyerStateCodeFC.errors.stateCodeInvalid">
+                                            State Code
+                                            should be between 1 and 2 characters</div>
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.buyerStateCodeFC.errors.stateCodePatternInvalid">
+                                            State Code should
+                                            have correct format</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label">Phone</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" type="number" name="buyerPhone" matInput
+                                        placeholder="Phone" formControlName="buyerPhoneFC" required="false" minlength="6" maxlength="12" />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.buyerPhoneFC.invalid">
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.buyerPhoneFC.errors.phoneInvalid || editFormGroup.controls.buyerPhoneFC.errors.phonePatternInvalid"> 
+                                            LENGTH (6-12) OR FORMAT INCORRECT</div>
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label">Email</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" name="buyerEmail" matInput placeholder="Email"
+                                        formControlName="buyerEmailFC" required="false" />
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.buyerEmailFC.invalid ">
+
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.buyerEmailFC.errors.email">
+                                            Email should
+                                            have correct format</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="margin-top: 0.5rem;">
+                                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                                    <label class="input-label asterisk-if-mandatory ">Place of Supply</label>
+                                </div>
+                                <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left">
+                                    <input class="form-control input-md1" name="buyerPlaceOfSupply" matInput
+                                        placeholder="Place Of Supply" formControlName="buyerPlaceOfSupplyFC" readonly/>
+                                    <div class="error"
+                                        *ngIf="editFormGroup.controls.buyerPlaceOfSupplyFC.invalid">
+                                      
+
+                                        <div class="error"
+                                            *ngIf="editFormGroup.controls.buyerPlaceOfSupplyFC.errors.placeOfSupplyInvalid || editFormGroup.controls.buyerPlaceOfSupplyFC.errors.placeOfSupplyPatternInvalid">
+                                            LENGTH (1-2) OR FORMAT INCORRECT</div>
+
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+                <div class="contol-label col-lg-12 col-md-12 col-sm-12" style="float: left; margin-bottom: 0.7rem;" *ngIf = "!irnCheck">
+                    <div class="contol-label col-lg-2 col-md-2 col-sm-2" style="float: left; margin-left: 0.9rem;">
+                        <label class="input-label">Mark this invoice as B2C</label>
+                    </div>
+                    <div class=" col-lg-1 col-md-1 col-sm-1" style="float: left">
+
+                        <mat-checkbox (change)="b2cTrue($event.checked)" class="checkbox-control">
+                        </mat-checkbox>
+                    </div>
+                </div>
+                <br>
+
+
+
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center footer-button-padding" style="margin-top: 0.7rem">
+                    <button mat-raised-button (click)="back()">BACK</button>
+                    
+                    <button mat-raised-button style="margin-left:0.3rem;" color="primary"
+                        [disabled]="!myForm.form.valid" (click)="integrate()" *ngIf = "!irnCheck">Integrate with IRP Portal</button>
+                    
+                    <br>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>

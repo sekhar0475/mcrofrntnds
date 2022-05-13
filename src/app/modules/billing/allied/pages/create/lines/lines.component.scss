@@ -1,0 +1,356 @@
+table {
+  width: 100%;
+}
+
+//mat-divider font
+.mat-divider {
+  border-top-color: #27ae60;
+  border-top-width: 1px;
+}
+
+//For each form fields.
+.form-control:hover {
+  border-color: #27ae60;
+  box-shadow: none;
+}
+.form-control:focus {
+  box-shadow: none;
+  border: 0.07rem solid #27ae60;
+}
+
+.mat-form-field:hover {
+  border-color: #27ae60;
+  box-shadow: none;
+}
+
+.mat-form-field:focus {
+  box-shadow: none;
+  border: 0.07rem solid #27ae60;
+}
+
+.contol-label {
+  padding-left: 0px;
+}
+.mat-content-label {
+  padding-top: 14px;
+  font-weight: 700;
+  font-size: 11.52px;
+}
+//for mat-date
+.date-form-control {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+  font-size: 11.52px;
+  justify-content: center;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+//for each field
+.form-control {
+  text-transform: uppercase;
+  width: 100%;
+  box-shadow: 0px 0.1rem 0.2rem #00000029;
+  border: 0.05rem solid #6a6868;
+  border-radius: 0px;
+  height: 1.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 11.52px;
+  text-transform: uppercase;
+}
+
+.form-control:disabled {
+  background-color: white;
+  border: none;
+  box-shadow: none;
+}
+
+mat-expansion-panel-header:hover {
+  background-color: white !important;
+}
+
+//for expansion panel
+.mat-expansion-panel-header {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: grey;
+  border-radius: 0px;
+  padding: 0px;
+}
+
+.mat-expansion-panel-header.mat-expanded {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #27ae60;
+  border-radius: 0px;
+  color: #27ae60;
+}
+
+.mat-card.header {
+  margin-left: 0px !important;
+  padding-left: 0px !important;
+}
+
+.no-padding {
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+    font-size: 12px;
+    justify-content: center;
+  }
+}
+
+// Role Mapping Table
+mat-cell.mat-column-service {
+  min-width: 15% !important;
+  font-size: 11.52px !important;
+}
+.mat-cell.mat-column-delete {
+  min-width: 5% !important;
+  font-size: 11.52px !important;
+}
+.mat-cell.mat-column-remarks {
+  min-width: 20% !important;
+  font-size: 11.52px !important;
+}
+
+
+.mat-footer-cell.mat-column-taxService {
+  min-width: 15% !important;
+  font-size: 11.52px !important;
+}
+.mat-footer-cell.mat-column-taxDelete {
+  min-width: 5% !important;
+  font-size: 11.52px !important;
+}
+.mat-footer-cell.mat-column-taxRemarks {
+  min-width: 20% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-footer-cell.mat-column-finService {
+  min-width: 15% !important;
+  font-size: 11.52px !important;
+}
+.mat-footer-cell.mat-column-finDelete {
+  min-width: 5% !important;
+  font-size: 11.52px !important;
+}
+.mat-footer-cell.mat-column-finRemarks {
+  min-width: 20% !important;
+  font-size: 11.52px !important;
+}
+
+//Privileged Branch Details
+.mat-header-cell.mat-column-service {
+  min-width: 15% !important;
+  font-size: 11.52px !important;
+}
+.mat-header-cell.mat-column-delete {
+  min-width: 5% !important;
+  font-size: 11.52px !important;
+}
+.mat-header-cell.mat-column-remarks {
+  min-width: 20% !important;
+  font-size: 11.52px !important;
+}
+
+hr.divider {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+.mat-cell:first-of-type {
+  padding-left: 0px;
+}
+
+.mat-header-cell:first-of-type {
+  padding-left: 0px;
+}
+
+.mat-footer-cell:first-of-type {
+  padding-left: 0px;
+}
+
+// .mat-cell,
+// .mat-footer-cell {
+//   padding-right: 5px !important;
+// }
+
+.mat-footer-row,
+.mat-row {
+  min-height: 30px;
+//  text-transform: uppercase;
+  font-size: 11.52px !important;
+}
+
+.mat-paginator {
+  display: unset;
+}
+
+.mat-header-cell:last-of-type {
+  padding-right: 0px;
+}
+
+.mat-footer-cell:last-of-type {
+  padding-right: 0px;
+}
+
+.input-label {
+  font-weight: bold;
+  font-size: 11.52px !important;
+}
+
+.input-md1 {
+  padding-left: 0.6rem;
+}
+.toolbar-button {
+  padding: 0;
+}
+.mat-header-cell {
+  //display: flex;
+  justify-content: center;
+  background-color: #f1f1f1; // #f3f3f3;
+  color: #1a1a1a;
+  min-height: 25px;
+}
+.mat-header-row {
+  min-height: 25px;
+}
+
+.mat-cell,.mat-footer-cell {
+  // display: flex;
+  justify-content: center;
+  min-height: 25px;
+  word-break: break-all;
+}
+::ng-deep .mat-datepicker-toggle-default-icon {
+  margin-bottom: 5px !important ;
+}
+
+h2 {
+  margin-bottom: 0px !important;
+  margin-left: 5px;
+}
+
+.input-value {
+  font-size: 11.52px;
+}
+
+/* focused color */
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: white;
+  box-shadow: none;
+  border: 0.07rem solid #27ae60;
+}
+
+/* focused color */
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: white;
+  box-shadow: none;
+  border: 0.07rem solid #27ae60;
+}
+
+::ng-deep {
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: white;
+    border: 0.05rem solid #6a6868;
+    box-shadow: 0px 0.1rem 0.2rem #00000029;
+    border-radius: 0px;
+    padding: 0px;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-flex {
+    padding: 0px !important;
+    height: 1.6rem !important;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 0px !important;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-flex {
+    align-items: center !important;
+  }
+}
+// for small screen
+@media screen and (max-width: 960px) {
+  .mat-table {
+    border: 0;
+    vertical-align: middle;
+  }
+
+  .mat-table caption {
+    font-size: 1em;
+  }
+
+  .mat-table .mat-header-cell {
+    border: 10px solid;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .mat-table .mat-row {
+    border-bottom: 5px solid #ddd;
+    display: block;
+  }
+
+  .mat-table .mat-cell {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    text-align: right;
+    font-weight: bold;
+    min-height: 30px;
+    font-size: 11.52px !important;
+  }
+
+  .mat-cell.mat-column-expDt {
+    height: 60px !important;
+  }
+  .mat-cell.mat-column-expiryDt {
+    height: 60px !important;
+  }
+
+
+  .mat-table .mat-cell:before {
+    content: attr(data-label);
+    float: left;
+    text-transform: inherit;
+    font-weight: normal;
+    font-size: 11.52px !important;
+  }
+  .mat-table .mat-cell:last-child {
+    border-bottom: 0;
+  }
+  .mat-table .mat-cell:first-child {
+    margin-top: 4%;
+  }
+}
+
+//to mark the mandatory fields
+label.asterisk-if-mandatory::after {
+  content: " *";
+  color: red;
+}
+
+.row-color-blue {
+  background-color: #27ae60;
+}
+
+.amount-text-padding {
+  padding-right: 0.4rem;
+}
+
+.checkbox-margin {
+  margin: 0 10px;
+}

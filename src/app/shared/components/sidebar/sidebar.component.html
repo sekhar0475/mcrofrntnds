@@ -1,0 +1,31 @@
+<mat-nav-list style="padding:0px; margin: 0px;">
+    <!-- <a mat-list-item 
+       routerLinkActive="list-item-active" 
+       (click) = "closeSideNavBar()"
+       routerLink="/dashboard">Dashboard</a> -->
+    <!-- <div  *ngFor="let module of userModules"> -->
+      <!-- <mat-divider style="color:#157b18"></mat-divider> 
+      <mat-divider style="color:#157b18"></mat-divider>  -->
+      <mat-accordion *ngFor="let module of userModules">
+        <mat-expansion-panel class="mat-elevation-z0"hideToggle="true">
+            <mat-expansion-panel-header>
+               <mat-divider></mat-divider>
+               <span style="padding-left: 5px;">{{module.moduleName}}</span> 
+            </mat-expansion-panel-header>
+            <mat-list *ngFor="let subModule of module.userSubmoduleList" 
+                style="justify-content: center;">
+                <mat-divider></mat-divider>
+              <a mat-list-item 
+              (click) = "closeSideNavBar(subModule.readFlag,subModule.writeFlag,subModule.writeFlag)"
+              routerLinkActive="list-item-active" 
+              routerLink={{subModule.submoduleUrl}}>
+                {{subModule.submoduleName}}
+             </a> 
+            </mat-list>
+            <mat-divider></mat-divider>
+        </mat-expansion-panel>
+    </mat-accordion>
+    
+    <!-- </div> -->
+    <!-- <mat-divider></mat-divider> 
+    <mat-divider></mat-divider>  -->

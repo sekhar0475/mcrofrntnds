@@ -1,0 +1,98 @@
+.mat-expansion-panel-header{
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: grey;
+  border-radius: 0px;
+  padding: 0px;
+  font-size: 11.52px;
+  }
+  
+.mat-expansion-panel-header:hover {
+    background-color: white !important;
+  }
+.mat-expansion-panel-header.mat-expanded{
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color:  #27AE60;
+  border-radius: 0px;
+  color: #27AE60;;
+  font-size: 11.52px;
+  }
+
+  //for left align in table
+.mat-table{
+    // text-align: left;
+     justify-content: left;  
+   }
+  
+.mat-header-cell{
+     justify-content: left;
+   }
+  
+.mat-cell{
+     justify-content: left;
+   }
+
+//horizontal divider
+hr.divider { 
+  margin-top: 0px;
+  margin-bottom: 4px;
+}
+
+//header
+h2{
+  margin-bottom: 0px !important;
+  margin-left: 5px;
+}
+
+@media screen and (max-width: 960px) {
+.mat-table {
+    border: 0;
+    vertical-align: middle
+  }
+
+.mat-table caption {
+    font-size: 1em;
+  }    
+  
+.mat-table .mat-header-cell {      
+    border: 10px solid;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+.mat-table .mat-row {
+    border-bottom: 5px solid #ddd;
+    display: block;
+  }
+     
+.mat-table .mat-cell {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    text-align: right;
+    font-weight: bold;
+    min-height: 25px;
+    font-size: 11.52px;
+  }
+
+.mat-cell:first-of-type{
+    padding-left:0px;
+  }
+.mat-table .mat-cell:before {   
+    content: attr(data-label);
+    float: left;
+    text-transform:inherit;
+    font-weight: normal;
+    font-size: 11.52px;
+  }
+.mat-table .mat-cell:last-child {
+    border-bottom: 0;
+  }
+.mat-table .mat-cell:first-child {
+    margin-top: 4%;
+  }
+}

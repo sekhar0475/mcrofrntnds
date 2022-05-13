@@ -1,0 +1,145 @@
+<div class="inner-page-padding">
+  <h2 style="font-size:0.9rem;font-weight: 600;">Hold Auto Bill</h2>
+  <app-breadcrumb></app-breadcrumb>
+  <mat-card fxLayout="column" fxFlexFill>
+    <mat-card-header>
+      <mat-card-title>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <app-search-auto-hold-bill (holdSearchVal)="getSearchVal($event)" [searchValues]="clearSearchValues">
+      </app-search-auto-hold-bill>
+      <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+          <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <span class="mat-content-label">Result</span>
+          </mat-expansion-panel-header>
+          <hr class="divider">
+          <div class="form-row">
+            <div class="col-md-12" style="text-align: end;">
+              <a (click)="export2Excel()" class="excel-img">
+                <img class="png-icon" style="height: 20px;"
+                  src="../../../../../../assets/icons/icons8-microsoft-excel-52.png" class="img-icon" /></a>
+              <a (click)="export2Excel()" class="excel-label" style="cursor:pointer">
+                <b>Export To Excel</b>
+              </a>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-12 text-left">
+              <div class="data-container mat-elevation-z">
+                <mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+                  <ng-container matColumnDef="select">
+                    <mat-header-cell *matHeaderCellDef>
+                      <mat-checkbox (change)="customToggle($event)" [checked]="isAllSelected()">
+                      </mat-checkbox>
+                    </mat-header-cell>>
+                    <mat-cell *matCellDef="let row">
+                      <mat-checkbox [checked]="checkIfHold(row)" (change)="changeRow(row,$event)">
+                      </mat-checkbox>
+                    </mat-cell>
+                  </ng-container>
+
+                  <!-- billingCongId Column -->
+                  <ng-container matColumnDef="billingConfigId">
+                    <mat-header-cell *matHeaderCellDef> <b>BILL ID</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.billConfigId}} </mat-cell>
+                  </ng-container>
+
+                  <!-- Customer Name -->
+                  <ng-container matColumnDef="customerName">
+                    <mat-header-cell *matHeaderCellDef> <b>Customer Name</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Customer Name"
+                      matTooltip="{{ element.customerName }}" matTooltipPosition="above"
+                      matTooltipClass="custom-tooltip">
+                      <span class="truncate-text">
+                        {{element.customerName}}
+                      </span>
+
+                    </mat-cell>
+                  </ng-container>
+
+                  <!-- Name MSA -->
+                  <ng-container matColumnDef="msa">
+                    <mat-header-cell *matHeaderCellDef><b>MSA</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="MSA"> {{element.msaCode}} </mat-cell>
+                  </ng-container>
+
+                  <!-- Alias Column -->
+                  <ng-container matColumnDef="alias">
+                    <mat-header-cell *matHeaderCellDef><b>Alias</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Alias" matTooltip="{{ element.aliasName }}"
+                      matTooltipPosition="above" matTooltipClass="custom-tooltip">
+                      <span class="truncate-text">
+                        {{element.aliasName}}
+                      </span>
+                    </mat-cell>
+                  </ng-container>
+
+                  <!-- SFX Code Column -->
+                  <ng-container matColumnDef="sfxCode">
+                    <mat-header-cell *matHeaderCellDef> <b>SFX Code </b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="SFX Code"> {{element.sfxCode}} </mat-cell>
+                  </ng-container>
+
+                  <!-- RateCard Column -->
+                  <ng-container matColumnDef="rateCard">
+                    <mat-header-cell *matHeaderCellDef><b>Rate Card</b> </mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Rate Card"> {{element.rateCardCode}}</mat-cell>
+                  </ng-container>
+
+                  <!-- Billing Cycle Column -->
+                  <ng-container matColumnDef="billingCycle">
+                    <mat-header-cell *matHeaderCellDef><b>Billing Cycle</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Billing Cycle"> {{element.billingCycle}} </mat-cell>
+                  </ng-container>
+
+                  <!-- Billing Level Column -->
+                  <ng-container matColumnDef="billingLevel">
+                    <mat-header-cell *matHeaderCellDef><b>Billing Level </b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Billing Level"> {{element.billingLevel}} </mat-cell>
+                  </ng-container>
+
+                  <!-- Hold Reason Column -->
+                  <ng-container matColumnDef="holdReason">
+                    <mat-header-cell *matHeaderCellDef><b>Reason</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Hold Reason">
+                      <ng-select [disabled]="reasonEditable(element.billConfigId,element.status)"
+                        style="min-width: 100%;" appearance="outline" [items]="reasonList" appendTo="body"
+                        class="select-control" role="listbox" bindLabel="viewValue" bindValue="viewValue"
+                        [clearable]="false" name="holdReason" placeholder="HOLD REASON" [(ngModel)]=element.reason>
+                      </ng-select>
+
+                    </mat-cell>
+                  </ng-container>
+
+                  <!-- Hold Status Column -->
+                  <ng-container matColumnDef="holdStatus">
+                    <mat-header-cell *matHeaderCellDef><b>Status</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Hold Status"> {{element.status}} </mat-cell>
+                  </ng-container>
+
+                  <!-- Hold Date Column -->
+                  <ng-container matColumnDef="holdDate">
+                    <mat-header-cell *matHeaderCellDef><b>Date</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Hold Date"> {{element.holdDate| date:'dd-MMM-yyyy'}}
+                    </mat-cell>
+                  </ng-container>
+
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <mat-paginator [pageSizeOptions]="[5,10,20,30]" showFirstLastButtons></mat-paginator>
+              </div>
+            </div>
+          </div>
+          <div class="main-container mat-elevation-z" style="text-align: center; margin-bottom:0.3rem;">
+            <button mat-raised-button *ngIf="writeAccess" color="primary" (click)="submit()">Confirm</button>
+            <button mat-raised-button style="margin-left: 0.3rem;" class="secondary-btn"
+              (click)="clear()">Clear</button>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
+</div>

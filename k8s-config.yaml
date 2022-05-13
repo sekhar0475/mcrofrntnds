@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bil-webfrontend-service
+  labels:
+    app: bil-webfrontend-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bil-webfrontend-service
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        iam.amazonaws.com/role: "arn:aws:iam::117998157554:role/Safex_EKS_S3FullAccess_Safexdev"
+        iam.amazonaws.com/external-id: "57554"
+      labels:
+        app: bil-webfrontend-service
+    spec:
+      containers:
+      - image: 183454673550.dkr.ecr.ap-south-1.amazonaws.com/dev:web-front-end-ui:BUILDNUMBER
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "750Mi"
+          requests:
+            memory: "750Mi"
+        name: bil-webfrontend-service
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        volumeMounts:
+        - name: bil-webfrontend-service-vol
+          mountPath: /etc/config
+          readOnly: true
+      volumes:
+      - name: bil-webfrontend-service-vol
+      imagePullSecrets:
+      - name: aws-ecr
+      - name: regcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bil-webfrontend-service
+spec:
+  type: NodePort
+  selector:
+    app: bil-webfrontend-service
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80

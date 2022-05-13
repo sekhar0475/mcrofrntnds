@@ -1,0 +1,80 @@
+<h2 mat-dialog-title class="title-style">Job Search</h2>
+<!-- <div class="material-icons modals_cancel_btn float-right"  mat-dialog-close> cancel </div> -->
+<hr class="popup-hr">
+<mat-dialog-content>
+    <form class="create-search" #myForm="ngForm" [formGroup]="searchFormGroup">
+
+        <div class="row">
+            <!--Row 1 Column 1-->
+            <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                <div class="col-lg-2 col-md-2 col-sm-2" style="float: left;"> &nbsp; </div>
+                <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                    <label class="input-label">Job Id</label>
+                </div>
+                <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                    <input class="form-control input-md1" formControlName="jobIdFc" placeholder="JOB ID">
+                </div>
+            </div>
+
+
+            <!--Row 1 Column 2-->
+            <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                <div class="col-lg-3 col-md-3 col-sm-3" style="float: left;"> &nbsp; </div>
+                <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                    <label class="input-label">Job Status</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4" style="float: left">
+                    <ng-select [items]="jobStatusList" class="select-control" role="listbox" bindLabel="descr"
+                        bindValue="lookupVal" [clearable]="false" placeholder="JOB STATUS"
+                        formControlName="jobStatusFc">
+                    </ng-select>
+                </div>
+            </div>
+
+            <!--Row 2 Column 1-->
+            <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                <div class="col-lg-2 col-md-2 col-sm-2" style="float: left;"> &nbsp; </div>
+                <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                    <label class="input-label">Job From Date</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4" style="float: left">
+                    <mat-form-field appearance="outline" class="no-padding">
+                        <input matInput class="date-form-control" [matDatepicker]="picker11" placeholder="DD-MMM-YYYY"
+                            formControlName="jobfromDateFc">
+                        <mat-datepicker-toggle matPrefix [for]="picker11"></mat-datepicker-toggle>
+                        <mat-datepicker panelClass="safexDatePicker" #picker11></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+            <!--Row 2 Column 2-->
+            <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                <div class=" col-lg-3 col-md-3 col-sm-3" style="float: left;"> &nbsp; </div>
+                <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                    <label class="input-label">Job To Date</label>
+                </div>
+                <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                    <mat-form-field appearance="outline" class="no-padding">
+                        <input matInput class="date-form-control" [matDatepicker]="picker111" placeholder="DD-MMM-YYYY"
+                            formControlName="jobfromToFc">
+                        <mat-datepicker-toggle matPrefix [for]="picker111"></mat-datepicker-toggle>
+                        <mat-datepicker panelClass="safexDatePicker" #picker111></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center footer-button-padding">
+                <button mat-raised-button color="primary" (click)="search()">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <app-job-result-dialog *ngIf="showResult" [searchValues]="searchValues" [reportJobType]="reportJobValues"></app-job-result-dialog>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+    <!-- <button mat-raised-button color="primary" cdkFocusInitial>Ok</button> -->
+</mat-dialog-actions>

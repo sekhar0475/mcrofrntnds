@@ -1,0 +1,289 @@
+<div class="inner-page-padding">
+  <h2 style="font-size:0.9rem;font-weight: 600;">Create Receipt</h2>
+  <app-breadcrumb></app-breadcrumb>
+  <mat-card fxLayout="column" fxFlexFill>
+    <mat-card-content>     
+      <form class="create-search" #myForm="ngForm" [formGroup]="createFormGroup">
+        <div class="row">
+          <!--Row-1 Column 1-->
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="form-group">
+              <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="asterisk-if-mandatory input-label">Mode</label>
+              </div>
+              <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                <ng-select [items]="modeList" 
+                            class="select-control" 
+                            role="listbox"
+                            bindLabel="viewDescr" 
+                            bindValue="viewValue" 
+                            [clearable]="false" name="viewValue"
+                            formControlName="modeFC" 
+                            (change)="setBankAccount($event)"
+                            [(ngModel)]="receipt.mode"
+                            placeholder="MODE"></ng-select>
+                <div class="error"
+                     *ngIf="createFormGroup.controls.modeFC.invalid && (createFormGroup.controls.modeFC.touched || createFormGroup.controls.modeFC.dirty) ">
+                    <div class="error" *ngIf="createFormGroup.controls.modeFC.errors.required">Mandatory Field</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Row 1 Column 2-->
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+            <div class=" contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="asterisk-if-mandatory input-label">Customer Type</label>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;">
+              <ng-select [items]="custTypeList" 
+                            class="select-control" 
+                            role="listbox"
+                            bindLabel="viewDescr" 
+                            bindValue="viewValue" 
+                            [clearable]="false" name="viewValue"
+                            formControlName="CustomerTypeFC" 
+                            (change)="setCustomerType($event)"
+                            [(ngModel)]="receipt.custType"
+                            placeholder="TYPE"></ng-select>
+                <div class="error"
+                      *ngIf="createFormGroup.controls.CustomerTypeFC.invalid && (createFormGroup.controls.CustomerTypeFC.touched || createFormGroup.controls.CustomerTypeFC.dirty) ">
+                  <div class="error" *ngIf="createFormGroup.controls.CustomerTypeFC.errors.required">Mandatory Field</div>
+                </div>
+            </div>
+          </div>
+          <!--Row 2 Column 1-->
+          <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+              <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="asterisk-if-mandatory input-label">Customer Name</label>
+              </div>
+              <div class=" col-lg-4 col-md-4 col-sm-4 customer-search" style="float: left">
+                <i class="fa fa-search fa-lg search-icons"></i>
+                  <input class="form-control input-md2" 
+                    type="text"
+                    name="custName" 
+                    (click)="findCustomer()"
+                    formControlName="customerNameFC" 
+                    placeholder="Customer Name"
+                    [(ngModel)]="receipt.custName" readonly/> 
+              <div class="error"
+                  *ngIf="createFormGroup.controls.customerNameFC.invalid && (createFormGroup.controls.customerNameFC.touched || createFormGroup.controls.customerNameFC.dirty)">
+              <div class="error" >Mandatory Field</div>
+              </div> 
+              </div>
+          </div>
+          <!--Row 2 Column 2-->
+          <div class="col-lg-6 col-md-6 col-sm-6"  style="margin-top: 0.5rem;">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label *ngIf = "disableBillingLevel" class="asterisk-if-mandatory input-label">MSA/SFX/Rate Card</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              <input  class="form-control input-md1"  *ngIf = "disableBillingLevel"
+                      type="text"
+                      name="billingLevelValue"  
+                      placeholder="MSA/SFX/Rate Card"
+                      formControlName="billingLevelFC" 
+                      [(ngModel)]="receipt.billingLevelValue" readonly />
+              <div class="error"
+                *ngIf="createFormGroup.controls.billingLevelFC.invalid && (createFormGroup.controls.billingLevelFC.touched || createFormGroup.controls.billingLevelFC.dirty) ">
+              <div class="error" *ngIf="createFormGroup.controls.billingLevelFC.errors.required">Search Customer</div>
+            </div>
+            </div>
+          </div>
+          <!-- Row 3 COlumn 1-->
+          <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+              <label class="input-label">Received Freight</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              <input class="form-control input-md1" 
+                    name="totRecFrtAmt" 
+                    type="number"
+                    matInput 
+                    placeholder="Freight Amount"
+                    formControlName="freightAmtFC" [(ngModel)]="receipt.totRecFrtAmt" />
+            </div>
+          </div>
+          <!-- Row 3 COlumn 2-->
+          <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              &nbsp;
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              &nbsp;
+            </div>
+          </div>
+          <!--Row 4 Column 1-->
+          <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+              <label class="input-label">TDS Amount</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              <input class="form-control input-md1" type="number"
+                    name="totRecFrtTdsAmt" matInput placeholder="TDS Amount"
+                formControlName="TdsAmtFC" [(ngModel)]="receipt.totRecFrtTdsAmt" />
+            </div>
+          </div>
+           <!--Row 4 Column 2-->
+           <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="input-label">GST TDS Amount</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              <input class="form-control input-md1" type="number" name="gstTdsAmt" matInput placeholder="GST TDS Amount"
+                formControlName="gstTdsAmtFC" [(ngModel)]="receipt.totRecGstTdsAmt" />
+            </div>
+          </div>
+
+           <!--Row 5 Column 1-->
+           <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+              <label class=" asterisk-if-mandatory input-label">Reference Number</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              <input class="form-control input-md1"
+                    name="insmtRef" matInput placeholder="Reference Number"
+                formControlName="insmtRefFC" [(ngModel)]="receipt.insmtRef" />
+                <div class="error"
+                  *ngIf="createFormGroup.controls.insmtRefFC.invalid && (createFormGroup.controls.insmtRefFC.touched || createFormGroup.controls.insmtRefFC.dirty) ">
+                  <div class="error" *ngIf="createFormGroup.controls.insmtRefFC.errors.required">Mandatory Field</div>
+                </div>
+            </div>
+          </div>
+           <!--Row 5 Column 2-->
+           <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="asterisk-if-mandatory input-label">Reference Date</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              <mat-form-field appearance="outline" class="no-padding">
+                <input matInput [max]="todayDt" 
+                      readonly 
+                      class="date-form-control" 
+                      [matDatepicker]="picker111"
+                      formControlName="insmtRefDtFC" 
+                      placeholder="DD-MMM-YYYY" 
+                      [(ngModel)]="receipt.insmtRefDt">
+                <mat-datepicker-toggle matPrefix [for]="picker111"></mat-datepicker-toggle>
+                <mat-datepicker panelClass="safexDatePicker" #picker111></mat-datepicker>
+                <div class="error"
+                  *ngIf="createFormGroup.controls.insmtRefDtFC.invalid && (createFormGroup.controls.insmtRefDtFC.touched || createFormGroup.controls.insmtRefDtFC.dirty) ">
+                  <div class="error" *ngIf="createFormGroup.controls.insmtRefDtFC.errors.required">Mandatory Field</div>
+                </div>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!--Row 6 Column 1-->
+          <div class="col-lg-6 col-md-6 col-sm-6" *ngIf="enableCustomerBank" style="margin-top: 0.5rem;">
+            <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+              <label [ngClass]="{'asterisk-if-mandatory' : paymentMode != 'CASH'}" class="input-label">Customer Bank Account</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              <input class="form-control input-md1"
+                    name="custbankAcc" matInput placeholder="Bank Account"
+                    [readonly]="!disableBank"
+                formControlName="custbankAccFC" [(ngModel)]="receipt.custbankAcc" />
+                <div class="error"
+                  *ngIf="createFormGroup.controls.custbankAccFC.invalid && (createFormGroup.controls.custbankAccFC.touched || createFormGroup.controls.custbankAccFC.dirty) ">
+                  <div class="error" *ngIf="createFormGroup.controls.custbankAccFC.errors.required">Mandatory Field</div>
+                </div>
+            </div>
+          </div>
+           <!--Row 6 Column 2-->
+           <div class="col-lg-6 col-md-6 col-sm-6" *ngIf="enableCustomerBank" style="margin-top: 0.5rem;">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label [ngClass]="{'asterisk-if-mandatory' : paymentMode != 'CASH'}" class="input-label">Customer Bank Branch</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              <input class="form-control input-md1"
+                    name="custBankBr" matInput placeholder="Bank Branch"
+                    [readonly]="!disableBank"
+                formControlName="custBankBrFC" [(ngModel)]="receipt.custBankBr" />
+              <div class="error"
+                *ngIf="createFormGroup.controls.custBankBrFC.invalid && (createFormGroup.controls.custBankBrFC.touched || createFormGroup.controls.custBankBrFC.dirty) ">
+                <div class="error" *ngIf="createFormGroup.controls.custBankBrFC.errors.required">Mandatory Field</div>
+              </div>
+            </div>
+          </div>
+
+          <!--Row 7 Column 1-->
+          <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+              <label class="input-label">Safexpress Bank Account</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              <!-- <input class="form-control input-md1"  readonly="{{ disableBank }}"
+                    name="safexBankAcc" matInput placeholder="Bank Account"
+                formControlName="safexBankAccFC" [(ngModel)]="receipt.safexBankAcc" /> -->
+                <ng-select [items]="bankAccList"                           
+                            class="select-control" 
+                            role="listbox"
+                            bindLabel="value" 
+                            bindValue="value" 
+                            [clearable]="false" name="value"
+                            formControlName="safexBankAccFC" 
+                            [(ngModel)]="receipt.safexBankAcc"
+                            [readonly]="disableBank"
+                            placeholder="BANK ACCOUNT"></ng-select>
+            </div>
+          </div>
+           <!--Row 7 Column 2-->
+           <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="input-label">TAN Number</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              <input class="form-control input-md1"
+                    type="text"
+                    name="tanNum" placeholder="TAN Number"
+                formControlName="tanNumFC" [(ngModel)]="receipt.tanNum"/>
+            </div>
+          </div>
+
+           <!--Row 8 Column 1-->
+           <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+              <label class="input-label">Remarks</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              <textarea matInput class="input-md1 textareaoutline" 
+                        placeholder="REMARKS"
+                        formControlName="remarksFC"
+                        [(ngModel)]="receipt.remarks" cols="20" rows="2" maxlength="100"></textarea>
+            </div>
+          </div>
+           <!--Row 8 Column 2-->
+           <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="input-label">Attachment</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              <input type="file" id="file" (change)="handleFileInput($event.target.files)">
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="writeAccess">
+          <div class="col-md-12 text-center footer-button-padding">
+            <button mat-raised-button (click)="openCancelDialog()">Cancel</button>
+            <button mat-raised-button style="margin-left:0.3rem;" color="primary" [disabled]="!myForm.form.valid" (click)="createReceipt()">Submit</button>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,105 @@
+<div class="inner-page-padding">
+  <h2 style="font-size:0.9rem;font-weight: 600;">WMS Billing</h2>
+  <app-breadcrumb></app-breadcrumb>
+  <mat-card fxLayout="column" fxFlexFill>
+    <!-- <span class="input-label">User Details</span> -->
+    <mat-card-content>
+      <!-- <mat-divider></mat-divider> -->
+      <!-- <br> -->
+      <form class="create-search" #myForm="ngForm" [formGroup]="createFormGroup">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div>
+              <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+              <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                <label class="asterisk-if-mandatory input-label">Customer Name</label>
+              </div>
+              <div class=" col-lg-4 col-md-4 col-sm-4 customer-search" style="float: left">
+                <i class="fa fa-search fa-lg search-icons"></i>
+                <input class="form-control input-md1" (click)="customerSearch();selectBillingLvlDropdown.clearModel();selectBillingLvlCodeDropdown.clearModel()" readonly
+                  placeholder="   Search Customer" formControlName="customerFc">
+                <div class="error"
+                  *ngIf="createFormGroup.controls.customerFc.invalid && createFormGroup.controls.customerFc.touched">
+                  <div class="error" *ngIf="createFormGroup.controls.customerFc.errors.required"> Customer name is
+                    required.</div>
+                    <div class="error"> {{isDataSaved}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+            <div class=" contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="asterisk-if-mandatory input-label">Billing Level</label>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 " style="float: left;">
+              <ng-select [clearable]="false" [items]="billingLevelList" bindLabel="billingLevelName"
+                bindValue="billingLevelName" (change)="selectBillingLevel($event);selectBillingLvlCodeDropdown.clearModel();hideSearchResult()" formControlName="billLevelFc"
+                name="billingLevelName" placeholder="BILLING LEVEL" #selectBillingLvlDropdown></ng-select>
+              <div class="error"
+                *ngIf="createFormGroup.controls.billLevelFc.invalid && createFormGroup.controls.billLevelFc.touched">
+                <div class="error" *ngIf="createFormGroup.controls.billLevelFc.errors.required"> Billing level is
+                  required.</div>
+              </div>
+              
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="asterisk-if-mandatory input-label">Billing Level Code</label>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;">
+              <!-- <input class="form-control input-md1 ng-touched" matInput placeholder="" autocomplete="off" type="text"
+                formControlName="billLevelCodeFc"> -->
+                <ng-select [clearable]="false" [items]="bilngLvlAndBilngCodeList" (change)="selectBillingLvlValue($event);hideSearchResult()" bindLabel="billingLvlCode"
+                bindValue="billingLvlCode" formControlName="billLevelCodeFc"
+                name="billingLvlCode" placeholder="BILLING LEVEL CODE" #selectBillingLvlCodeDropdown></ng-select>
+
+              <div class="error"
+                *ngIf="createFormGroup.controls.billLevelCodeFc.invalid && createFormGroup.controls.billLevelCodeFc.touched">
+                <div class="error" *ngIf="createFormGroup.controls.billLevelCodeFc.errors.required"> Billing level code
+                  is required.</div>
+              </div>
+              
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;">&nbsp;</div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="asterisk-if-mandatory input-label">Bill Branch</label>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 customer-search" style="float: left;">
+              <i class="fa fa-search fa-lg search-icons"></i>
+              <input class="form-control input-md1" placeholder="   Search Branch" formControlName="billBranchFc"
+                (click)="branchSearch();" readonly>
+              <div class="error"
+                *ngIf="createFormGroup.controls.billBranchFc.invalid && createFormGroup.controls.billBranchFc.touched">
+                <div class="error" *ngIf="createFormGroup.controls.billBranchFc.errors.required"> Billing branch is
+                  required.</div>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: center;">
+            <button mat-raised-button color="primary" [disabled]="!myForm.form.valid" (click)="submit()">Search</button>
+            <!-- <button mat-raised-button color="primary" (click)="submit()">Search</button>
+           -->
+          </div>
+        </div>
+      </form>
+
+    </mat-card-content>
+
+    <!-- <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0" [(expanded)]="xpandStatus">
+          <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <span class="mat-content-label">Result</span>
+          </mat-expansion-panel-header> -->
+    <app-create-billing-result *ngIf="displayResultComponent" (displayResultComponentChange)="getSavedDataStatus($event)" [customerBillBranch]="customerBillBranch"
+      [searchResult]="searchResult" [searchData]="searchData"></app-create-billing-result>
+    <!-- </mat-expansion-panel>
+      </mat-accordion> -->
+  </mat-card>
+</div>

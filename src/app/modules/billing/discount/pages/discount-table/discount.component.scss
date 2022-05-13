@@ -1,0 +1,397 @@
+//For each form fields.
+.form-control:hover {
+	border-color: #27ae60;
+	box-shadow: none;
+}
+
+.form-control:focus {
+	box-shadow: none;
+	border: 0.07rem solid #27ae60;
+}
+
+//for form-field hover highlight
+.mat-form-field:hover {
+	border-color: #27ae60;
+	box-shadow: none;
+}
+
+//for form-field focus highlight
+.mat-form-field:focus {
+	box-shadow: none;
+	border: 0.07rem solid #27ae60;
+}
+
+//header
+h2 {
+	margin-bottom: 0px !important;
+	margin-left: 5px;
+}
+
+hr.divider {
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+
+//to remove the bootstrap left padding.
+.contol-label {
+	padding-left: 0px;
+}
+
+//for subheadings.
+.mat-content-label {
+	padding-top: 14px;
+	font-weight: bold;
+	font-size: 11.52px;
+}
+
+// to ensure date fields fit the cell 100%.
+.mat-form-field {
+	width: 100%;
+}
+
+//for input label field
+.input-label {
+	font-weight: bold;
+	font-size: 11.52px;
+}
+
+.input-md1 {
+	padding-left: .6rem;
+}
+
+//for the label field value
+.input-value {
+	font-size: 11.52px;
+}
+
+.mat-cell:first-of-type {
+	padding-left: 10px;
+}
+
+.mat-header-cell:first-of-type {
+	padding-left: 10px;
+}
+
+.mat-cell,
+.mat-footer-cell {
+	padding-right: 10px !important;
+} //to be changed for this.
+.mat-paginator {
+	display: unset;
+}
+
+.mat-header-cell {
+	display: flex;
+	justify-content: left;
+	background-color: #f3f3f3;
+	min-height: 40px;
+}
+
+.mat-header-row {
+	min-height: 25px;
+}
+
+.mat-cell {
+	display: flex;
+	justify-content: left;
+}
+
+//for date field.
+.no-padding {
+	 ::ng-deep .mat-form-field-wrapper {
+		padding-bottom: 0px !important;
+		font-size: 11.52px;
+		justify-content: left;
+	}
+}
+
+//for each field
+.form-control {
+	text-transform: uppercase;
+	width: 100%;
+	box-shadow: 0px 0.1rem 0.2rem #00000029;
+	border: 0.05rem solid #6A6868;
+	border-radius: 0px;
+	height: 1.4rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 11.52px;
+	text-transform: uppercase;
+}
+
+//for expansion panel
+.mat-expansion-panel-header {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: grey;
+	border-radius: 0px;
+	padding: 0px;
+}
+
+mat-expansion-panel-header:hover {
+	background-color: white !important;
+}
+
+.mat-expansion-panel-header.mat-expanded {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #27AE60;
+	;
+	border-radius: 0px;
+	color: #27AE60;
+	;
+}
+
+//for the mat-form date field.
+::ng-deep {
+	.mat-form-field-appearance-outline .mat-form-field-outline {
+		color: white;
+		border: 0.05rem solid #6A6868;
+		box-shadow: 0px 0.1rem 0.2rem #00000029;
+		border-radius: 0px;
+		padding: 0px;
+	}
+	.mat-form-field-appearance-outline .mat-form-field-flex {
+		padding: 0px !important;
+		height: 1.6rem !important;
+		align-items: center !important;
+	}
+	.mat-form-field-appearance-outline .mat-form-field-infix {
+		padding: 0px !important;
+		display: contents;
+	}
+}
+
+::ng-deep .mat-datepicker-toggle-default-icon {
+	margin-bottom: 5px !important;
+}
+
+
+/* focused color */
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+	color: white;
+	box-shadow: none;
+	border: 0.07rem solid #27ae60;
+}
+
+
+/* focused color */
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+	color: white;
+	box-shadow: none;
+	border: 0.07rem solid #27ae60;
+}
+
+//for date field.
+.no-padding {
+	 ::ng-deep .mat-form-field-wrapper {
+		padding-bottom: 0px !important;
+		font-size: 11.52px;
+		justify-content: center;
+	}
+}
+
+//text wrap for tooltip
+mat-cell>span.truncate-text {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+//for tooltip
+ ::ng-deep .custom-tooltip {
+	background-color: #27ae60;
+	color: #f3f3f3;
+}
+
+// set table values
+.mat-cell.mat-column-batchNum {
+	min-width: 1% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-batchNum {
+	min-width: 1% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-billNum {
+	min-width: 8% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-billNum {
+	min-width: 8% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-custName {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-custName {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-blngLevel {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-blngLevel {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-msaCode {
+	min-width: 8% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-msaCode {
+	min-width: 8% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-sfxCode {
+	min-width: 8% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-sfxCode {
+	min-width: 8% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-rateCardCode {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-rateCardCode {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-discountVal {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-discountVal {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-amount {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-amount {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-discSign {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-discSign {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-discType {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-discType {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-value {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-value {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-revisedBillAmt {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-revisedBillAmt {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-revisedGBillAmt {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-revisedGBillAmt {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+// for small screen
+@media screen and (max-width: 960px) {
+	.mat-table {
+		border: 0;
+		vertical-align: middle
+	}
+	.mat-table caption {
+		font-size: 1em;
+	}
+	.mat-table .mat-header-cell {
+		border: 10px solid;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+	}
+	.mat-table .mat-row {
+		border-bottom: 5px solid #ddd;
+		display: block;
+	}
+	.mat-table .mat-cell {
+		border-bottom: 1px solid #ddd;
+		display: block;
+		text-align: right;
+		font-weight: bold;
+		min-height: 25px;
+		font-size: 11.52px;
+	}
+	.mat-cell:first-of-type {
+		padding-left: 0px;
+	}
+	.mat-table .mat-cell:before {
+		content: attr(data-label);
+		float: left;
+		text-transform: inherit;
+		font-weight: normal;
+		font-size: .85em;
+	}
+	.mat-table .mat-cell:last-child {
+		border-bottom: 0;
+	}
+	.mat-table .mat-cell:first-child {
+		margin-top: 4%;
+	}
+}

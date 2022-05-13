@@ -1,0 +1,129 @@
+<div class="inner-page-padding">
+    <h2 style="font-size:0.9rem;font-weight: 600;">Receipt Unapplication</h2>
+    <app-breadcrumb></app-breadcrumb>
+    <mat-card fxLayout="column" fxFlexFill>
+            <mat-card-content>
+            <app-receipt-header [receiptById]="receiptById"></app-receipt-header>
+            <mat-accordion>
+                <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+                    <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+                        <span class="mat-content-label">Applied Bills Results</span>
+                    </mat-expansion-panel-header>
+                    <hr class="divider">
+                    <mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+                        <!-- Checkbox Column -->
+                        <ng-container matColumnDef="select">
+                            <mat-header-cell *matHeaderCellDef>
+                                <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()">
+                                </mat-checkbox>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(row) : null"
+                                [checked]="selection.isSelected(row)">
+                                </mat-checkbox>
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- Document Number Column -->
+                        <ng-container matColumnDef="documentNumber">
+                            <mat-header-cell *matHeaderCellDef ><b>Document <br> Number</b></mat-header-cell>
+                            <mat-cell *matCellDef="let element"  data-label="Document Number">{{element.documentNumber}}</mat-cell>
+                        </ng-container>
+
+                        <!-- Document Date Column -->
+                        <ng-container matColumnDef="documentDt">
+                            <mat-header-cell *matHeaderCellDef><b>Document <br>Date</b></mat-header-cell>
+                            <mat-cell *matCellDef="let element"  data-label="Document Date">{{element.documentDate | date:'dd-MMM-yyyy'}}</mat-cell>
+                        </ng-container>
+
+                        <!-- Customer Name Column -->
+                        <ng-container matColumnDef="customerName">
+                            <mat-header-cell *matHeaderCellDef ><b>Customer <br> Name</b></mat-header-cell>
+                            <mat-cell *matCellDef="let element" data-label="Customer Name"
+                            matTooltip="{{element.customerName}}" matTooltipPosition="above"
+                            matTooltipClass="custom-tooltip">
+                            <span class="truncate-text">
+                                {{element.customerName}}
+                            </span>
+                        </mat-cell>
+                        </ng-container>
+
+                        <!--  Out standing Column -->
+                        <ng-container matColumnDef="actualorAvail">
+                            <mat-header-cell *matHeaderCellDef> <b>Actual O/S Amount |<br> Available O/S Amount</b>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element" data-label="Actual O/S Amount">{{element.actualoutstandingAmt}} |
+                                {{element.outstandingAmt}}
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- Billing Level code column -->
+                        <ng-container matColumnDef="billingLevelValue">
+                            <mat-header-cell *matHeaderCellDef ><b>MSA / SFX / <br>RATE CARD</b></mat-header-cell>
+                            <mat-cell *matCellDef="let element"  data-label="MSA / SFX / RATE CARD">{{element.billingLevelValue}}</mat-cell>
+                        </ng-container>
+
+                        <!-- Applied Frt Amount column -->
+                        <ng-container matColumnDef="appliedFrtAmt">
+                            <mat-header-cell *matHeaderCellDef ><b>Freight <br> Amount</b> </mat-header-cell>
+                            <mat-cell *matCellDef="let element" data-label="Freight Amount">{{element.appliedFrtAmt}}</mat-cell>
+                        </ng-container>
+
+                        <!-- Applied frt tds Amount column-->
+                        <ng-container matColumnDef="appliedFrtTdsAmt">
+                            <mat-header-cell *matHeaderCellDef><b>TDS Applied <br> Amount</b></mat-header-cell>
+                            <mat-cell *matCellDef="let element" data-label="TDS Applied Amount">{{element.appliedFrtTdsAmt}}</mat-cell>
+                        </ng-container>
+
+                        <!-- GST TDS Amount column -->
+                        <ng-container matColumnDef="appliedGstTdsAmt">
+                            <mat-header-cell *matHeaderCellDef><b>GST TDS <br> Applied Amount</b></mat-header-cell>
+                            <mat-cell *matCellDef="let element" data-label="GST TDS Applied Amount">{{element.appliedGstTdsAmt}}</mat-cell>
+                        </ng-container>
+
+                        <!-- Partially Amount column-->
+                        <ng-container matColumnDef="reason">
+                            <mat-header-cell *matHeaderCellDef><b>Partially Applied<br>Reason</b> 
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element" data-label="Partially Applied Reason">{{element.reason}}
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- Expected collection Date column -->
+                        <ng-container matColumnDef="expectedColDt">
+                            <mat-header-cell *matHeaderCellDef><b>Expected <br>Collection Date</b>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element" data-label="Expected Collection Date">
+                                {{element.expectedColDt | date:'dd-MMM-yyyy'}} </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                    </mat-table>
+                    <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+                    <div class="form-row">
+
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Un-Apply Reason</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <ng-select [items]="reasonList" appendTo="body" bindLabel="viewValue" bindValue="viewValue"
+                                name="viewValue" placeholder="UN-APPLY REASON" [(ngModel)]="unapplyReason"></ng-select>
+                        </div>
+                    </div>  
+                     <div class="form-row">
+                        <div class="col-md-12 text-center footer-button-padding" style = "margin-bottom: 0.3rem">
+                            <button mat-raised-button color="primary" [disabled]="validateReason()" (click)="save()">UNAPPLY</button>
+                            <button mat-raised-button style="margin-left:0.3rem" (click)="back()">BACK</button>
+                        </div>
+                    </div>
+                </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-card-content>
+    </mat-card>
+</div>

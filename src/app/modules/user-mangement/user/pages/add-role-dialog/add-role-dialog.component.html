@@ -1,0 +1,47 @@
+<alert></alert>
+<h2 mat-dialog-title>Select Roles</h2>
+<mat-dialog-content>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <input class="form-control" placeholder="SEARCH" (keyup)="applyFilter($event)">
+    </div>
+  </div>
+  <hr class="divider" />
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell data-label="Select" *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Role Name Column -->
+    <ng-container matColumnDef="roleName">
+      <mat-header-cell *matHeaderCellDef><b>Role Name</b></mat-header-cell>
+      <mat-cell data-label="Role Name" *matCellDef="let row">{{ row.roleName }}</mat-cell>
+    </ng-container>
+
+    <!-- Role Description Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef><b>Description</b></mat-header-cell>
+      <mat-cell data-label="Description" *matCellDef="let row">{{ row.description }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button class="buttons" mat-dialog-close>Cancel</button>
+  <button mat-raised-button class="buttons" color="primary" [mat-dialog-close]="selection.selected" cdkFocusInitial
+    (click)="AddUserRoles()">Ok</button>
+</mat-dialog-actions>
+
+

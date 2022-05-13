@@ -1,0 +1,30 @@
+  <div class="row">
+    <!-- Row-1 column 1 -->
+    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+      <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+      <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+        <label class="input-label">Batch Number</label>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4" style="float: left">
+        <input class="form-control input-md1" matInput placeholder="BATCH NUMBER"
+          [(ngModel)]="discountSearchValues.batchNum" >
+      </div>
+    </div>
+
+    <!-- Row1- column 2 -->
+    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+      <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+      <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+        <label class="input-label">Bill Numbers</label>
+      </div>
+      <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+        <input class="form-control input-md1" matInput placeholder="BILL NUMBERS"
+          [(ngModel)]="discountSearchValues.billNumbers" >
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center footer-button-padding">
+      <button mat-raised-button color="primary"  (click)="pushValues()">Search</button>
+    </div>
+  </div>

@@ -1,0 +1,246 @@
+<mat-accordion>
+  <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+    <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+      <span class="mat-content-label">Credit/Debit Memo Result</span>
+    </mat-expansion-panel-header>
+    <br>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+        <label class="input-label">Document Number</label>
+        <label class="value-label">: &nbsp; {{cmdmSearchParam.documentNumbers == null ? cmdmSearchParam.waybillNumbers
+          :cmdmSearchParam.documentNumbers }}</label>
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+        <label class="input-label">Bill Branch</label>
+        <label class="value-label">: &nbsp; {{cmdmSearchParam.billBranch}}</label>
+      </div>
+
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+        <label class="input-label">Memo Date</label>
+        <label class="value-label">: &nbsp; {{cmdmSearchParam.creditMemoDate | date: 'dd-MMM-yyyy'}}</label>
+      </div>
+
+
+    </div>
+
+    <hr class="divider">
+    <div *ngIf="cmdmSearchParam.isWaybill && cmdmSearchParam.isCredit" class="col-md-12" style="text-align: end;">
+      <a (click)="exportToExcel()" class="excel-img">
+        <img class="png-icon" style="height: 20px;" src="../../../../../../assets/icons/icons8-microsoft-excel-52.png"
+          class="img-icon" /></a>
+      <label class="excel-label"><b>Export To Excel</b></label>
+    </div>
+
+
+    <div class="data-container mat-elevation-z">
+      <mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+        <ng-container matColumnDef="lineNumber">
+          <mat-header-cell *matHeaderCellDef><b>LINE NO</b></mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="Line Number">
+            {{element.lineNumber}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="total">
+          <mat-footer-cell *matFooterCellDef>Total</mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="gTotal">
+          <mat-footer-cell *matFooterCellDef>G Total</mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="billNumber">
+          <mat-header-cell *matHeaderCellDef><b>BILL NUMBER</b></mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="Bill Number">
+            {{element.billNumber == null ? '-' : element.billNumber}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="billDt">
+          <mat-header-cell *matHeaderCellDef><b>BILL DATE</b></mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="Bill Date">
+            {{element.billDt | date:'dd-MMM-yyyy'}}
+          </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="actualoutstandingAmt">
+          <mat-header-cell *matHeaderCellDef><b>Document Amt</b></mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="Actual O/S Amount">
+            {{element.actInvOutstandingAmt}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="outstandingAmt">
+          <mat-header-cell *matHeaderCellDef><b>O/S AMT</b></mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="O/S Amount">
+            {{element.outstandingAmt}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="collBr">
+          <mat-header-cell *matHeaderCellDef><b>COLLECTION BR</b></mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="COLLECTION BRANCH">
+            {{element.collBr}}
+          </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="waybillNumber" *ngIf="cmdmSearchParam.isWaybill || cmdmSearchParam.isBulkUpload">
+          <mat-header-cell *matHeaderCellDef><b>WAYBILL</b></mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="Waybill Number">
+            {{element.waybillNumber}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="reason">
+          <mat-header-cell *matHeaderCellDef><b>REASON<span style="color: red">*</span></b></mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="Reason">
+            <ng-select *ngIf="!cmdmSearchParam.isBulkUpload" [items]="reasonLineList" class="ngSelectCustom"
+              role="listbox" bindLabel="descr" bindValue="id" placeholder="Select Reason"
+              [(ngModel)]="element.reasonId">
+            </ng-select>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="wayBillReason">
+          <mat-header-cell *matHeaderCellDef><b>REASON<span style="color: red">*</span></b></mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="Reason">
+            {{element.reasonId}}
+          </mat-cell>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="amount">
+          <mat-header-cell *matHeaderCellDef><b>AMOUNT<span style="color: red">*</span></b></mat-header-cell>
+          <mat-cell *matCellDef="let element index as i" data-label="Amount">
+            <input *ngIf="!cmdmSearchParam.isBulkUpload" class="form-control input-md1" matInput type="number"
+              [(ngModel)]="element.lineAmt" (change)="calcTax(i)" placeholder="Amount" />
+            <div *ngIf="cmdmSearchParam.isBulkUpload">{{element.lineAmt}}</div>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="totalAmount">
+          <mat-footer-cell *matFooterCellDef>{{getLineTotal()}}</mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="gTotalAmount">
+          <mat-footer-cell *matFooterCellDef>{{getLineTotal()}}</mat-footer-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="remark">
+          <mat-header-cell *matHeaderCellDef><b>REMARK</b></mat-header-cell>
+          <div *ngIf="!cmdmSearchParam.isBulkUpload">
+            <mat-cell *matCellDef="let element" data-label="Remark" matTooltip="{{element.remark}}"
+              matTooltipPosition="above" matTooltipClass="custom-1-tooltip">
+              <input class="form-control input-md1" matInput placeholder="Remark" [(ngModel)]="element.remark"
+                maxlength="254" />
+            </mat-cell>
+          </div> -->
+
+          <div *ngIf="!cmdmSearchParam.isBulkUpload">
+            <mat-cell *matCellDef="let element" data-label="Remark" matTooltip="{{element.remark}}"
+              matTooltipPosition="above" matTooltipClass="custom-tooltip">
+              <input class="form-control input-md1" matInput placeholder="Remark" [(ngModel)]="element.remark" />
+            </mat-cell>
+          </div>
+
+          <div *ngIf="cmdmSearchParam.isBulkUpload">
+            <mat-cell *matCellDef="let element" data-label="Remark" matTooltip="{{element.remark}}"
+              matTooltipPosition="above" matTooltipClass="custom-tooltip"><span
+                class="truncate-text">{{element.remark}}</span>
+            </mat-cell>
+          </div>
+        </ng-container>
+
+        <ng-container matColumnDef="taxableAmount">
+          <mat-header-cell *matHeaderCellDef><b>TAXABLE</b></mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="Taxable Amount">
+            {{element.taxableAmount}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="totalTaxableAmount">
+          <mat-footer-cell *matFooterCellDef>{{getTaxTotal()}}</mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="blank_A_1">
+          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="blank_B_1">
+          <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="sgst">
+          <mat-header-cell *matHeaderCellDef><b>SGST</b></mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="SGST">{{element.sgstAmt}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="totalSgst">
+          <mat-footer-cell *matFooterCellDef>{{getSgstTotal()}}</mat-footer-cell>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="cgst">
+          <mat-header-cell *matHeaderCellDef><b>CGST</b></mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="CGST">{{element.cgstAmt}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="totalCgst">
+          <mat-footer-cell *matFooterCellDef>{{getCgstTotal()}}</mat-footer-cell>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="igst">
+          <mat-header-cell *matHeaderCellDef><b>IGST</b></mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="IGST">{{element.igstAmt}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="totalIgst">
+          <mat-footer-cell *matFooterCellDef>{{getIgstTotal()}}</mat-footer-cell>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="message" *ngIf="cmdmSearchParam.isBulkUpload">
+          <mat-header-cell *matHeaderCellDef><b>MESSAGE</b></mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="Message" matTooltip="{{element.message}}"
+            matTooltipPosition="above" matTooltipClass="custom-tooltip">
+            <span class="truncate-text">
+              {{element.message}}
+            </span>
+          </mat-cell>
+        </ng-container>
+
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
+        <mat-row [ngClass]="{'row-color-green' : row.isTotColumn == 'true'}"
+          *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-footer-row class="sticky-footer row-color-green" *matFooterRowDef="displayedColumnsTotal; sticky: true;">
+        </mat-footer-row>
+        <mat-footer-row class="sticky-footer row-color-green" *matFooterRowDef="displayedColumnsGTotal; sticky: true;">
+        </mat-footer-row>
+      </mat-table>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12 text-center footer-button-padding" style="margin-bottom:0.3rem;">
+        <button mat-raised-button color="primary" type="submit" [disabled]="ifErrored"
+          (click)="submit()">Submit</button>
+        <button mat-raised-button style="margin-left:0.3rem" *ngIf="!cmdmSearchParam.isBulkUpload" class="secondary-btn"
+          (click)="reset()">Reset</button>
+      </div>
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>

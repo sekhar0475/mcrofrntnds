@@ -1,0 +1,178 @@
+<div class="inner-page-padding">
+  <h2 style="font-size:0.9rem;font-weight: 600;">Credit Memo/ Debit Memo, {{documentSubType}} </h2>
+  <app-breadcrumb></app-breadcrumb>
+  <mat-card fxLayout="column" fxFlexFill>
+    <mat-card-content>
+      <form class="create-search" #myForm="ngForm" [formGroup]="createFormGroup">
+        <div class="row">
+          <!-- Row 1 column 1 -->
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left; margin-top:0.5rem">
+              <label class="asterisk-if-mandatory input-label">Document Type</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4 cmdm-search" style="float: left; margin-top:0.5rem">
+              <ng-select (change)="onDocumentTypeChange($event)" [items]="documentTypes" class="select-control"
+                role="listbox" bindLabel="descr" [clearable]="false" bindValue="lookupVal" name="viewValue" placeholder="DOCUMENT TYPE"
+                formControlName="documentType">
+              </ng-select>
+              <span class="error"
+                *ngIf="!createFormGroup.get('documentType').valid && createFormGroup.get('documentType').touched">
+                <span class="error" *ngIf="createFormGroup.get('documentType').errors['required']">Document Type is
+                  required</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Row 1 column 2 -->
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left; margin-top:0.5rem">
+              <label class="asterisk-if-mandatory input-label">Document SubType</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4 cmdm-search" style="float: left; margin-top:0.5rem">
+              <input class="form-control input-md1" placeholder="DOCUMENT SUBTYPE" [(ngModel)]="documentSubType"
+                [ngModelOptions]="{standalone: true}" readonly>
+            </div>
+
+          </div>
+
+          <!-- Row 2 column 1-->
+          <div class="col-lg-6 col-md-6 col-sm-6" *ngIf="isRetail">
+            <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left; margin-top:0.5rem">
+              <label class="asterisk-if-mandatory input-label">Created Against</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4 cmdm-search" style="float: left; margin-top:0.5rem">
+              <ng-select (change)="onCreatedAgainstChange($event ,false)" [items]="createdAgainsts" class="select-control"
+                role="listbox" bindLabel="createdAgainst" [clearable]="false" bindValue="createdAgainst" name="viewValue"
+                placeholder="DOCUMENT TYPE" formControlName="createdAgainst">
+              </ng-select>
+              <span class="error"
+                *ngIf="!createFormGroup.get('createdAgainst').valid && createFormGroup.get('createdAgainst').touched">
+                <span class="error" *ngIf="createFormGroup.get('createdAgainst').errors['required']">Created Against is
+                  required</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Row 2 column 2-->
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <!-- <div *ngIf="isRetail" class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div> -->
+            <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;" *ngIf="!isRetail"> &nbsp; </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;" *ngIf="isRetail"> &nbsp; </div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left; margin-top:0.5rem">
+              <label class="asterisk-if-mandatory input-label">Document Wise</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4 cmdm-search" style="float: left; margin-top:0.5rem"
+              *ngIf="!checkDocSubType()">
+              <ng-select (change)="onCreatedAgainstChange($event ,true)" [items]="documentWises" class="select-control"
+                role="listbox" bindLabel="descr" [clearable]="false" bindValue="lookupVal" name="viewValue" placeholder="DOCUMENT WISE"
+                formControlName="documentWise">
+              </ng-select>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4 cmdm-search" style="float: left; margin-top:0.5rem"
+              *ngIf="checkDocSubType()">
+              <input class="form-control input-md1 ng-touched" matInput autocomplete="off" type="text"
+                placeholder="Document Wise" formControlName="documentWise" readonly>
+
+            </div>
+          </div>
+
+          <!-- Row 3 column 1-->
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;" *ngIf="isRetail"> &nbsp; </div>
+            <div *ngIf="!isRetail" class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left; margin-top:0.5rem">
+
+              <label class="asterisk-if-mandatory input-label">Document Number</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4 cmdm-search" style="float: left; margin-top:0.5rem ">
+              <input class="form-control input-md1 ng-touched" matInput autocomplete="off" type="text"
+                placeholder="DOCUMENT NUMBERS" formControlName="documentNumber">
+              <span class="error"
+                *ngIf="createFormGroup.controls.documentNumber.invalid && createFormGroup.controls.documentNumber.touched">
+                <span class="error" *ngIf="createFormGroup.controls.documentNumber.errors.required">Document Number
+                  is required.</span>
+              </span>
+            </div>
+          </div>
+          <!-- Row 3 column 2-->
+          <div class="col-lg-6 col-md-6 col-sm-6" *ngIf="isRetail || isWaybill">
+            <!-- <div *ngIf="!isRetail || isWaybill" class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div> -->
+            <div *ngIf="!isRetail && isWaybill" class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+            <!-- <div *ngIf="(isRetail && !isWaybill) || (isCredit && !isWaybill)" class="col-lg-4 col-md-4 col-sm-4"
+              style="float: left;"> &nbsp; </div> -->
+              <div *ngIf="isRetail" class="col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left; margin-top:0.5rem">
+              <label class="asterisk-if-mandatory input-label">Waybill Number</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4 cmdm-search" style="float: left; margin-top:0.5rem">
+              <input class="form-control input-md1 ng-touched" matInput autocomplete="off" type="text"
+                placeholder="WAYBILL NUMBERS" formControlName="waybillNumber">
+              <span class="error"
+                *ngIf="createFormGroup.controls.waybillNumber.invalid && createFormGroup.controls.waybillNumber.touched">
+                <span class="error" *ngIf="createFormGroup.controls.waybillNumber.errors.required">Waybill Number
+                  is required.</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row d-flex justify-content-center" *ngIf="!isCredit || !isWaybill">
+          <button mat-raised-button color="primary" [disabled]="!myForm.form.valid" (click)="search()">Search</button>
+        </div>
+
+        <mat-accordion *ngIf="isWaybill && isCredit">
+          <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+            <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+              <span class="mat-content-label">Bulk upload</span>
+            </mat-expansion-panel-header>
+            <hr class="divider">
+            <div class="form-row">
+              <div class="col-md-12" style="text-align: end;">
+                <a><label class="text-label" (click)="downloadTemplate()"><b>Download
+                      Template</b></label></a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                  <label class="asterisk-if-mandatory input-label">Upload File</label>
+                </div>
+                <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                  <input #fileInput  type="file" (click)="fileInput.value=null"
+                    (change)="chooseFileToUpload($event)" placeholder="CHOOSE FILE" accept=".xlsx">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 text-center footer-button-padding" style="margin-top:0.5rem">
+                  <button mat-raised-button color="primary" (click)="uploadValidateAndShow()">Validate And
+                    Show</button>
+                  <button mat-raised-button style="margin-left:0.7rem" color="primary"
+                    (click)="skipUploadAndSearch()">Skip Upload And
+                    Search</button>
+                </div>
+              </div>
+            </div>
+
+
+            <app-cmdm-search-result *ngIf="showResult" [cmdmSearchParam]="cmdmSearchParam"
+              (emitterClearSearchParams)="resetComponent($event)"></app-cmdm-search-result>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <app-cmdm-search-result *ngIf="showResult && (!isCredit || !isWaybill)" [cmdmSearchParam]="cmdmSearchParam"
+          (emitterClearSearchParams)="resetComponent($event)">
+        </app-cmdm-search-result>
+
+      </form>
+
+    </mat-card-content>
+    <!--
+    <app-create-billing-result *ngIf="displayResultComponent" [customerBillBranch]="customerBillBranch"
+      [searchResult]="searchResult" [searchData]="searchData"></app-create-billing-result> -->
+  </mat-card>
+</div>

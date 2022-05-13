@@ -1,0 +1,223 @@
+<div class="inner-page-padding">
+    <h2 style="font-size:0.9rem;font-weight: 600;">Batch Review</h2>
+    <app-breadcrumb></app-breadcrumb>
+    <mat-card fxLayout="column" fxFlexFill>
+        <mat-card-header>
+            <mat-card-title>
+                <div class="row">
+                    <div>
+                        <label>BATCH REVIEW:</label>
+                    </div>
+                    &nbsp;
+                    <div>
+                        <label>Batch Number ({{searchCustomer.batchNumber}})</label>
+                    </div>
+                </div>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="create-search" #myForm="ngForm" [formGroup]="createFormGroup">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                        <div class=" col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-2 col-md-2 col-sm-2" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Search By</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4"
+                            style="float: left; padding-right: 1px; padding-left: 1px;">
+                            <ng-select [items]="billingLevelList" class="select-control" role="listbox"
+                                bindLabel="blngLvlValue" bindValue="blngLvlValue" [clearable]="false"
+                                name="blngLvlValue" (change)="setBillingLevel($event)"
+                                [(ngModel)]="searchCustomer.blngLvlValue" placeholder="BILLING LEVEL"
+                                formControlName="billingLevelFC">
+                            </ng-select>
+                            <div class="error"
+                                *ngIf="createFormGroup.controls.billingLevelFC.invalid && createFormGroup.controls.billingLevelFC.touched">
+                                <div class="error" *ngIf="createFormGroup.controls.billingLevelFC.errors.required">
+                                    Mandatory for Search.</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4"
+                            style="float: left; padding-right: 5px; padding-left: 5px;">
+                            <input class="form-control input-md1" [(ngModel)]="searchCustomer.blngLvlcode" matInput
+                                placeholder="BILLING LEVEL CODE" formControlName="blngLvlCodeFc">
+                            <div class="error"
+                                *ngIf="createFormGroup.controls.blngLvlCodeFc.invalid && createFormGroup.controls.blngLvlCodeFc.touched">
+                                <div class="error" *ngIf="createFormGroup.controls.blngLvlCodeFc.errors.required">
+                                    Mandatory for Search.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <button mat-raised-button color="primary" style = "margin-top: 0.5rem;" [disabled]="!myForm.form.valid"
+                            (click)="findBilingLevel()">Search</button>
+                    </div>
+                </div>
+                <mat-accordion>
+                    <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+                        <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+                            <span class="mat-content-label">Customer Result</span>
+                        </mat-expansion-panel-header>
+                        <hr class="divider">
+                        <mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+                            <!-- Customer Name Column -->
+                            <ng-container matColumnDef="customerName">
+                                <mat-header-cell *matHeaderCellDef><b>Customer Name</b></mat-header-cell>
+                                <mat-cell *matCellDef="let element" data-label="Customer Name">{{element.customerName}}
+                                </mat-cell>
+                            </ng-container>
+
+                            <!-- MSA Column -->
+                            <ng-container matColumnDef="msaCode">
+                                <mat-header-cell *matHeaderCellDef><b>MSA</b></mat-header-cell>
+                                <mat-cell *matCellDef="let element" data-label="MSA">{{element.msaCode}}</mat-cell>
+                            </ng-container>
+
+                            <!-- Sfx Code Column -->
+                            <ng-container matColumnDef="sfxCode">
+                                <mat-header-cell *matHeaderCellDef><b>SFX Code</b></mat-header-cell>
+                                <mat-cell *matCellDef="let element" data-label="SFX Code">{{element.sfxCode}}</mat-cell>
+                            </ng-container>
+
+                            <!-- Rate Card Column -->
+                            <ng-container matColumnDef="rateCard">
+                                <mat-header-cell *matHeaderCellDef><b>Rate Card</b></mat-header-cell>
+                                <mat-cell *matCellDef="let element" data-label="Rate Card">{{element.rateCard}}
+                                </mat-cell>
+                            </ng-container>
+
+                            <!-- Remove Column -->
+                            <ng-container matColumnDef="remove">
+                                <mat-header-cell *matHeaderCellDef><b>Remove</b></mat-header-cell>
+                                <mat-cell *matCellDef="let element;index as i" data-label="Remove">
+                                    <a mat-icon-button aria-label="Remove" (click)="removeCustomerFromAray(i)">
+                                        <mat-icon color="primary">delete</mat-icon>
+                                    </a>
+                                </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                        </mat-table>
+                    </mat-expansion-panel>
+                </mat-accordion>
+                <br>
+                <section>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                            <div class=" col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                                <label class="input-label">Waybill Number</label>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4" style="float: left">
+                                <input class="form-control input-md1" matInput placeholder="WAYBILL NUMBER"
+                                    formControlName="wayBillNumberFc" (blur) = "checkWaybillValue()">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 text-center footer-button-padding" >
+                                <button mat-raised-button color="primary" style = "margin-top: 0.5rem;" [disabled] = "!isWaybillValuesAvailable" (click)="callWayBillGet()">Search</button>
+                                <!-- [disabled]="!createFormGroup.get('wayBillNumberFc').value" -->
+
+                            </div>
+                        </div>
+                    </div>
+                    <mat-accordion>
+                        <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+                            <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+                                <span class="mat-content-label">WayBill Result</span>
+                            </mat-expansion-panel-header>
+                            <hr class="divider">
+                            <mat-table [dataSource]="matDataSource" matSort class="mat-elevation-z0">
+
+                                <!-- Waybill Number Column -->
+                                <ng-container matColumnDef="waybillNumber">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Waybill Number</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Waybill Number">
+                                        {{element.waybillNumber}}</mat-cell>
+                                </ng-container>
+
+                                <!-- Sfx Code Column -->
+                                <ng-container matColumnDef="sfxCode">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>SFX Code</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="SFX Code">{{element.sfxCode}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Pickup Date Column -->
+                                <ng-container matColumnDef="pickupDate">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Pickup Date</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Pickup Date">
+                                        {{element.pickupDate | date:'dd-MMM-yyyy'}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Origin Column -->
+                                <ng-container matColumnDef="originCode">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Origin</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Origin">{{element.originCode}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Destination Column -->
+                                <ng-container matColumnDef="destinationCode">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Destination</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Destination">
+                                        {{element.destinationCode}}</mat-cell>
+                                </ng-container>
+
+                                <!-- Qty Column -->
+                                <ng-container matColumnDef="qty">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Qty</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Qty"></mat-cell>
+                                </ng-container>
+
+                                <!-- Pkg Column -->
+                                <ng-container matColumnDef="pkg">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Pkg</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Pkg">{{element.pkg}}</mat-cell>
+                                </ng-container>
+
+                                <!-- Weight Column -->
+                                <ng-container matColumnDef="weight">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Weight</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Weight">{{element.weight}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Amount Column -->
+                                <ng-container matColumnDef="outstandingAmount">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Amount</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Amount">
+                                        {{element.outstandingAmount}}</mat-cell>
+                                </ng-container>
+
+                                <!-- Remove Column -->
+                                <ng-container matColumnDef="remove">
+                                    <mat-header-cell *matHeaderCellDef><b>Remove</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element;index as i" data-label="Remove">
+                                        <a mat-icon-button aria-label="Remove"
+                                            (click)="removeWayBillFromArray(element.waybillId , i)">
+                                            <mat-icon color="primary">delete</mat-icon>
+                                        </a>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row *matHeaderRowDef="displayedWayBillColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedWayBillColumns"></mat-row>
+                            </mat-table>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <div class="form-row" [style.margin-top]="'12px'">
+                        <div class="col-md-12 text-center footer-button-padding">
+                            <button mat-raised-button  color="primary" (click)="submit()">Submit</button>
+                            <button mat-raised-button style="margin-left:0.3rem" (click)="cancel()">Cancel</button>
+                            <button mat-raised-button style="margin-left:0.3rem" (click)="back()">Back</button>
+                        </div>
+                    </div>
+                </section>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

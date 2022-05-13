@@ -1,0 +1,138 @@
+.flexcontain {
+	background-color: #f3f3f3;
+	min-height: calc(118vh - 157px);
+}
+
+.banner-input {
+	border: none;
+	position: relative;
+	width: 100%;
+	text-transform: uppercase;
+	font-size: 11.52px;
+}
+
+.green-border-heading {
+	background: #27AE60;
+	border: .05rem solid #27AE60;
+	margin-bottom: .5rem;
+	margin-top: .1rem;
+}
+
+.greetings {
+	font-size: 20px;
+}
+
+.form-heading {
+	font-size: 20px;
+	margin-top: 4%;
+	margin-bottom: 7%;
+}
+
+.overlapped {
+	position: absolute;
+}
+
+// View/Edit link 
+.link-control {
+	cursor: pointer;
+	color: #27ae60;
+}
+
+.link-control:hover {
+	color: #27ae60;
+}
+
+//mat-table properties.    
+.mat-cell:first-of-type {
+	padding-left: 20px;
+}
+
+.mat-header-cell:first-of-type {
+	padding-left: 20px;
+}
+
+.mat-header-cell {
+	justify-content: left;
+}
+
+.mat-footer-row {
+	min-height: 25px;
+}
+
+.mat-row {
+	min-height: 25px;
+}
+
+.mat-cell {
+	justify-content: left;
+}
+
+//text wrap for tooltip
+mat-cell>span.truncate-text {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+//for tooltip
+ ::ng-deep .custom-tooltip {
+	background-color: #27ae60;
+	color: #f3f3f3;
+}
+
+//for small devices.
+@media screen and (max-width: 960px) {
+	.greetings {
+		font-size: 18px;
+	}
+	.form-heading {
+		font-size: 18px;
+	}
+	.welcome-box {
+		border-radius: 0px;
+	}
+	.mat-table {
+		border: 0;
+		vertical-align: middle
+	}
+	.mat-table caption {
+		font-size: 1em;
+	}
+	.mat-table .mat-header-cell {
+		border: 10px solid;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+	}
+	.mat-table .mat-row {
+		border-bottom: 5px solid #ddd;
+		display: block;
+	}
+	.mat-table .mat-cell {
+		border-bottom: 1px solid #ddd;
+		display: block;
+		text-align: right;
+		font-weight: bold;
+		min-height: 30px;
+		font-size: 11.52px;
+	}
+	.mat-cell:first-of-type {
+		padding-left: 0px;
+	}
+	.mat-table .mat-cell:before {
+		content: attr(data-label);
+		float: left;
+		text-transform: inherit;
+		font-weight: normal;
+		font-size: 11.52px;
+	}
+	.mat-table .mat-cell:last-child {
+		border-bottom: 0;
+	}
+	.mat-table .mat-cell:first-child {
+		margin-top: 4%;
+	}
+}

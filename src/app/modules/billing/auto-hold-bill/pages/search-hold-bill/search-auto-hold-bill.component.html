@@ -1,0 +1,55 @@
+<section>
+    <div class="row">
+
+        <!-- Row-1 column 1  -->
+        <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+            <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                <label class="input-label">Hold Status</label>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4" style="float: left">
+                <ng-select [items]="holdList" class="select-control" role="listbox"
+                    bindLabel="holdStatus" bindValue="holdStatus" [clearable]="false" name="viewValue"
+                    placeholder="HOLD STATUS" [(ngModel)]="searchValues.holdStatus">
+                </ng-select>
+            </div>
+        </div>
+        <!-- Row-1 column 2  -->
+        <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                <label class="input-label">Customer Name</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                <input class="form-control input-md1" matInput placeholder="CUSTOMER NAME"
+                    [(ngModel)]="searchValues.customerName">
+            </div>
+        </div>
+        <!--Row 2 Column 1-->
+        <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                <label class="input-label">MSA</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                <input class="form-control input-md1" matInput placeholder="MSA" [(ngModel)]="searchValues.msaCode">
+            </div>
+        </div>
+        <!--Row 2 Column 2-->
+        <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                <label class="input-label">SFX Code</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                <input class="form-control input-md1" matInput placeholder="SFX CODE"
+                    [(ngModel)]="searchValues.sfxCode">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center footer-button-padding">
+            <button mat-raised-button color="primary" (click)="pushValues() ">Search</button>
+        </div>
+    </div>
+</section>

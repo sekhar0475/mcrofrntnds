@@ -1,0 +1,434 @@
+@import '../node_modules/@angular/material/theming';
+@import "../node_modules/ngx-toastr/toastr.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@include mat-core();
+//Added custom palettes for custom collor
+//Added custom palettes for custom collor
+$sfx-brand: (
+    50 : #e5f5ec,
+    100 : #bee7cf,
+    200 : #93d7b0,
+    300 : #68c690,
+    400 : #47ba78,
+    500 : #27ae60,
+    600 : #23a758,
+    700 : #1d9d4e,
+    800 : #179444,
+    900 : #0e8433,
+    A100 : #b5ffc9,
+    A200 : #82ffa4,
+    A400 : #4fff7f,
+    A700 : #36ff6d,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$my-primary: mat-palette($sfx-brand, 500);
+$my-accent: mat-palette($mat-grey, 800);
+$my-theme: mat-light-theme($my-primary, $my-accent);
+@include angular-material-theme($my-theme);
+//set the uniform font size 
+* {
+	font-family: "Open Sans", sans-serif;
+}
+
+//remove padding from the mat-expansion
+.mat-expansion-panel-content>.mat-expansion-panel-body {
+	padding: 0 0 0px !important;
+}
+
+// set default button properties
+.mat-raised-button{
+    text-transform:uppercase;
+    font-size: 11.52px;
+    color: #1a1a1a!important;
+    border-radius: 1px;
+    height:26.5px;
+    width:auto;
+    min-width: 74px;
+    margin: 0px 2.88px 0px 0px;
+    line-height: 0px !important;
+    padding: 0px 8px;
+    text-align: center;
+    opacity: 0.6;
+    display: block;
+    align-items: flex-end; 
+}
+.mat-raised-button:hover {opacity: 1}
+
+.mat-button-base {
+	border-radius: 20px !important;
+	margin-right: 15px;
+}
+
+//remove the button focus
+button:focus {
+	outline: 0;
+}
+
+// set the text color.
+.mat-raised-button.mat-primary {
+	color: white !important;
+}
+
+.mat-raised-button.mat-accent {
+	color: white !important;
+}
+
+.mat-expansion-indicator::after {
+	transform: rotate(0deg) !important;
+	border-style: none !important;
+	width: 0;
+	height: 0;
+	border-left: .3rem solid transparent;
+	border-right: .3rem solid transparent;
+	border-top: 0.6rem solid #1a1a1a;
+}
+
+.mat-expansion-indicator {
+	transform: rotate(0deg) !important;
+	border-style: none;
+	width: 0;
+	height: 0;
+	border-left: .3rem solid transparent;
+	border-right: .3rem solid transparent;
+	border-top: 0.6rem solid #1a1a1a;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+	padding: 5px 0px 5px 0px !important;
+}
+
+.divider-padding-top {
+	padding-bottom: 20px;
+	padding-top: 2px;
+}
+
+.mat-dialog-actions {
+	justify-content: center;
+}
+
+//mat-check-box  Properties
+.mat-checkbox-checked .mat-checkbox-background {
+	background-color: #27AE60 !important;
+}
+
+.mat-checkbox-indeterminate .mat-checkbox-background {
+	background-color: #27AE60 !important;
+}
+
+//ng-select (LOV) properties set.
+.ng-select.ng-select-opened>.ng-select-container {
+	height: 1.4rem !important;
+	border: .1rem solid #27ae60!important;
+	border-radius: 0px!important;
+}
+
+.ng-select.ng-select-single .ng-select-container {
+	height: 1.4rem !important;
+	font-size: 12px;
+	border-radius: 0px;
+}
+
+.ng-select .ng-select-container {
+	min-height: 2rem!important;
+	border: .05rem solid #6A6868 !important;
+}
+
+.ng-select .ng-select-container:hover {
+	border-color: #27ae60!important;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+	padding: .2rem 1rem!important;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+	background-color: #27ae60!important;
+	color: #fff;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected.ng-option-marked {
+	background-color: #fff;
+}
+
+.ng-dropdown-panel {
+	border: .05rem solid #6a6868!important;
+	border-radius: 0px !important;
+	background: #fff;
+	font-size: 10.08px;
+	text-transform: uppercase;
+}
+
+.ng-select .ng-select-container {
+	min-height: 1.4rem !important
+}
+
+.ng-select.ng-select-single .ng-select-container {
+	height: 1.4rem !important;
+}
+
+.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {
+	top: 50%;
+	transform: translateY(-50%);
+	padding-right: 0px;
+	min-width: 100%;
+}
+
+.ng-dropdown-panel.ng-select-bottom .ng-dropdown-panel-items .ng-option:last-child {
+	border-radius: 0px !important;
+}
+
+// to set the page padding
+.inner-page-padding {
+	padding-top: 3%;
+	padding-left: 3.5%;
+	padding-right: 3.5%;
+}
+
+// dashboard welcome box
+.welcome-box {
+	background: #27AE60;
+	margin-bottom: 25px;
+	padding-top: 5px;
+	padding-right: 55px;
+	padding-left: 55px;
+	height: 15.5rem;
+	color: #fff;
+	border-radius: 0 0px 40% 40%;
+	text-align: left;
+}
+
+//to remove the up & down arrow marks for Number fields.
+
+/* Chrome, Safari, Edge, Opera */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+
+/* Firefox */
+
+input[type=number] {
+	-moz-appearance: textfield;
+}
+
+//error font
+.error {
+	font-size: 0.5rem;
+	color: red;
+	height: 0px;
+	margin: 0px;
+	padding: 0px;
+	font-weight: 100;
+}
+
+//Set the scroll bar width
+
+/*over write*/
+
+::-webkit-scrollbar {
+	width: 0.35rem;
+}
+
+::-webkit-scrollbar-track {
+	background: #EBEBF2;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #6A6868;
+	height: 5.0rem
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #585757;
+}
+
+//to mark the mandatory fields
+label.asterisk-if-mandatory::after {
+	content: " *";
+	color: red;
+}
+
+// Mat-table properties 
+.mat-cell:first-of-type {
+	padding-left: 0px;
+}
+
+.mat-header-cell:first-of-type {
+	padding-left: 0px;
+}
+
+.mat-cell,
+.mat-footer-cell {
+	padding-right: 5px !important;
+	font-size: 11.52px;
+}
+
+.mat-footer-row,
+.mat-row {
+	min-height: 30px;
+	text-transform: uppercase;
+	font-size: 11.52px;
+}
+
+.mat-paginator {
+	display: unset;
+}
+
+.mat-header-cell:last-of-type {
+	padding-right: 0px;
+}
+
+.mat-header-cell {
+	display: flex;
+	justify-content: center;
+	background-color: #f1f1f1; // #f3f3f3;
+	color: #1a1a1a;
+	min-height: 25px;
+}
+
+.mat-header-row {
+	min-height: 25px;
+}
+
+.mat-cell {
+	display: flex;
+	justify-content: center;
+	min-height: 25px;
+	word-break: break-all;
+}
+
+//for all mat-dialog-boxes
+.mat-dialog-container {
+ border-radius: 15px !important;
+}
+
+//for all mat-dialog-boxes
+.mat-dialog-title {
+	font-size: 17.28px !important;
+}
+
+//for all mat-dialog-boxes
+.popup-hr {
+	margin-top: .1rem;
+	border: 0;
+	border-top: .05rem solid #81C784;
+}
+
+// for all toastres 
+.toast-container {
+	pointer-events: none;
+	position: fixed;
+	z-index: 999999;
+	font-size: 0.7rem;
+}
+
+.toast-top-right {
+	top: 12px;
+	right: 12px;
+}
+
+
+/* mat-datepicker-start */
+
+//box size
+.safexDatePicker {
+	width: 14.8rem !important;
+	height: 17.7rem !important;
+  }
+  
+  //calendar header
+.mat-calendar-controls {
+	display: flex;
+	margin: 5% calc(33% / 7 - 16px);
+  }
+  
+  //calender middle button
+.mat-calendar-period-button {
+	position: absolute !important;
+	display: flex !important;
+	font-weight: bold !important;
+	padding: 0px !important;
+	width: 100% !important;
+  }
+  
+  //calendar middle button 
+.mat-calendar-period-button .mat-button-wrapper {
+	margin: auto !important;
+  }
+  
+  //calender left-arrow button
+.mat-calendar-previous-button {
+	position: absolute !important;
+	left: 0 !important;
+	color: #27AE60 !important;
+	font-weight: 800 !important;
+	top: 14px !important;
+  }
+  
+  //calender right-arrow button
+.mat-calendar-next-button {
+	color: #27AE60 !important;
+  }
+  
+.safexDatePicker thead.mat-calendar-table-header tr th {
+	background-color: transparent;
+	color: #1a1a1a;
+	font-weight: bold;
+	font-size: 0.8rem;
+  }
+  
+.mat-calendar-table-header th {
+	text-align: center;
+	padding: 0 0 8px 0;
+  }
+  
+.mat-calendar-body-label{
+	opacity: 0;
+  }
+  
+.mat-calendar-body-label[colspan="7"] {
+	display: none; 
+   }
+  
+.mat-calendar-arrow {
+	display: none !important;
+  }
+  
+.safexDatePicker .mat-calendar-body-cell-content {
+	  position: absolute;
+	  top: 0%;
+	  left: 5%;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  box-sizing: border-box;
+	  width: 90%;
+	  height: 65%;
+	  line-height: 1;
+	  border-width: 1px;
+	  border-style: solid;
+	  border-radius: 999px;
+	  font-size: 10.5px;
+  }
+  
+/* mat-datepicker-end */

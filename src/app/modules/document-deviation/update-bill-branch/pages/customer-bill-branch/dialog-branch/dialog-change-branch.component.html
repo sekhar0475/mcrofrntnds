@@ -1,0 +1,39 @@
+<h2 mat-dialog-title class="title-style">Update Submission / Collection / Alternative Collection Branch</h2>
+<hr class="popup-hr">
+<mat-dialog-content style="height:150px">
+    <form class="create-search" #myForm="ngForm" [formGroup]="createFormGroup">
+        <div class="row">
+            <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="input-label">Submission Branch</label>
+            </div>
+            <div class=" col-lg-5 col-md-5 col-sm-5 search-branch" style="float: left">
+                <i class="fa fa-search fa-lg search-icons"></i>
+                    <input class="form-control input-md2" placeholder="SEARCH BRANCH" formControlName="submsnBrFc"
+                        (click)="submissonBrSearch()" readonly>
+            </div>
+        </div>
+        <div class="row">
+            <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="input-label">Collection Branch</label>
+            </div>
+            <div class=" col-lg-5 col-md-5 col-sm-5 search-branch" style="float: left">
+                <i class="fa fa-search fa-lg search-icons"></i>
+                <input class="form-control input-md2" placeholder="SEARCH BRANCH" formControlName="collectionBrFc"
+                    (click)="collectionBrSearch()" readonly>
+            </div>
+        </div>
+        <div class="row">
+            <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="input-label">Alternative Branch</label>
+            </div>
+            <div class=" col-lg-5 col-md-5 col-sm-5 search-branch" style="float: left">
+                <i class="fa fa-search fa-lg search-icons"></i>
+                <input class="form-control input-md2" placeholder="SEARCH BRANCH" formControlName="altColBrFc"
+                    (click)="alternativeBrSearch()" readonly>
+            </div>
+        </div>
+    </form>
+    <mat-dialog-actions>
+        <button mat-raised-button mat-dialog-close>Cancel</button>
+        <button mat-raised-button color="primary" (click)="submit()" cdkFocusInitial>Submit</button>
+    </mat-dialog-actions>

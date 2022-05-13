@@ -1,0 +1,94 @@
+<div class="flexcontain">
+  <div class="welcome-box">
+    <div class="row">
+      <div class="col-md-12">
+        <a routerLink="/dashboard" style="color: white; font-size:10.08px">Dashboard</a>
+        <i style="font-size:10.08px"> &#x25BA;</i>
+        <a style="color: white; font-size:10.08px"> User Management</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10">
+        <p class="greetings"> {{greetings}}, <strong>{{userName}}!</strong></p>
+      </div>
+      <div class="col-md-2">
+        <p class="greetings">Administration</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <p class="form-heading">User Management</p>
+      </div>
+    </div>
+    <div class=".overlapped">
+      <mat-card fxLayout="column" fxFlexFill>
+        <mat-card-header>
+          <button *ngIf="writeAccess" mat-icon-button (click)="addUser()" style="margin-left: auto;">
+            <mat-icon color="primary" style="padding-right: 15px;">add_circle</mat-icon>
+          </button>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="user-search">
+            <div>
+              <input matInput type="text" placeholder="Search" class="banner-input" (keyup)="applyFilter($event)">
+              <hr class="green-border-heading">
+              <mat-table [dataSource]="dataSource" class="mat-elevation-z0" matSort>
+                <!-- User Id Column -->
+                <ng-container matColumnDef="userId">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header><b>User Id</b></mat-header-cell>
+                  <mat-cell data-label="User Id" *matCellDef="let row">{{ row.userId }}</mat-cell>
+                </ng-container>
+
+                <!-- User Name Column -->
+                <ng-container matColumnDef="username">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header><b>Name</b></mat-header-cell>
+                  <mat-cell data-label="Name" *matCellDef="let row">{{ row.username }}</mat-cell>
+                </ng-container>
+
+                <!-- Mobile No. Column -->
+                <ng-container matColumnDef="mobile">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header><b>Mobile No.</b></mat-header-cell>
+                  <mat-cell data-label="Mobile No." *matCellDef="let row">{{ row.mobile }}</mat-cell>
+                </ng-container>
+
+                <!-- Email ID Column -->
+                <ng-container matColumnDef="email">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header><b>Email Id</b></mat-header-cell>
+                  <!-- <mat-cell  data-label="Email ID" *matCellDef="let row">{{ row.email }}</mat-cell> -->
+                  <mat-cell data-label="Email ID" *matCellDef="let row" matTooltip="{{ row.email }}"
+                    matTooltipPosition="above" matTooltipClass="custom-tooltip">
+                    <span class="truncate-text">
+                      {{ row.email }}
+                    </span>
+                  </mat-cell>
+                </ng-container>
+
+                <!-- Title Column -->
+                <ng-container matColumnDef="status">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header><b>Status</b></mat-header-cell>
+                  <mat-cell data-label="Status" *matCellDef="let row">{{ row.status }}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="details">
+                  <mat-header-cell *matHeaderCellDef><b>View Details</b></mat-header-cell>
+                  <mat-cell *matCellDef="let row" data-label=" View Details">
+                    <a (click)="gotoView(row.userMasterId)" class="link-control">VIEW</a>
+                    <i>&nbsp;</i>
+                    <i *ngIf="editAccess" style="color:#27ae60;">/</i>
+                    <i *ngIf="editAccess">&nbsp;</i>
+                    <a *ngIf="editAccess" (click)="gotoEdit(row.userMasterId)" class="link-control">EDIT</a>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+              </mat-table>
+              <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
+
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

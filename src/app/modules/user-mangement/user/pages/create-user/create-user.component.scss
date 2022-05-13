@@ -1,0 +1,385 @@
+//For each form fields.
+.form-control:hover{
+  border-color:  #27ae60;
+  box-shadow: none;
+}
+.form-control:focus{
+  box-shadow: none;
+  border: 0.07rem solid #27ae60;
+}
+
+.select-control:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+//date field hover
+.mat-form-field:hover{
+  border-color:  #27ae60;
+  box-shadow: none;
+}
+//date field focus
+.mat-form-field:focus{
+  box-shadow: none;
+  border: 0.07rem solid #27ae60;
+}
+
+//to remove the button margins
+.button-margin{
+  margin:0px !important;
+}
+
+//to remove the left padding of standard bootstrap class.
+.contol-label{
+  padding-left: 0px;
+}
+
+//for the sub-headings.
+.mat-content-label {
+  padding-top: 14px;
+  font-weight: 700;
+  font-size: 11.52px;
+}
+
+//for mat-date 
+.date-form-control{
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  font-size: 11.52px;
+  justify-content: center;
+}
+
+// for the date field to occupy 100% width in table.
+.mat-form-field{
+  width:100% ;
+}
+
+// for ng-select
+.select-control{
+  box-shadow: 0px 0.1rem 0.2rem #00000029;
+  font-size: 11.52px;
+}
+
+//for each field
+.form-control {
+  text-transform: uppercase;
+  width: 100%;
+  box-shadow: 0px 0.1rem 0.2rem #00000029;
+  border: 0.05rem solid #6A6868;
+  border-radius: 0px;
+  height: 1.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 11.52px;
+  text-transform: uppercase;
+}
+
+.input-label{
+  font-weight: bold;
+  font-size: 11.52px !important;
+}
+
+.input-md1 {
+  padding-left: .6rem;
+}
+
+.form-control:disabled{
+  background-color: white;
+  border:none;
+  box-shadow: none;
+}
+
+//for expansion panel 
+mat-expansion-panel-header:hover {
+  background-color: white !important;
+}
+ 
+.mat-expansion-panel-header{
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: grey;
+  border-radius: 0px;
+  padding: 0px;
+  
+}
+
+.mat-expansion-panel-header.mat-expanded{
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color:  #27AE60;;
+  border-radius: 0px;
+  color: #27AE60;;
+}
+
+//for the mat-date field.
+.no-padding{
+  ::ng-deep  .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+    font-size: 12px;
+    justify-content: left;
+}
+}
+
+.mat-header-cell{
+  display: flex;  
+  justify-content: left;
+  background-color: #f3f3f3;
+  min-height: 40px;
+}
+
+.mat-header-row{
+min-height: 25px;
+}
+
+.mat-cell{
+display: flex;  
+justify-content: left; 
+}
+
+
+// Role Mapping Table
+mat-cell.mat-column-description{
+  min-width: 30% !important;
+  font-size: 11.52px !important;
+}
+.mat-cell.mat-column-expDt{
+  min-width: 15% !important;
+  font-size: 11.52px !important;
+}
+.mat-cell.mat-column-roleName{
+  min-width: 40% !important;
+  font-size: 11.52px !important;
+}
+.mat-cell.mat-column-effectiveDt{
+  min-width: 15% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-description{
+  min-width: 30% !important;
+  font-size: 11.52px !important;
+}
+.mat-header-cell.mat-column-expDt{
+  min-width: 15% !important;
+  font-size: 11.52px !important;
+}
+.mat-header-cell.mat-column-roleName{
+  min-width: 40% !important;
+  font-size: 11.52px !important;
+}
+.mat-header-cell.mat-column-effectiveDt{
+  min-width: 15% !important;
+  font-size: 11.52px !important;
+}
+
+//Privileged Branch Details
+.mat-header-cell.mat-column-branchName{
+  min-width: 15% !important;
+  font-size: 11.52px !important;
+}
+.mat-header-cell.mat-column-type{
+  min-width: 15% !important;
+  font-size: 11.52px !important;
+}
+.mat-header-cell.mat-column-effectiveDt{
+  min-width: 15% !important;
+  font-size: 11.52px !important;
+}
+.mat-header-cell.mat-column-address{
+  min-width: 40% !important;
+  font-size: 11.52px !important;
+}
+.mat-header-cell.mat-column-expiryDt{
+  min-width: 15% !important;
+  font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-branchName{
+  min-width: 15% !important;
+  font-size: 11.52px !important;
+}
+.mat-cell.mat-column-type{
+  min-width: 15% !important;
+  font-size: 11.52px !important;
+}
+.mat-cell.mat-column-effectiveDt{
+  min-width: 15% !important;
+  font-size: 11.52px !important;
+}
+.mat-cell.mat-column-address{
+  min-width: 40% !important;
+  font-size: 11.52px !important;
+}
+.mat-cell.mat-column-expiryDt{
+  min-width: 15% !important;
+  font-size: 11.52px !important;
+}
+
+//header
+h2{
+  margin-bottom: 0px !important;
+  margin-left: 5px;
+}
+
+//for the default branch field
+.input-value{
+  font-size: 11.52px;
+}
+
+// mat-option settings for drop down
+.email-hint 
+{ 
+  font-size: 10.08px; 
+  background-color: #27AE60;
+  text-transform: uppercase;
+  color: white;
+  overflow: visible;
+  line-height: initial;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+  .email-hint.mat-selected {
+    background: white;
+    color:black;
+  }
+  .email-hint.mat-selected:hover {
+    background-color: #27AE60;
+    color: white;
+  }
+  
+  .email-hint:hover{
+    background-color: #27AE60;
+    color: white;
+  }
+
+//for the mat-date picker properties.
+::ng-deep .mat-datepicker-toggle-default-icon{
+  margin-bottom: 5px !important ;
+}
+/* focused color */
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: white;
+  box-shadow: none;
+  border: 0.07rem solid #27ae60; 
+}
+
+/* focused color */
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: white;
+  box-shadow: none;
+  border: 0.07rem solid #27ae60; 
+}
+
+::ng-deep {
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+     color: white;
+     border: 0.05rem solid #6A6868;
+     box-shadow: 0px 0.1rem 0.2rem #00000029;
+     border-radius: 0px;
+     padding: 0px;
+  }
+  .mat-form-field-appearance-outline .mat-form-field-flex {
+     padding: 0px !important;
+     height: 1.6rem !important;
+     align-items: center !important;
+ }
+ .mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 0px !important;
+  display: contents;
+}
+}
+
+//for ctrl save top right
+.ctrlLabel {
+  font-size:0.9rem;
+  font-weight: 600;
+  font-style: italic;
+  color: #27ae60;
+}
+
+//text wrap for tooltip
+mat-cell>span.truncate-text {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+
+.add-content-label {
+	padding-top: 14px;
+	font-weight: bold;
+	font-size: 11.52px;
+}
+//for tooltip
+ ::ng-deep .custom-tooltip {
+	background-color: #27ae60;
+	color: #f3f3f3;
+}
+
+
+// for small screen 
+@media screen and (max-width: 960px) {
+  .mat-table {
+    border: 0;
+    vertical-align: middle
+  }
+
+  .mat-table caption {
+    font-size: 1em;
+  }    
+  
+  .mat-table .mat-header-cell {      
+    border: 10px solid;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  .mat-table .mat-row {
+    border-bottom: 5px solid #ddd;
+    display: block;
+  }
+     
+  .mat-table .mat-cell {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    text-align: right;
+    font-weight: bold;
+    min-height:30px;
+    font-size: 11.52px !important;
+  }
+
+  .mat-cell.mat-column-expDt{
+    height: 60px!important;
+  }
+  .mat-cell.mat-column-expiryDt{
+    height: 60px!important;
+  }
+
+  .mat-cell:first-of-type{
+    padding-left:0px;
+  }
+  .mat-table .mat-cell:before {
+   
+    content: attr(data-label);
+    float: left;
+    text-transform:inherit;
+    font-weight: normal;
+    font-size: 11.52px !important;
+  }
+  .mat-table .mat-cell:last-child {
+    border-bottom: 0;
+  }
+    .mat-table .mat-cell:first-child {
+    margin-top: 4%;
+  }
+}
+

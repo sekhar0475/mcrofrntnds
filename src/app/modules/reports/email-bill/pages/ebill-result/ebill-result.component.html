@@ -1,0 +1,99 @@
+<mat-accordion>
+    <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+        <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <span class="mat-content-label">Review Results</span>
+        </mat-expansion-panel-header>
+        <hr class="divider">
+        <div class="form-row">
+            <div class="col-md-12 text-left">
+                <mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+                    <!-- Checkbox Column -->
+                    <ng-container matColumnDef="select">
+                        <mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                [aria-label]="checkboxLabel()">
+                            </mat-checkbox>
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
+                                [aria-label]="checkboxLabel(row)">
+                            </mat-checkbox>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="msa">
+                        <mat-header-cell *matHeaderCellDef><b>MSA</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="msa">
+                            <label *ngIf = "element.billingLevel != 'MSA'" class = "no-margin-bottom-label"> {{ element.msaCode }}</label> 
+                            <a *ngIf = "element.billingLevel == 'MSA'" (click)="openPopupEmailSend(element.billingLevel,element.billingLevelCode)" class="link-control"> {{ element.msaCode }}</a> 
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="sfxCode">
+                        <mat-header-cell *matHeaderCellDef><b>SFX Code</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="sfxCode">
+                            <label *ngIf = "element.billingLevel != 'SFX'" class = "no-margin-bottom-label">{{ element.sfxCode }}</label>
+                            <a *ngIf = "element.billingLevel == 'SFX'" (click)="openPopupEmailSend(element.billingLevel,element.billingLevelCode)" class="link-control">{{ element.sfxCode }}</a>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="rateCardCode">
+                        <mat-header-cell *matHeaderCellDef><b>Rate Card Code</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Rate Card Code">
+                            <label *ngIf = "(element.billingLevel !== 'RATE CARD') && (element.billingLevel !== 'RATE_CARD')" class = "no-margin-bottom-label">{{ element.rateCardCode }}</label>
+                            <a *ngIf = "(element.billingLevel === 'RATE CARD') || (element.billingLevel === 'RATE_CARD')" (click)="openPopupEmailSend(element.billingLevel,element.billingLevelCode)" class="link-control">{{ element.rateCardCode }}</a>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="customerName">
+                        <mat-header-cell *matHeaderCellDef><b>Customer Name</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="customerName">
+                            {{ element.customerName }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="custName">
+                        <mat-header-cell *matHeaderCellDef><b>Customer Name</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Customer Name">{{ element.customerName }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="billGeneratedCount">
+                        <mat-header-cell *matHeaderCellDef><b>Bill Generated Count</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Bill Generated Count">{{ element.billGeneratedCount }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="emailSentCount">
+                        <mat-header-cell *matHeaderCellDef><b>Email Sent Count</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Email Sent Count">{{ element.emailSentCount }}
+                        </mat-cell>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="acknowledgeCount">
+                        <mat-header-cell *matHeaderCellDef><b>Acknowledge Count</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Acknowledge Count">{{ element.acknowledgeCount }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="sendingFailedCount">
+                        <mat-header-cell *matHeaderCellDef><b>Sending Failed Count</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Sending Failed Count">{{ element.sendingFailedCount }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                </mat-table>
+                <mat-paginator [pageSizeOptions]="[5 ,10, 30, 60]" showFirstLastButtons></mat-paginator>
+            </div>
+        </div>
+        <div class="form-row" [style.margin-top]="'12px'">
+            <div class="col-md-12 text-center footer-button-padding" style= "margin-bottom: 0.3rem">
+                <button mat-raised-button color="primary" (click)="submit()">Resend Emails</button>
+            </div>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

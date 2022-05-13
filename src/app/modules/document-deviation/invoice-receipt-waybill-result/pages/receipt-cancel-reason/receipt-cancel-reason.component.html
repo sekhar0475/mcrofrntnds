@@ -1,0 +1,75 @@
+<mat-accordion>
+    <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+        <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <span class="mat-content-label">Perform Receipt Cancellation</span>
+        </mat-expansion-panel-header>
+        <form class="create-search" #myForm="ngForm" [formGroup]="searchFormGroup">
+            <div class="row">
+                <!--Row 1 Column 1-->
+                <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                    <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                    <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                        <label class="input-label">Document Number</label>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4" style="float: left">
+                        <label class="value-label">{{documentData?.documentNum}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Row 2 Column 1 -->
+                <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                    <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                    <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                        <label class="asterisk-if-mandatory input-label">Cancellation Reason</label>
+                    </div>
+                    <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                        <ng-select [items]="cancelResonList" class="select-control" role="listbox" bindLabel="cancelValue"
+                            bindValue="cancelValue" bindLabel="cancelDesc"  [clearable]="false" name="value" [(ngModel)]="documentData.cancelReson"
+                           placeholder="CANCEL REASON" formControlName="cancellationResonFc" (change)="newReceipt()">
+                        </ng-select>
+                        <div class="error"
+                            *ngIf="searchFormGroup.controls.cancellationResonFc.invalid && searchFormGroup.controls.cancellationResonFc.touched">
+                            <div class="error" *ngIf="searchFormGroup.controls.cancellationResonFc.errors.required">
+                                Cancellation Reason is Mandatory.</div>
+                        </div>
+                    </div>
+                </div>
+                <!--Row 2 Column 2-->
+                <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                    <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+                    <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                        <label class="input-label">Remarks</label>
+                    </div>
+                    <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                        <textarea matInput class="input-md1 textareaoutline" placeholder="REMARKS"  cols="20" rows="2"
+                        [(ngModel)]="documentData.cancelRemarks"  [ngModelOptions]="{standalone: true}"  maxlength="100"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                    <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                    <div class="contol-label col-lg-6 col-md-6 col-sm-6" style="float: left;">
+                        <label class="input-label">Create New Receipt Against Existing Receipt</label>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4" style="float: left">
+                        <mat-radio-group color="primary" formControlName="matRadioFc" (change)="newReceipt()">
+                            <mat-radio-button class="mat-radio-label-content" value="yes"
+                                [checked]="displayNewReceiptComp" >Yes</mat-radio-button>
+                            <mat-radio-button class="mat-radio-label-content" value="no"
+                                [checked]="!displayNewReceiptComp" >No</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <app-new-receipt *ngIf="displayNewReceiptComp" [writeAccess]="writeAccess" [documentData]="documentData" 
+            [cancelReason]="cancelReason" [reasonId]="reasonId" [bankDetails]="bankDetails" (clearSearchValues)="pickSearchData($event)"></app-new-receipt>
+            <div *ngIf="writeAccess" class="row">
+                <div *ngIf="!displayNewReceiptComp" class="col-md-12 text-center footer-button-padding" style="margin-bottom: 0.3rem;">
+                    <button mat-raised-button color="primary" [disabled]="!myForm.form.valid" (click)="submit()">Submit</button>
+                </div>
+            </div>
+        </form>
+    </mat-expansion-panel>
+</mat-accordion>

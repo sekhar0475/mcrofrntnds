@@ -1,0 +1,43 @@
+<mat-toolbar class="app-header">
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="toggleSideBar()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <a><img class="circle" [routerLink]="['/dashboard']" src="assets/images/propel-i.png" style="cursor: pointer"
+        alt="logo"></a>
+
+    <div fxFlex class="profile-class">
+      <div class="profile-inner" style="">
+        <div class=" order-1">
+          <mat-select value="DUMMY" disabled [matMenuTriggerFor]="profile" class="custom-mat-select">
+            <mat-option value="DUMMY">{{userName}}</mat-option>
+          </mat-select>
+          <mat-menu #profile="matMenu" xPosition="before" class="customize">
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>exit_to_app</mat-icon> Sign Out
+            </button>
+          </mat-menu>
+          <mat-divider class="custom-divider"></mat-divider>
+        </div>
+        <div class="col-12 order-2">
+          <a style="cursor: pointer;" (click)="openDialog()">
+          <div class="col-11" style="float: left;padding:0px; margin:0px">
+            <input type="text"
+                   placeholder="SEARCH"
+                   style="cursor: pointer;"
+                   class="form-control"
+                   [(ngModel)]="branchName"
+                   disabled>
+
+          </div>
+          <div class="col-1">
+            <mat-icon>search</mat-icon>
+          </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </mat-toolbar-row>
+
+</mat-toolbar>

@@ -1,0 +1,130 @@
+<mat-accordion>
+    <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+        <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <span class="mat-content-label">Review Results</span>
+        </mat-expansion-panel-header>
+        <hr class="divider">
+        <div class="form-row">
+            <div class="col-md-12 text-left">
+                <mat-table matTableExporter [dataSource]="dataSource" class="mat-elevation-z0" #exporter="matTableExporter" matSort>
+                    <!-- Checkbox Column -->
+                    <ng-container matColumnDef="select">
+                        <mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                [aria-label]="checkboxLabel()">
+                            </mat-checkbox>
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
+                                [aria-label]="checkboxLabel(row)">
+                            </mat-checkbox>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Batch Number Column -->
+                    <ng-container matColumnDef="documentNumber">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Bill Number</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Document Number">{{ element.documentNumber }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Batch Status Column -->
+                    <ng-container matColumnDef="documentDate">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Bill Date</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Document Date">
+                            {{ element.documentDate | date:'dd-MMM-yyyy' }}
+                        </mat-cell>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="documentType">
+                        <mat-header-cell [hidden] = "hidebillType" *matHeaderCellDef mat-sort-header><b>Bill Type</b></mat-header-cell>
+                        <mat-cell [hidden] = "hidebillType" *matCellDef="let element" data-label="Bill Type">
+                            {{ element.documentType }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="billingBranch">
+                        <mat-header-cell [hidden] = "hidebillBr" *matHeaderCellDef mat-sort-header><b>Billing <br> Branch</b></mat-header-cell>
+                        <mat-cell [hidden] = "hidebillBr" matTooltipPosition="above" matTooltipClass="custom-tooltip" matTooltip="{{element.billingBranch }}" *matCellDef="let element" data-label="Billing Branch">
+                            <span class="truncate-text"> {{ element.billingBranch }}</span></mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="submissionBranch">
+                        <mat-header-cell [hidden]="hideSubBr" *matHeaderCellDef mat-sort-header><b>Submission <br> Branch</b></mat-header-cell>
+                        <mat-cell [hidden]="hideSubBr"  matTooltipPosition="above" matTooltipClass="custom-tooltip" matTooltip="{{element.submissionBranch }}" *matCellDef="let element" data-label="Submission Branch">
+                            <span class="truncate-text">{{ element.submissionBranch }}</span></mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="collectionBranch">
+                        <mat-header-cell [hidden]="hideColBr" *matHeaderCellDef mat-sort-header><b>Collection <br> Branch</b></mat-header-cell>
+                        <mat-cell [hidden]="hideColBr" matTooltipPosition="above" matTooltipClass="custom-tooltip" matTooltip="{{element.collectionBranch }}" *matCellDef="let element" data-label="Collection Branch">
+                            <span class="truncate-text">{{ element.collectionBranch }}</span></mat-cell>
+                    </ng-container>
+
+                    <!-- Billing Type Column -->
+                    <ng-container matColumnDef="refdocumentType">
+                        <mat-header-cell [hidden]="hideRefDocType" *matHeaderCellDef mat-sort-header><b>Bill Type</b></mat-header-cell>
+                        <mat-cell [hidden]="hideRefDocType" *matCellDef="let element" data-label="Reference Document Type">
+                            {{ element.documentType }}</mat-cell>
+                    </ng-container>
+
+                    <!-- Request Date Column -->
+                    <ng-container matColumnDef="amount">
+                        <mat-header-cell [hidden]="hideAmt" *matHeaderCellDef mat-sort-header><b>Amount</b></mat-header-cell>
+                        <mat-cell [hidden]="hideAmt" *matCellDef="let element" data-label="Amount">
+                            {{ element.amount }}</mat-cell>
+                    </ng-container>
+
+                    <!-- Billing Cycle Column -->
+                    <ng-container matColumnDef="customerName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Customer <br> Name</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" matTooltipPosition="above" matTooltipClass="custom-tooltip" matTooltip="{{element.customerName }}" data-label="Customer Name"><span class="truncate-text">{{ element.customerName }}</span>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Download Errors Column -->
+                    <ng-container matColumnDef="billingLevel">
+                        <mat-header-cell [hidden]="hideBilLvl" *matHeaderCellDef mat-sort-header><b>MSA/SFX/RATE CARD</b></mat-header-cell>
+                        <mat-cell [hidden]="hideBilLvl" *matCellDef="let element" data-label="MSA/SFX/RATE CARD">{{ element.billingLevel }}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Action Column -->
+                    <ng-container matColumnDef="billingLevelCode">
+                        <mat-header-cell [hidden]="hideBilLvlCode" *matHeaderCellDef mat-sort-header><b>MSA/SFX/RATE CARD CODE</b></mat-header-cell>
+                        <mat-cell [hidden]="hideBilLvlCode" *matCellDef="let element" data-label="Customer Name">{{ element.billingLevelCode }}
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="msa">
+                        <mat-header-cell [hidden]="hideMsa" *matHeaderCellDef mat-sort-header><b>MSA</b></mat-header-cell>
+                        <mat-cell [hidden]="hideMsa" *matCellDef="let element" data-label="MSA">
+                            {{ element.msa }}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="sfx">
+                        <mat-header-cell [hidden]="hideSfx" *matHeaderCellDef mat-sort-header><b>SFX</b></mat-header-cell>
+                        <mat-cell [hidden]="hideSfx" *matCellDef="let element" data-label="SFX">
+                            {{ element.sfx }}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="rateCard">
+                        <mat-header-cell [hidden]="hideRc" *matHeaderCellDef mat-sort-header><b>Rate Card</b></mat-header-cell>
+                        <mat-cell [hidden]="hideRc" *matCellDef="let element" data-label="Rate Card">
+                            {{ element.rateCard }}</mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                </mat-table>
+                <mat-paginator [pageSize]="25" [pageSizeOptions]="[5 ,10, 30, 60]" showFirstLastButtons></mat-paginator>
+            </div>
+        </div>
+        <div class="form-row" [style.margin-top]="'12px'">
+            <div class="col-md-12 text-center footer-button-padding" style= "margin-bottom: 0.3rem">
+                <button mat-raised-button (click)="export2Excel()" >Export to XLS</button>
+                <button mat-raised-button style= "margin-left: 0.3rem" color="primary" (click)="submit()">Submit Job</button>
+
+            </div>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

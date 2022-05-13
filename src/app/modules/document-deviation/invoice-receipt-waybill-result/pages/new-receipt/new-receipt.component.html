@@ -1,0 +1,82 @@
+<mat-accordion>
+    <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+        <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <span class="mat-content-label">New Receipt Details</span>
+        </mat-expansion-panel-header>
+        <form class="create-search" #myForm="ngForm" [formGroup]="searchFormGroup">
+            <div class="row">
+                <!--Row 3 Column 2-->
+                <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                    <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                    <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                        <label class="input-label">Original Reference Number</label>
+                    </div>
+                    <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                        <label class="value-label">{{documentData?.documentRefNum}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- Row 2 Column 1 -->
+                <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                    <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                    <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                        <label class="asterisk-if-mandatory input-label">Reference Document</label>
+                    </div>
+                    <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                        <input class="form-control input-md1" name="referenceDoc" matInput
+                            placeholder="REFERENCE DOCUMENT" formControlName="referenceDocFc" [(ngModel)]="documentData.newDocumentRefNum">
+                        <div class="error"
+                            *ngIf="searchFormGroup.controls.referenceDocFc.invalid && searchFormGroup.controls.referenceDocFc.touched">
+                            <div class="error" *ngIf="searchFormGroup.controls.referenceDocFc.errors.required">
+                                Reference Document is Mandatory.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                    <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+                    <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                        <label class="input-label">Reference Date</label>
+                    </div>
+                    <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                        <label class="value-label">{{documentData?.documentRefDt | date:'dd-MMM-yyyy'}}</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                    <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                    <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                        <label class="asterisk-if-mandatory input-label">Safexpress Bank Account</label>
+                    </div>
+                    <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                        <ng-select [items]="bankAccList" class="select-control" role="listbox" bindLabel="value"
+                           bindValue="value" [clearable]="false" name="value" formControlName="sfxBankAccFc"
+                           placeholder="BANK ACCOUNT" [(ngModel)]="documentData.sfxBankAcc">
+                        </ng-select>
+                        <div class="error"
+                            *ngIf="searchFormGroup.controls.sfxBankAccFc.invalid && searchFormGroup.controls.sfxBankAccFc.touched">
+                            <div class="error" *ngIf="searchFormGroup.controls.sfxBankAccFc.errors.required">
+                                Bank Account is Mandatory.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                    <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+                    <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                        <label class="input-label">Upload File</label>
+                    </div>
+                    <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                        <input type="file" id="file" (change)="handleFileInput($event.target.files)">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div *ngIf="writeAccess" class="col-md-12 text-center footer-button-padding">
+                    <button mat-raised-button color="primary" [disabled]="!myForm.form.valid || cancelReason" (click)="submit()">Submit</button>
+                </div>
+            </div>
+        </form>
+    </mat-expansion-panel>
+</mat-accordion>

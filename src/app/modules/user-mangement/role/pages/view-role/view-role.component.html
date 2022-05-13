@@ -1,0 +1,156 @@
+<div class="inner-page-padding">
+    <h2 style="font-size:0.9rem;font-weight: 600;">View Role</h2>
+    <app-breadcrumb></app-breadcrumb>
+    <mat-card fxLayout="column" fxFlexFill>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                        <label class="input-label">Role Name</label>
+                    </div>
+                    <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                        <label class="value-label">{{role?.roleName}}</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;">&nbsp;</div>
+                    <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                        <label class="input-label">Status</label>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4" style="float: left">
+                        <label class="value-label">{{role?.status}}</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                        <label class="input-label">Description</label>
+                    </div>
+                    <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                        <label class="value-label">{{role?.desc}}</label>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;">&nbsp;</div>
+                    <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                        <label class="input-label">Start Date</label>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                        <label class="value-label">{{role?.effectiveDt | date:'dd-MMM-yyyy'}}</label>
+                    </div>
+                </div>
+
+                <div class="col-sm-6"></div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;">&nbsp;</div>
+                    <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                        <label class="input-label">Expiry Date</label>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                        <label class="value-label">{{role?.expDt | date:'dd-MMM-yyyy'}}</label>
+                    </div>
+                </div>
+
+            </div>
+            <mat-accordion>
+                <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+                    <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+                        <span class="mat-content-label">Permissions</span>
+                    </mat-expansion-panel-header>
+                    <hr class="divider">
+                    <div class="form-row">
+                        <div class="col-md-12 text-left">
+                            <div class="data-container mat-elevation-z">
+                                <mat-table [dataSource]="dataSource" class="mat-elevation-z0" matSort>
+                                    <!-- Module Name -->
+                                    <ng-container matColumnDef="moduleName">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Module Name</b>
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let module" data-label="Module Name"
+                                            matTooltip="{{ module.moduleName }}" matTooltipPosition="above"
+                                            matTooltipClass="custom-tooltip">
+                                            <span class="truncate-text">
+                                                {{module.moduleName}}
+                                            </span>
+                                        </mat-cell>
+                                    </ng-container>
+                                    <!-- SubModule Name -->
+                                    <ng-container matColumnDef="subModuleName">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Submodule Name</b>
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let subModule" data-label="SubModule Name">
+                                            {{subModule.submoduleName}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <!-- Read FLag -->
+                                    <ng-container matColumnDef="readFlag">
+                                        <mat-header-cell *matHeaderCellDef><b>Read</b></mat-header-cell>
+                                        <mat-cell *matCellDef="let element" data-label="Read Flag"
+                                            class="checkbox-control">
+                                            <mat-checkbox disabled
+                                                [checked]='element.readFlag? element.readFlag=="Y" ? true: false : false'>
+                                            </mat-checkbox>
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <!-- Write FLag -->
+                                    <ng-container matColumnDef="writeFlag">
+                                        <mat-header-cell *matHeaderCellDef><b>Write</b></mat-header-cell>
+                                        <mat-cell *matCellDef="let element" data-label="Write Flag"
+                                            class="checkbox-control">
+                                            <mat-checkbox disabled
+                                                [checked]='element.writeFlag? element.writeFlag=="Y" ? true: false : false'>
+                                            </mat-checkbox>
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <!-- Update FLag -->
+                                    <ng-container matColumnDef="updateFlag">
+                                        <mat-header-cell *matHeaderCellDef><b>Update</b></mat-header-cell>
+                                        <mat-cell *matCellDef="let element" data-label="Update Flag"
+                                            class="checkbox-control">
+                                            <mat-checkbox disabled
+                                                [checked]='element.updFlag? element.updFlag=="Y" ? true: false : false'>
+                                            </mat-checkbox>
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <!-- start Date -->
+                                    <ng-container matColumnDef="effectiveDt">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Start Date</b>
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" data-label="Start Date">
+                                            {{element.effectiveDt | date:'dd-MMM-yyyy'}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <!-- Expiry Date -->
+                                    <ng-container matColumnDef="expDt">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header><b>Expiry Date</b>
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element" data-label="Expiry Date">
+                                            {{element.expDt | date:'dd-MMM-yyyy'}}
+                                        </mat-cell>
+                                    </ng-container>
+                                    <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                </mat-table>
+                                <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+                            </div>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+            <br>
+            <div class="row">
+                <div class="col-md-12 text-center footer-button-padding">
+                    <button mat-raised-button (click)="gotoSearch()">Back</button>
+                </div>
+            </div>
+            <br>
+        </mat-card-content>
+    </mat-card>
+</div>

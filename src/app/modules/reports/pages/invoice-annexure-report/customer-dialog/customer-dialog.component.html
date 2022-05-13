@@ -1,0 +1,79 @@
+<h2 mat-dialog-title>Select Customer</h2>
+<mat-dialog-content class="mat-typography">
+    <form class="customer-search">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="form-group">
+                <div class="contol-label col-lg-2 col-md-2 col-sm-2" style="float: left;">
+                    <label class="asterisk-if-mandatory input-label">Search By</label>
+                </div>
+                <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;padding-right: 0px;padding-left: 0px;">
+                    <input class="form-control input-readonly" 
+                    type="text" value="Customer Name"  readonly 
+                    >
+                </div>
+                <div class=" col-lg-3 col-md-3 col-sm-4 " style="float: left;padding-right: 0px;padding-left: 0px;">
+                    <input class="form-control" 
+                            type="text"  #searchVal        
+                            (keyup)="onKeyup(searchVal.value.length)"
+                    >
+                    <div class="error"*ngIf="showError"> Please enter first 3 characters</div>
+                </div>
+                <div class=" col-lg-2 col-md-2 col-sm-2 " style="float: left;padding-right: 0px;padding-left: 0px;">
+                    <button class="go-button" [disabled]="showError" (click)="onClickGo(searchVal.value)" >GO</button>
+                  </div>
+               </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+          <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef><b>Select</b>
+            </mat-header-cell>
+            <mat-cell data-label="Select" *matCellDef="let row">
+                <mat-radio-button (click)="$event.stopPropagation()"
+                (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)"
+                [aria-label]="checkboxLabel(row)"></mat-radio-button>
+            </mat-cell>
+          </ng-container>   
+            <!-- Customer MSA Column -->
+            <ng-container matColumnDef="propelMsaCode">
+              <mat-header-cell *matHeaderCellDef ><b>MSA Code</b></mat-header-cell>
+              <mat-cell data-label="MSA Code" *matCellDef="let row">{{ row.propelMsaCode }}</mat-cell>
+            </ng-container>
+    
+            <!-- Customer Name Column -->
+            <ng-container matColumnDef="msaName">
+              <mat-header-cell *matHeaderCellDef ><b>Customer Name</b></mat-header-cell>
+              <mat-cell data-label="Customer Name" *matCellDef="let row" matTooltip="{{ row.msaName }}"
+                matTooltipPosition="above" matTooltipClass="custom-tooltip">
+                <span class="truncate-text">
+                  {{ row.msaName }}
+                </span>
+              </mat-cell>
+            </ng-container>
+
+             <!-- Alias Name Column -->
+             <ng-container matColumnDef="aliasName">
+              <mat-header-cell *matHeaderCellDef ><b>Alias Name</b></mat-header-cell>
+              <mat-cell data-label="Alias Name" *matCellDef="let row" matTooltip="{{ row.aliasName }}"
+                matTooltipPosition="above" matTooltipClass="custom-tooltip">
+                <span class="truncate-text">
+                  {{ row.aliasName }}
+                </span>
+              </mat-cell>
+            </ng-container>
+    
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator> 
+       
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="primary" [mat-dialog-close]="selection.selected" cdkFocusInitial>Ok</button>
+  </mat-dialog-actions>

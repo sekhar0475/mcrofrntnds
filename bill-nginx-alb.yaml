@@ -1,0 +1,61 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: "nginx-ingress"
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+  labels:
+    app: bil-webfrontend-service
+spec:
+  rules:
+     - http:
+        paths:
+          - path: /admin/*
+            backend:
+              serviceName: "bil-usermgmt-service"
+              servicePort: 80
+          - path: /jwt/*
+            backend:
+              serviceName: "bil-jwt-auth-service"
+              servicePort: 80
+          - path: /receipt/*
+            backend:
+              serviceName: "bil-receipts-service"
+              servicePort: 80
+          - path: /retail/*
+            backend:
+              serviceName: "bil-retail-service"
+              servicePort: 80
+          - path: /integration/*
+            backend:
+              serviceName: "bil-customers-service"
+              servicePort: 80
+          - path: /wms/*
+            backend:
+              serviceName: "bil-wms-service"
+              servicePort: 80
+          - path: /credit/*
+            backend:
+              serviceName: "bil-credit-service"
+              servicePort: 80
+          - path: /notification/*
+            backend:
+              serviceName: "bil-notification-service"
+              servicePort: 80
+          - path: /cmdm/*
+            backend:
+              serviceName: "bil-cmdm-service"
+              servicePort: 80
+          - path: /allied/*
+            backend:
+              serviceName: "bil-allied-service"
+              servicePort: 80
+          - path: /reports/*
+            backend:
+              serviceName: "bil-reports-service"
+              servicePort: 80
+          - path: /irn/*
+            backend:
+              serviceName: "bil-einvoicing-integration-service"
+              servicePort: 80

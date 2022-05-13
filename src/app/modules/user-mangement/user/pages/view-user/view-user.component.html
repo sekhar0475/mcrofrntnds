@@ -1,0 +1,171 @@
+<alert></alert>
+<div class="inner-page-padding">
+  <h2 style="font-size:0.9rem;font-weight: 600;">View User</h2>
+  <app-breadcrumb></app-breadcrumb>
+  <mat-card fxLayout="column" fxFlexFill>
+    <mat-card-content>
+      <form class="create-search" [formGroup]="createFormGroup">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="asterisk-if-mandatory input-label">User ID</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              <label class="label-value">{{ users.userId }}</label>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="asterisk-if-mandatory input-label">Name</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              <label class="label-value">{{ users.username }}</label>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="asterisk-if-mandatory input-label">Mobile No.</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              <label class="label-value">{{ users.mobile }}</label>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="asterisk-if-mandatory input-label">Email Id</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              <label class="label-value">{{ users.email }}</label>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="asterisk-if-mandatory input-label">Department</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              <label class="label-value">{{ users.departmentName }}</label>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="input-label">Expiry Date</label>
+            </div>
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+              <label class="label-value">{{ users.expDt | date:'dd-MMM-yyyy'}}</label>
+            </div>
+          </div>
+        </div>
+        <!--close Row-->
+      </form>
+      <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+          <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <span class="mat-content-label">Default Branch Mapping</span>
+          </mat-expansion-panel-header>
+          <form class="create-search" [formGroup]="createFormGroup">
+            <div class="form-row">
+              <div class="col-md-2 text-left">
+                <label class="input-label">Default Branch</label>
+              </div>
+              <div class="col-md-2">
+                <label class="input-value">{{defaultBranchName}}</label>
+              </div>
+            </div>
+          </form>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+          <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <span class="mat-content-label">Privileged Branch Mapping</span>
+          </mat-expansion-panel-header>
+          <hr class="divider">
+          <mat-table [dataSource]="userBranchessDataSource" class="mat-elevation-z0">
+            <ng-container matColumnDef="branchName">
+              <mat-header-cell *matHeaderCellDef><b>Branch Name</b></mat-header-cell>
+              <mat-cell data-label="Branch Name" *matCellDef="let row">{{ row.branchName }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="type">
+              <mat-header-cell *matHeaderCellDef><b>Type</b></mat-header-cell>
+              <mat-cell data-label="Type" *matCellDef="let row">Privileged</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="effectiveDt">
+              <mat-header-cell *matHeaderCellDef><b>Start Date</b></mat-header-cell>
+              <mat-cell data-label="Effective Date" *matCellDef="let row">{{ row.effectiveDt | date:'dd-MMM-yyyy'}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="expiryDt">
+              <mat-header-cell *matHeaderCellDef><b>Expiry Date</b></mat-header-cell>
+              <mat-cell data-label="Expiry Date" *matCellDef="let row">{{ row.expDt | date:'dd-MMM-yyyy'}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="address">
+              <mat-header-cell *matHeaderCellDef><b>Address</b></mat-header-cell>
+              <mat-cell data-label="Address" *matCellDef="let row" matTooltip="{{ row.address }}"
+                matTooltipPosition="above" matTooltipClass="custom-tooltip">
+                <span class="truncate-text">
+                  {{ row.address }}
+                </span>
+              </mat-cell>
+
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedBranchesColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedBranchesColumns"></mat-row>
+          </mat-table>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+          <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <span class="mat-content-label">Role Mapping</span>
+          </mat-expansion-panel-header>
+          <hr class="divider">
+          <mat-table [dataSource]="userRolesDataSource" class="mat-elevation-z0">
+            <ng-container matColumnDef="roleName">
+              <mat-header-cell *matHeaderCellDef><b>Role Name</b></mat-header-cell>
+              <mat-cell data-label="Role Name" *matCellDef="let row">{{ row.roleName }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+              <mat-header-cell *matHeaderCellDef><b>Description</b></mat-header-cell>
+              <mat-cell data-label="Description" *matCellDef="let row" matTooltip="{{row.description }}"
+                matTooltipPosition="above" matTooltipClass="custom-tooltip">
+                <span class="truncate-text">{{ row.description }}</span>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="effectiveDt">
+              <mat-header-cell *matHeaderCellDef><b>Start Date</b></mat-header-cell>
+              <mat-cell data-label="Effective Date" *matCellDef="let row">{{ row.effectiveDt | date:'dd-MMM-yyyy'}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="expDt">
+              <mat-header-cell *matHeaderCellDef><b>Expiry Date</b></mat-header-cell>
+              <mat-cell data-label="Expiry Date" *matCellDef="let row">{{ row.expDt | date:'dd-MMM-yyyy'}}</mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          </mat-table>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <br>
+      <div class="col-md-12 text-center footer-button-padding">
+        <button mat-raised-button class="buttons" type="submit" (click)="gotoSearch()">
+          Back
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

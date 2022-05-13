@@ -1,0 +1,162 @@
+<div class="inner-page-padding">
+  <h2 style="font-size:0.9rem;font-weight: 600;">Manual Batch Creation</h2>
+  <app-breadcrumb></app-breadcrumb>
+  <mat-card fxLayout="column" fxFlexFill>
+    <mat-card-header>
+    </mat-card-header>
+    <mat-card-content>
+      <br>
+      <app-create-manual-search #searchBatch (manualSearchVal)="getSearchVal($event)"
+        [searchValues]="clearSearchValues">
+      </app-create-manual-search>
+      <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+          <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <span class="mat-content-label">Result</span>
+          </mat-expansion-panel-header>
+          <hr class="divider">
+          <div class="form-row">
+            <div class="col-md-12" style="text-align: end;">
+              <a (click)="export2Excel()" class="excel-img">
+                <img class="png-icon" style="height: 20px; "
+                  src="../../../../../../assets/icons/icons8-microsoft-excel-52.png" class="img-icon" /></a>
+              <!-- <label class="excel-label"><b>Export To Excel</b></label> -->
+              <a (click)="export2Excel()" class="excel-label" style="cursor:pointer">
+                <b>Export To Excel</b>
+              </a>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col-md-12 text-left">
+              <input matInput type="text" placeholder="SEARCH" class="banner-input" (keyup)="applyFilter($event)">
+              <hr class="green-border-heading">
+              <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z0">
+                <!-- Checkbox Column -->
+                <!-- <ng-container matColumnDef="select">
+                  <mat-header-cell *matHeaderCellDef  >
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                    </mat-checkbox>
+                  </mat-header-cell>
+                  <mat-cell data-label="Select" *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                    </mat-checkbox>
+                  </mat-cell>
+                </ng-container> -->
+                <ng-container matColumnDef="select">
+                  <mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                    </mat-checkbox>
+                  </mat-header-cell>
+                  <mat-cell data-label="Select" *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                    </mat-checkbox>
+                  </mat-cell>
+                </ng-container>
+
+                <!-- customerName Column -->
+                <ng-container matColumnDef="msaCustName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header><b>Customer Name</b></mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="Customer Name" matTooltip="{{element.msaCustName }}"
+                    matTooltipPosition="above" matTooltipClass="custom-tooltip"><span class="truncate-text">{{
+                      element.msaCustName }}</span></mat-cell>
+                </ng-container>
+
+                <!-- alias Name Column -->
+                <ng-container matColumnDef="aliasName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header><b>Alias</b></mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="Alias" matTooltip="{{element.aliasName }}"
+                    matTooltipPosition="above" matTooltipClass="custom-tooltip"><span class="truncate-text">{{
+                      element.aliasName }}</span>
+                  </mat-cell>
+                </ng-container>
+
+                <!-- msa Column -->
+                <ng-container matColumnDef="msaCustCode">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header><b>MSA</b></mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="MSA">{{ element.msaCustCode }}</mat-cell>
+                </ng-container>
+
+                <!-- sfxcode Column -->
+                <!-- <ng-container matColumnDef="cntrCode">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header><b>SFX Code</b></mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="SFX Code">{{ element.cntrCode }}
+                  </mat-cell>
+                </ng-container> -->
+
+                <!-- sfxcode Column -->
+                <ng-container matColumnDef="cntrCode">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header><b>SFX Code</b></mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="SFX Code" matTooltip="{{ element.cntrCode }}"
+                    matTooltipPosition="above" matTooltipClass="custom-tooltip"><span class="truncate-text">{{
+                      element.cntrCode }}</span></mat-cell>
+                </ng-container>
+
+                <!-- rateCard Column -->
+                <ng-container matColumnDef="rateCardCode">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header><b>Rate Card</b></mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="Rate Card">{{ element.rateCardCode }}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="billingByLvlVal">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header><b>Billing By</b></mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="Billing By" matTooltip="{{ element.billingByLvlVal }}"
+                    matTooltipPosition="above" matTooltipClass="custom-tooltip"><span class="truncate-text">{{
+                      element.billingByLvlVal }}</span></mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="billingLevel">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header><b>Billing Level</b></mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="Billing Level">{{ element.billingLevel }}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="bkgBrCount">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header><b>Booking<br>Branch Count</b></mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="Booking Branch Count">{{ element.bkgBrCount }}
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="validBrCount">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header><b>Billing<br>Branch Count</b></mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="Billing Branch Count">{{ element.validBrCount }}
+                  </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="excludeBrCount">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header><b>Excluded<br>Branch Count</b></mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="Excluded Branch Count">{{ element.excludeBrCount }}
+                  </mat-cell>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="lastBillDate">
+                  <mat-header-cell *matHeaderCellDef><b>Last Bill Date</b></mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="Last Bill Date">{{ element.lastBillDate }}</mat-cell>
+                </ng-container> -->
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns">
+                </mat-row>
+              </mat-table>
+              <!-- <div >
+                <app-customer-paginator [totalPages]=totalPagesInData [restToZero]=resetFlag (onPageChange)="getMoreCustomer($event)" (onShowAll)="getShowAllCustomer($event)"></app-customer-paginator>
+              </div> -->
+              <mat-paginator [pageSizeOptions]="[10,30,40]" showFirstLastButtons></mat-paginator>
+            </div>
+          </div>
+          <div class="form-row" [style.margin-top]="'12px'">
+            <div class="col-md-12 text-center footer-button-padding" style="margin-bottom:0.3rem;">
+              <button mat-raised-button (click)="clear()">Reset</button>
+              <button mat-raised-button style="margin-left:0.3rem;" *ngIf="writeAccess" color="primary"
+                (click)="submit()">Submit</button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
+</div>

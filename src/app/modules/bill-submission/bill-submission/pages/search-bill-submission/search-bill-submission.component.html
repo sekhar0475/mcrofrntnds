@@ -1,0 +1,59 @@
+<div class="inner-page-padding">
+    <h2 style="font-size:0.9rem;font-weight: 600;">Update Bill Submission</h2>
+    <app-breadcrumb></app-breadcrumb>
+    <mat-card fxLayout="column" fxFlexFill>
+        <mat-card-header>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="create-search" #myForm="ngForm" [formGroup]="searchFormGroup">
+                <div class="row">
+                    <!--Row 1 Column 2-->
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                        <div class=" col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Document Type</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <ng-select [items]="documentTypeList"  class="select-control" role="listbox"
+                                bindLabel="documentValue" bindValue="documentValue" [clearable]="false"
+                                name="documentValue" placeholder="DOCUMENT TYPE" formControlName="documentTypeFc">
+                                <div class="error"
+                                    *ngIf="searchFormGroup.controls.documentTypeFc.invalid && searchFormGroup.controls.documentTypeFc.touched">
+                                    <div class="error" *ngIf="searchFormGroup.controls.documentTypeFc.errors.required">
+                                        Document Type is required for Search.</div>
+                                </div>
+                            </ng-select>
+                        </div>
+                    </div>
+
+                    <!--Row 1 Column 2-->
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Document Number</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <input class="form-control input-md1" name="documentNum" matInput
+                                placeholder="DOCUMENT NUMBER" formControlName="documentNumFc">
+                            <div class="error"
+                                *ngIf="searchFormGroup.controls.documentNumFc.invalid && searchFormGroup.controls.documentNumFc.touched">
+                                <div class="error" *ngIf="searchFormGroup.controls.documentNumFc.errors.required">
+                                    Document Number is required for Search.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 text-center footer-button-padding">
+                        <button mat-raised-button color="primary" [disabled]="!myForm.form.valid"
+                            (click)="search()">Search</button>
+                    </div>
+                </div>
+            </form>
+        </mat-card-content>
+        <app-bill-submission-details *ngIf="displaySubmissionComp" [submissionData]="submissionData"
+        [documentType]="documentType" (clearValues)="getClearValue($event)">
+        </app-bill-submission-details>
+    </mat-card>
+</div>

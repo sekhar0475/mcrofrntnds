@@ -1,0 +1,22 @@
+<div class="inner-page-padding">
+    <h2 style="font-size:0.9rem;font-weight: 600;">Receipt Application</h2>
+    <app-breadcrumb></app-breadcrumb>
+    <mat-card fxLayout="column" fxFlexFill>
+        <mat-card-header>
+            <mat-card-title>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content *ngIf=displayApplnBills>
+            <app-receipt-header (receiptHeaderAttachment)="getFileToUpload($event)" [receiptById]="receiptById"></app-receipt-header> 
+            <mat-accordion>
+                <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+                    <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+                        <span class="mat-content-label">Payment Application Search</span>
+                    </mat-expansion-panel-header>
+                    <br>
+                    <app-document-result [fileToUpload]="fileToUpload" [receiptById]="receiptById"></app-document-result>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-card-content>
+    </mat-card>
+</div>

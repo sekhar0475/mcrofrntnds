@@ -1,0 +1,158 @@
+<div class="inner-page-padding">
+    <h2 style="font-size:0.9rem;font-weight: 600;">Discount Bill</h2>
+    <app-breadcrumb></app-breadcrumb>
+    <mat-card fxLayout="column" fxFlexFill>
+        <mat-card-header>
+        </mat-card-header>
+        <mat-card-content>
+            <br>
+            <app-discount-search (discountSearchVal)="getSearchVal($event)" [discountSearchValues]="clearSearchValues">
+            </app-discount-search>
+            <mat-accordion>
+                <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+                    <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+                        <span class="mat-content-label">Discount Results</span>
+                    </mat-expansion-panel-header>
+                    <hr class="divider">
+                    <div class="form-row">
+                        <div class="col-md-12 text-left">
+                            <mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+
+                                <!-- Batch Number Column -->
+                                <ng-container matColumnDef="batchNum">
+                                    <mat-header-cell *matHeaderCellDef><b>Batch No</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Batch Number">{{element.batchNum}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Bill Number Column -->
+                                <ng-container matColumnDef="billNum">
+                                    <mat-header-cell *matHeaderCellDef><b>Bill Number</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Bill Number">{{element.billNum}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Customer Column -->
+                                <ng-container matColumnDef="custName">
+                                    <mat-header-cell *matHeaderCellDef><b>Customer</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Customer" matTooltip="{{element.custName}}" matTooltipPosition="above"
+                                    matTooltipClass="custom-tooltip">
+                                    <span class="truncate-text">
+                                        {{element.custName}}
+                                    </span>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Billing Level Column -->
+                                <ng-container matColumnDef="blngLevel">
+                                    <mat-header-cell *matHeaderCellDef><b>Blng Level</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Billing Level">{{element.blngLevel}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- MSA/SFX/RATE Card Column -->
+                                <ng-container matColumnDef="msaCode">
+                                    <mat-header-cell *matHeaderCellDef><b>Msa Code</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Msa code">
+                                        {{element.msaCode}}</mat-cell>
+                                </ng-container>
+
+                                <!-- SFX Column -->
+                                <ng-container matColumnDef="sfxCode">
+                                    <mat-header-cell *matHeaderCellDef><b>Sfx Code</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Sfx Code">
+                                        {{element.sfxCode}}</mat-cell>
+                                </ng-container>
+
+                                <!-- RATE Card Column -->
+                                <ng-container matColumnDef="rateCardCode">
+                                    <mat-header-cell *matHeaderCellDef><b>Rate Card</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Rate Card">
+                                        {{element.blngLevel ==='RATE CARD' ?element.blngLevelCode:null}}</mat-cell>
+                                </ng-container>
+
+                                <!-- Amount Column -->
+                                <ng-container matColumnDef="amount">
+                                    <mat-header-cell *matHeaderCellDef><b>Base Amt</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Amount">{{element.amount}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Discount Value Column -->
+                                <ng-container matColumnDef="discountVal">
+                                    <mat-header-cell *matHeaderCellDef><b>Discount Amount</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Discount Amount">{{element.discountVal}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- DISC_SIGN column -->
+                                <ng-container matColumnDef="discSign">
+                                    <mat-header-cell *matHeaderCellDef><b>Disc Sign<span style="color: red">*</span></b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Disc Sign">
+                                        <ng-select [items]="discSignList" appendTo="body" name="discSign"
+                                            style="min-width: 80%;" role="listbox" [(ngModel)]="element.discSign"
+                                            bindLabel="discSignValue" bindValue="discSignValue" [clearable]="false"
+                                            placeholder="DISC SIGN" (change)="calculateRevisedVal()"
+                                            (blur)="toMoveData(element)">
+                                        </ng-select>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- DISC_TYPE column -->
+                                <ng-container matColumnDef="discType">
+                                    <mat-header-cell *matHeaderCellDef><b>Disc Type<span style="color: red">*</span></b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Disc Type">
+                                        <ng-select [items]="discTypeList" appendTo="body" name="discType"
+                                            style="min-width: 80%;" appearance="outline" role="listbox"
+                                            [(ngModel)]="element.discType" bindLabel="discTypeValue"
+                                            bindValue="discTypeValue" [clearable]="false" placeholder="DISC TYPE"
+                                            (change)="calculateRevisedVal()" (blur)="toMoveData(element)">
+                                        </ng-select>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Value column -->
+                                <ng-container matColumnDef="value">
+                                    <mat-header-cell *matHeaderCellDef><b>Value<span style="color: red">*</span></b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Value">
+                                        <input class="form-control input-md1" matInput type="number" placeholder="VALUE"
+                                            [(ngModel)]="element.value" (change)="calculateRevisedVal()"
+                                            (blur)="toMoveData(element)">
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Revised Bill Amount column -->
+                                <ng-container matColumnDef="revisedBillAmt">
+                                    <mat-header-cell *matHeaderCellDef><b>Revised Base Amount</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element"  data-label="Revised Base Amount">
+                                        {{element.revisedBillAmount}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Revised Bill Amount column -->
+                                <ng-container matColumnDef="revisedGBillAmt">
+                                    <mat-header-cell *matHeaderCellDef><b>Revised Bill Amount</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Revised Bill Amount">
+                                        {{element.revisedGBillAmount}}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns">
+                                </mat-row>
+                            </mat-table>
+                            <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+                        </div>
+                    </div>
+                    <div class="form-row" [style.margin-top]="'12px'">
+                        <div class="col-md-12 text-center footer-button-padding" style="margin-bottom:0.3rem;">
+                            <button mat-raised-button (click)="clear()">Reset</button>
+                            <button mat-raised-button style="margin-left: 0.3rem" *ngIf="writeAccess" color="primary"
+                                (click)="submit()">Apply</button>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-card-content>
+    </mat-card>
+</div>

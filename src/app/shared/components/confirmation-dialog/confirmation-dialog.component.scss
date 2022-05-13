@@ -1,0 +1,16 @@
+.buttons {
+	border-radius: 1px;
+	height: 26.5px;
+	width: 74px;
+	vertical-align: middle;
+	margin: 0px 2.88px 0px 0px;
+	line-height: 2px;
+	padding: 0px 8px;
+	text-align: center;
+	opacity: 0.6;
+}
+
+//to make button dark on hover
+.buttons:hover {
+	opacity: 1
+}

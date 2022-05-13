@@ -1,0 +1,105 @@
+<section>
+  <div class="row">
+    <!-- Row-1 column 1 -->
+    <div class="col-lg-6 col-md-6 col-sm-6">
+      <div class="col-lg-1 col-md-1 col-sm-1" style="float: left; "> &nbsp; </div>
+      <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left; margin-top: 0.5rem;">
+        <label class="input-label">Bill Batch Type</label>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4" style="float: left; margin-top: 0.5rem;">
+        <ng-select [items]="billTypelist" appendTo="body" class="select-control" role="listbox"
+          bindLabel="blngTypeValue" bindValue="blngTypeValue" [clearable]="false" name="blngTypeValue"
+          placeholder="BATCH TYPE" [(ngModel)]="searchValues.billBatchType">
+        </ng-select>
+      </div>
+    </div>
+
+    <!-- Row-1 column 2 -->
+    <div class="col-lg-6 col-md-6 col-sm-6" >
+      <div class="col-lg-4 col-md-4 col-sm-4" style="float: left; "> &nbsp; </div>
+      <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;margin-top: 0.5rem;">
+        <label class="input-label">Batch Status</label>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4" style="float: left; margin-top: 0.5rem;">
+        <ng-select [items]="batchStatusList" class="select-control" role="listbox" bindLabel="blngBatchDscr"
+          bindValue="blngBatchValue" [clearable]="false" name="blngBatchValue" placeholder="BATCH STATUS"
+          [(ngModel)]="searchValues.batchStatus">
+        </ng-select>
+      </div>
+    </div>
+
+    <!-- Row-2 column 1 -->
+    <div class="col-lg-6 col-md-6 col-sm-6">
+      <div class="col-lg-1 col-md-1 col-sm-1" style="float: left; "> &nbsp; </div>
+      <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;margin-top: 0.5rem;">
+        <label class="input-label">Billing Level</label>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4" style="float: left; margin-top: 0.5rem; ">
+        <ng-select [items]="billLevelList" class="select-control" role="listbox" bindLabel="blngLvlValue"
+          bindValue="blngLvlValue" [clearable]="false" name="blngLvlValue" placeholder="BILLING LEVEL"
+          [(ngModel)]="searchValues.blngLevel">
+        </ng-select>
+      </div>
+    </div>
+
+    <!-- Row-2 column 2 -->
+    <div class="col-lg-6 col-md-6 col-sm-6" >
+      <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+      <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left; margin-top: 0.5rem; ">
+        <label class="input-label">Billing Level Code</label>
+      </div>
+      <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left; margin-top: 0.5rem; ">
+        <input class="form-control input-md1" matInput placeholder="BILLING LEVEL CODE"
+          [(ngModel)]="searchValues.blngLevelCode">
+      </div>
+    </div>
+
+    <!-- Row-3 column 1 -->
+    <div class="col-lg-6 col-md-6 col-sm-6" >
+      <div class="col-lg-1 col-md-1 col-sm-1" style="float: left; "> &nbsp; </div>
+      <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;margin-top: 0.5rem;">
+        <label class="input-label">From Date</label>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4" style="float: left; margin-top: 0.5rem; ">
+        <mat-form-field appearance="outline" class="no-padding">
+          <input matInput readonly class="date-form-control" [matDatepicker]="picker11"
+            placeholder="DD-MMM-YYYY" [(ngModel)]="searchValues.fromDate" readonly>
+          <mat-datepicker-toggle matPrefix [for]="picker11"></mat-datepicker-toggle>
+          <mat-datepicker panelClass="safexDatePicker" #picker11></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!--Row 3 Column 2-->
+    <div class="col-lg-6 col-md-6 col-sm-6">
+      <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left; "> &nbsp; </div>
+      <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;margin-top: 0.5rem;">
+        <label class="input-label">To Date</label>
+      </div>
+      <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left; margin-top: 0.5rem; ">
+        <mat-form-field appearance="outline" class="no-padding">
+          <input matInput [min]="searchValues.fromDate" readonly class="date-form-control" [matDatepicker]="picker111"
+            placeholder="DD-MMM-YYYY" [(ngModel)]="searchValues.toDate" readonly>
+          <mat-datepicker-toggle matPrefix [for]="picker111"></mat-datepicker-toggle>
+          <mat-datepicker panelClass="safexDatePicker"  #picker111></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <!--Row 4 Column 1-->
+    <div class="col-lg-6 col-md-6 col-sm-6">
+      <div class="col-lg-1 col-md-1 col-sm-1" style="float: left; "> &nbsp; </div>
+      <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left; margin-top: 0.5rem;">
+        <label class="input-label">Batch Number</label>
+      </div>
+      <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left; margin-top: 0.5rem;">
+        <input class="form-control input-md1" name="custName" matInput placeholder="BATCH NUMBER"
+          [(ngModel)]="searchValues.batchNum">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center footer-button-padding">
+      <button mat-raised-button class ="buttons" color="primary" (click)="pushValues()">Search</button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+<h2 mat-dialog-title class="title-style">Select Partial Application Reason</h2>
+<mat-dialog-content>
+  <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z0">
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef mat-sort-header><b>Select</b>
+      </mat-header-cell>
+      <mat-cell data-label="Select" *matCellDef="let row">
+          <mat-radio-button (click)="$event.stopPropagation()"
+          (click)="$event.stopPropagation()"
+              (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)"
+              [aria-label]="checkboxLabel(row)"
+          ></mat-radio-button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Reason -->
+    <ng-container matColumnDef="viewValue">
+      <mat-header-cell *matHeaderCellDef mat-sort-header><b>Reason <br></b></mat-header-cell>
+      <mat-cell data-label="Reason" *matCellDef="let row">{{ row.viewValue }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="selection.selected" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>

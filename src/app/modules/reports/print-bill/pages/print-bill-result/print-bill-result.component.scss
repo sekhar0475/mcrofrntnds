@@ -1,0 +1,314 @@
+.excel-label {
+	padding-left: 3px;
+	padding-bottom: 0px;
+	color: #27AE60;
+	font-size: 11.52px;
+	justify-content: left;
+}
+
+.excel-img {
+	cursor: pointer;
+}
+
+//for expansion panel 
+mat-expansion-panel-header:hover {
+	background-color: white !important;
+}
+
+.mat-expansion-panel-header {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: grey;
+	border-radius: 0px;
+	padding: 0px;
+}
+
+.mat-expansion-panel-header.mat-expanded {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #27AE60;
+	border-radius: 0px;
+	color: #27AE60;
+	;
+}
+
+.mat-content-label {
+	padding-top: 14px;
+	font-weight: 700;
+	font-size: 11.52px;
+}
+
+hr.divider {
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+
+.no-padding {
+	 ::ng-deep .mat-form-field-wrapper {
+		padding-bottom: 0px !important;
+	}
+}
+
+.mat-cell:first-of-type {
+	padding-left: 10px;
+}
+
+.mat-header-cell:first-of-type {
+	padding-left: 10px;
+}
+
+.mat-cell,
+.mat-footer-cell {
+	padding-right: 10px !important;
+} //to be changed for this.
+.mat-paginator {
+	display: unset;
+}
+
+.mat-header-cell {
+	display: flex;
+	justify-content: left;
+	background-color: #f3f3f3;
+	min-height: 40px;
+}
+
+.mat-header-row {
+	min-height: 25px;
+}
+
+.mat-cell {
+	display: flex;
+	justify-content: left;
+}
+
+//for date field.
+.no-padding {
+	 ::ng-deep .mat-form-field-wrapper {
+		padding-bottom: 0px !important;
+		font-size: 11.52px;
+		justify-content: center;
+	}
+}
+
+//header
+h2 {
+	margin-bottom: 0px !important;
+	margin-left: 5px;
+}
+
+//select
+.mat-column-select {
+	flex: 0 0 5%;
+}
+
+//set table values
+//select
+.mat-cell.mat-column-documentDate {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-documentDate {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-documentNumber {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-documentNumber {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-billingBranch {
+	min-width: 9% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-billingBranch {
+	min-width: 9% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-submissionBranch {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-submissionBranch {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-msa {
+	min-width: 3% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-msa {
+	min-width: 3% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-sfx {
+	min-width: 3% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-sfx {
+	min-width: 3% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-documentType {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-documentType {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-select {
+	min-width: 1% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-select {
+	min-width: 1% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-batchNum {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-batchNum {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-status {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-status {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-batchType {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-batchType {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-requestDt {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-requestDt {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-billingCycle {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-billingCycle {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-download {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-download {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-action {
+	min-width: 5% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-action {
+	min-width: 3% !important;
+	font-size: 11.52px !important;
+}
+
+// for small screen 
+@media screen and (max-width: 960px) {
+	.mat-table {
+		border: 0;
+		vertical-align: middle
+	}
+	.mat-table caption {
+		font-size: 1em;
+	}
+	.mat-table .mat-header-cell {
+		border: 10px solid;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+	}
+	.mat-table .mat-row {
+		border-bottom: 5px solid #ddd;
+		display: block;
+	}
+	.mat-table .mat-cell {
+		border-bottom: 1px solid #ddd;
+		display: block;
+		text-align: right;
+		font-weight: bold;
+		min-height: 25px;
+		font-size: 11.52px;
+	}
+	.mat-cell:first-of-type {
+		padding-left: 0px;
+	}
+	.mat-table .mat-cell:before {
+		content: attr(data-label);
+		float: left;
+		text-transform: inherit;
+		font-weight: normal;
+		font-size: .85em;
+	}
+	.mat-table .mat-cell:last-child {
+		border-bottom: 0;
+	}
+	.mat-table .mat-cell:first-child {
+		margin-top: 4%;
+	}
+}
+
+ ::ng-deep .custom-tooltip {
+	background-color: #27ae60;
+	color: #f3f3f3;
+}
+
+//text wrap for tooltip
+mat-cell>span.truncate-text {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}

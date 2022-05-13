@@ -1,0 +1,15 @@
+<app-header (sidebarActiveStatus)="sideBarToggler()"></app-header>
+<mat-drawer-container>
+      <mat-drawer [mode]="mobileQuery.matches ? 'over' : 'side'" [opened] = "sideBarOpen">
+        <div class="side-nav">      
+        <app-sidebar (sidebarActiveStatus)="sideBarToggler()"></app-sidebar>
+        </div>
+      </mat-drawer>          
+    <mat-drawer-content>
+        <div class="page-content">
+            <router-outlet>
+            </router-outlet>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
+<ngx-spinner size="large" type="ball-spin-clockwise"></ngx-spinner>

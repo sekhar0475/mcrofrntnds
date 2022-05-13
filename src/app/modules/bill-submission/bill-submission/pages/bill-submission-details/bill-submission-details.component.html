@@ -1,0 +1,111 @@
+<mat-accordion>
+    <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+        <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <span class="mat-content-label">Bill Submission Details</span>
+        </mat-expansion-panel-header>
+        <br>
+        <form class="create-search" #myForm="ngForm" [formGroup]="createFormGroup">
+            <div class="row">
+                <!--Row 1 Column 1-->
+                <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                    <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                    <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                        <label class="input-label">Document Number</label>
+                    </div>
+                    <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                        <label class="value-label">{{submissionData.documentNum}}</label>
+                    </div>
+                </div>
+                <!--Row 1 Column 2-->
+                <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                    <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+                    <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                        <label class="asterisk-if-mandatory input-label">Submitted To Person Name</label>
+                    </div>
+                    <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                        <input class="form-control input-md1" name="submittedToPersonName" matInput
+                            placeholder="PERSON NAME" formControlName="submittedToPersonNameFc">
+                        <div class="error"
+                            *ngIf="createFormGroup.controls.submittedToPersonNameFc.invalid && createFormGroup.controls.submittedToPersonNameFc.touched">
+                            <div class="error" *ngIf="createFormGroup.controls.submittedToPersonNameFc.errors.required">
+                                Person Name is Mandatory.</div>
+                        </div>
+                    </div>
+                </div>
+                <!--Row 2 Column 1-->
+                <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                    <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                    <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                        <label class="asterisk-if-mandatory input-label">Submission Date</label>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4" style="float: left">
+                        <mat-form-field appearance="outline" class="no-padding">
+                            <input matInput class="date-form-control" [matDatepicker]="picker11"
+                               [max]="todayDate"
+                               [min]="submissionData.documentDt" placeholder="DD-MMM-YYYY" formControlName="submsnDtFc" readonly>
+                            <mat-datepicker-toggle matPrefix [for]="picker11"></mat-datepicker-toggle>
+                            <mat-datepicker panelClass="safexDatePicker" #picker11></mat-datepicker>
+                        </mat-form-field>
+
+                    </div>
+                </div>
+                <!--Row 2 Column 2-->
+                <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                    <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+                    <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                        <label class="asterisk-if-mandatory input-label">Submitted To Contact Number</label>
+                    </div>
+                    <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                        <input class="form-control input-md1" name="submittedToContactNumber" matInput
+                            placeholder="CONTACT NUMBER" formControlName="submittedToContactNumberFc">
+
+                        <div class="error"
+                            *ngIf="createFormGroup.controls.submittedToContactNumberFc.invalid && createFormGroup.controls.submittedToContactNumberFc.touched">
+                            <div class="error"
+                                *ngIf="createFormGroup.controls.submittedToContactNumberFc.errors.mobileValid"> Mobile
+                                Number should
+                                have
+                                10 Digits</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Row 3 Column 1-->
+                <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                    <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                    <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                        <label class="input-label">Submission Notes</label>
+                    </div>
+                    <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+
+                        <textarea matInput class="input-md1 textareaoutline" placeholder="SUBMISSION NOTES"
+                            formControlName="submissionNotesFc" cols="20" rows="2" maxlength="100"></textarea>
+                    </div>
+                </div>
+                <!--Row 3 Column 2-->
+                <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.7rem;">
+                    <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+                    <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                        <label class="asterisk-if-mandatory input-label">Submitted To Contact Mail</label>
+                    </div>
+                    <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                        <input class="form-control input-md1" name="submittedToContactMail" matInput
+                            placeholder="CONTACT MAIL" formControlName="submittedToContactMailFc">
+                        <div class="error"
+                            *ngIf="createFormGroup.controls.submittedToContactMailFc.invalid && createFormGroup.controls.submittedToContactMailFc.touched">
+                            <div class="error" *ngIf="createFormGroup.controls.submittedToContactMailFc.errors.email">Please enter a valid email address.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12 text-center footer-button-padding" style= "margin-bottom: 0.3rem">
+                    <button *ngIf="writeAccess" mat-raised-button color="primary" [disabled]="!myForm.form.valid"
+                        (click)="submit()">Submit</button>
+                    <button mat-raised-button  style= "margin-left: 0.3rem" (click)="clear()">Reset</button>
+                </div>
+            </div>
+        </form>
+    </mat-expansion-panel>
+</mat-accordion>

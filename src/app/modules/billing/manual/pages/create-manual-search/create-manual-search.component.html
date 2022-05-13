@@ -1,0 +1,87 @@
+<section>
+  <form class="create-search" #myForm="ngForm" [formGroup]="createFormGroup">
+    <div class="row">
+      <!--Row 1 Column 1-->
+      <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+        <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+          <label class="asterisk-if-mandatory input-label">Billing Cycle</label>
+        </div>
+        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+          <ng-select [items]="blngCycleList" class="select-control" role="listbox" bindLabel="blngCycleValue"
+            bindValue="blngCycleId" [clearable]="false" name="blngCycleValue" placeholder="BILLING CYCLE"
+            [(ngModel)]="searchValues.billingCycle" formControlName="billingCycleFC">
+          </ng-select>
+          <div class="error"
+            *ngIf="createFormGroup.controls.billingCycleFC.invalid && (createFormGroup.controls.billingCycleFC.touched || createFormGroup.controls.billingCycleFC.dirty)">
+            <div class="error" *ngIf="createFormGroup.controls.billingCycleFC.errors.required">Mandatory Field</div>
+          </div>
+        </div>
+      </div>
+      
+      <!--Row 1 Column 2-->
+      <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+        <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+          <label class="asterisk-if-mandatory input-label">Billing Level</label>
+        </div>
+        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+          <ng-select [items]="blngLvlList" class="select-control" role="listbox" bindLabel="blngLvlValue"
+            bindValue="blngLvlId" [clearable]="false" name="blngLvlValue" placeholder="BILLING LEVEL"
+            [(ngModel)]="searchValues.billingLevel" formControlName="billngLevelFC">
+          </ng-select>
+          <div class="error"
+            *ngIf="createFormGroup.controls.billngLevelFC.invalid && (createFormGroup.controls.billngLevelFC.touched || createFormGroup.controls.billngLevelFC.dirty)">
+            <div class="error" *ngIf="createFormGroup.controls.billngLevelFC.errors.required">Mandatory Field</div>
+          </div>
+        </div>
+      </div>
+
+
+      <!--Row 2 Column 1-->
+      <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+        <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+          <label class="input-label">Customer Name</label>
+        </div>
+        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+          <input class="form-control input-md1" matInput placeholder="CUSTOMER NAME" name="customerName"
+            [(ngModel)]="searchValues.customerName" [ngModelOptions]="{standalone: true}">
+        </div>
+      </div>
+
+
+
+      <!--Row 2 Column 2-->
+      <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+        <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+          <label class="input-label">MSA Code</label>
+        </div>
+        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+          <input class="form-control input-md1" matInput placeholder="MSA CODE" [(ngModel)]="searchValues.msaCode"
+            name="msa" [ngModelOptions]="{standalone: true}">
+        </div>
+      </div>
+
+
+      <!--Row 2 Column 2-->
+      <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+        <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+          <label class="input-label">SFX Code</label>
+        </div>
+        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+          <input class="form-control input-md1" matInput placeholder="SFX CODE" [(ngModel)]="searchValues.sfxCode"
+            name="sfx" [ngModelOptions]="{standalone: true}">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 text-center footer-button-padding">
+        <button mat-raised-button color="primary" [disabled]="!myForm.form.valid" (click)="pushValues()">Search</button>
+      </div>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,281 @@
+<div class="inner-page-padding">
+  <h2 style="font-size:0.9rem;font-weight: 600;">Create User</h2>
+  <!-- <h2 class = "float-right ctrlLabel">For Submit, use Ctrl + s</h2> -->
+  <app-breadcrumb></app-breadcrumb>
+  <mat-card fxLayout="column" fxFlexFill>
+    <mat-card-content>
+      <form class="create-search" #myForm="ngForm" [formGroup]="createFormGroup">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div>
+              <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                <label class="asterisk-if-mandatory input-label">User Id</label>
+              </div>
+              <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                <input class="form-control input-md1" name="userId" matInput placeholder="USER ID"
+                  formControlName="userIdFC" [(ngModel)]="users.userId" />
+                <div class="error"
+                  *ngIf="createFormGroup.controls.userIdFC.invalid && createFormGroup.controls.userIdFC.touched">
+                  <div class="error" *ngIf="createFormGroup.controls.userIdFC.errors.required">Mandatory Field</div>
+                  <div class="error" *ngIf="createFormGroup.get('userIdFC').errors?.userIdInvalid">Invalid User Id</div>
+                </div>
+              </div>
+              <mat-icon color="primary"
+                *ngIf="createFormGroup.controls.userIdFC.valid && createFormGroup.controls.userIdFC.touched">
+                check_circle</mat-icon>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+            <div class=" contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="asterisk-if-mandatory input-label">Name</label>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;">
+              <input class="form-control input-md1" matInput placeholder="User Name" formControlName="userNameFC"
+                [(ngModel)]="users.username" />
+              <div class="error"
+                *ngIf="createFormGroup.controls.userNameFC.invalid && createFormGroup.controls.userNameFC.touched">
+                <div class="error" *ngIf="createFormGroup.controls.userNameFC.errors.required">Mandatory Field</div>
+              </div>
+            </div>
+            <mat-icon color="primary"
+              *ngIf="createFormGroup.controls.userNameFC.valid && createFormGroup.controls.userNameFC.touched">
+              check_circle</mat-icon>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="asterisk-if-mandatory input-label">Mobile No.</label>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;">
+              <input class="form-control input-md1" matInput type="number" name="mobile" placeholder="Mobile"
+                formControlName="mobileFC" [(ngModel)]="users.mobile" />
+              <div class="error"
+                *ngIf="createFormGroup.controls.mobileFC.invalid && createFormGroup.controls.mobileFC.touched">
+                <div class="error" *ngIf="createFormGroup.controls.mobileFC.errors.required"> Mandatory Field</div>
+                <div class="error" *ngIf="createFormGroup.controls.mobileFC.errors.mobileValid"> Mobile Number should
+                  have
+                  10 Digits</div>
+              </div>
+            </div>
+            <mat-icon color="primary"
+              *ngIf="createFormGroup.controls.mobileFC.valid && createFormGroup.controls.mobileFC.touched">check_circle
+            </mat-icon>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;">&nbsp;</div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="asterisk-if-mandatory input-label">Email Id</label>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;">
+              <input class="form-control input-md1" name="email" matInput placeholder="SFX@SAFEXPRESS.COM"
+                formControlName="emailFC" [matAutocomplete]="auto" type="text" id="email" #email
+                (keydown)="onKeydown($event,email)" [(ngModel)]="users.email">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option class="email-hint" *ngFor="let email of emailList" [value]="email.value">{{email.value}}
+                </mat-option>
+              </mat-autocomplete>
+              <div class="error"
+                *ngIf="createFormGroup.controls.emailFC.invalid && createFormGroup.controls.emailFC.touched">
+                <div class="error" *ngIf="createFormGroup.controls.emailFC.errors.required">Mandatory Field</div>
+                <div class="error" *ngIf="createFormGroup.controls.emailFC.errors.email"> Invalid Email Address</div>
+              </div>
+            </div>
+            <mat-icon color="primary"
+              *ngIf="createFormGroup.controls.emailFC.valid && createFormGroup.controls.emailFC.touched">check_circle
+            </mat-icon>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="asterisk-if-mandatory input-label">Department</label>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;">
+              <ng-select [items]="departmentList" class="select-control" role="listbox" bindLabel="departmentName"
+                bindValue="departmentId" [clearable]="false" name="departmentName" formControlName="departmentFC"
+                (change)="setDeptName($event)" [(ngModel)]="users.departmentId" placeholder="DEPARTMENT"></ng-select>
+              <div class="error"
+                *ngIf="createFormGroup.controls.departmentFC.invalid && createFormGroup.controls.departmentFC.touched">
+                <div *ngIf="createFormGroup.controls.departmentFC.errors.required"> Mandatory Field</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;">&nbsp; </div>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="input-label">Expiry Date</label>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;">
+              <mat-form-field appearance="outline" class="no-padding">
+                <input matInput [min]="todayDate" class="date-form-control" [matDatepicker]="picker111"
+                  formControlName="expiryDateFC" placeholder="DD-MMM-YYYY" [(ngModel)]="users.expDt">
+                <mat-datepicker-toggle matPrefix [for]="picker111"></mat-datepicker-toggle>
+                <mat-datepicker style="margin-bottom: 5px;" panelClass="safexDatePicker"  #picker111></mat-datepicker>
+              </mat-form-field>
+              <div class="error"
+                *ngIf="createFormGroup.controls.expiryDateFC.invalid && (createFormGroup.controls.expiryDateFC.dirty || createFormGroup.controls.expiryDateFC.touched)">
+                <div class="error" *ngIf="createFormGroup.controls.expiryDateFC.errors.date"> Invalid Date</div>
+              </div>
+            </div>
+            <mat-icon color="primary"
+              *ngIf="createFormGroup.controls.expiryDateFC.valid && createFormGroup.controls.expiryDateFC.touched">
+              check_circle</mat-icon>
+          </div>
+        </div>
+      </form>
+
+      <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+          <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <!-- <span class="mat-content-label">Default Branch Mapping</span> -->
+            <label class="asterisk-if-mandatory input-label mat-content-label">Default Branch Mapping</label>
+          </mat-expansion-panel-header>
+          <button *ngIf="!defaultBranchId" mat-icon-button  aria-label="Add" (click)="openAddDefaultBrDialog()">
+            <mat-icon color="primary">add_circle</mat-icon>
+          </button>
+          <div *ngIf="defaultBranchId">
+            <br>
+          </div>
+          <form class="create-search" [formGroup]="createFormGroup" *ngIf="defaultBranchId">
+            <div class="row">
+              <div class="col-sm-2">
+                <label class="input-label">Default Branch</label>
+              </div>
+              <div class="col-sm-2">
+                <label class="input-value">{{defaultBranchName}}</label>
+              </div>
+              <div *ngIf="defaultBranchId" class="col-sm-2">
+                <button mat-raised-button color="primary" class="button-margin buttons"
+                  (click)="openAddDefaultBrDialog()">
+                  Change
+                </button>
+              </div>
+            </div>
+          </form>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+          <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <span class="mat-content-label">Privileged Branch Mapping</span>
+          </mat-expansion-panel-header>
+          <span class="add-content-label">Add Privileged Branch</span>
+          <button mat-icon-button aria-label="Add" (click)="openAddBranchesDialog()">
+            <mat-icon color="primary">add_circle</mat-icon>
+          </button>
+          <mat-table [dataSource]="userBranchessDataSource" matSort class="mat-elevation-z0">
+            <ng-container matColumnDef="branchName">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Branch Name</b></mat-header-cell>
+              <mat-cell data-label="Branch Name" *matCellDef="let row" data-label="Branch Name">{{ row.branchName }}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="type">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Type</b></mat-header-cell>
+              <mat-cell data-label="Type" *matCellDef="let row" data-label="Type">Privileged</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="effectiveDt">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Start Date</b></mat-header-cell>
+              <mat-cell data-label="Start Date" *matCellDef="let row" data-label="Start Date">
+                <mat-form-field appearance="outline" class="no-padding">
+                  <input matInput class="date-form-control" [min]="todayDate" readonly [max]="row.expDt"
+                    [matDatepicker]="picker5" [(ngModel)]="row.effectiveDt" />
+                  <mat-datepicker-toggle matPrefix [for]="picker5"></mat-datepicker-toggle>
+                  <mat-datepicker panelClass="safexDatePicker" #picker5></mat-datepicker>
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="expiryDt">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Expiry Date</b></mat-header-cell>
+              <mat-cell data-label="Expiry Date" *matCellDef="let row" data-label="Expiry Date">
+                <mat-form-field appearance="outline" class="no-padding">
+                  <input matInput class="date-form-control" [min]="setMinExpiryDate(row.effectiveDt)" readonly
+                    [matDatepicker]="picker2" [(ngModel)]="row.expDt" />
+                  <mat-datepicker-toggle matPrefix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker panelClass="safexDatePicker" #picker2></mat-datepicker>
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="address">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Address</b></mat-header-cell>
+              <mat-cell data-label="Address" *matCellDef="let row" data-label="Address" matTooltip="{{ row.address }}"
+                matTooltipPosition="above" matTooltipClass="custom-tooltip">
+                <span class="truncate-text">
+                  {{ row.address }}
+                </span>
+              </mat-cell>
+
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedBranchesColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedBranchesColumns"></mat-row>
+          </mat-table>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+          <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <span class="mat-content-label">Role Mapping</span>
+          </mat-expansion-panel-header>
+          <span class="add-content-label">Add Role</span>
+          <button mat-icon-button aria-label="Add" (click)="openAddRolesDialog()">
+            <mat-icon color="primary">add_circle</mat-icon>
+          </button>
+          <mat-table [dataSource]="userRolesDataSource" matSort class="mat-elevation-z0">
+            <ng-container matColumnDef="roleName">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Role Name</b></mat-header-cell>
+              <mat-cell data-label="Role Name" *matCellDef="let row">{{ row.roleName }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Description</b></mat-header-cell>
+              <mat-cell data-label="Description" *matCellDef="let row" matTooltip="{{row.description }}"
+              matTooltipPosition="above" matTooltipClass="custom-tooltip">
+                <span class="truncate-text">{{ row.description }}</span></mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="effectiveDt">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Start Date</b></mat-header-cell>
+              <mat-cell data-label="Effective Date" *matCellDef="let row">{{ row.effectiveDt | date:'dd-MMM-yyyy'}}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="expDt">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Expiry Date</b></mat-header-cell>
+              <mat-cell data-label="Expiry Date" *matCellDef="let row">
+                <mat-form-field appearance="outline" class="no-padding">
+                  <input class="date-form-control" [min]=setMinExpiryDate(row.effectiveDt) matInput
+                    [matDatepicker]="picker3" readonly [(ngModel)]="row.expDt" />
+                  <mat-datepicker-toggle style="height: 1.5rem;" matPrefix [for]="picker3"></mat-datepicker-toggle>
+                  <mat-datepicker panelClass="safexDatePicker" #picker3></mat-datepicker>
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          </mat-table>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <br>
+
+      <div class="form-row">
+        <div class="col-md-12 text-center footer-button-padding">
+          <button mat-raised-button color="primary" type="submit" (click)="saveData()" style="margin-right: 5px;"
+            [disabled]="!myForm.form.valid">
+            Submit
+          </button>
+          <button mat-raised-button color="accent" style="margin-right: 5px;" type="reset" (click)="resetPage()">
+            Reset
+          </button>
+          <button mat-raised-button style="margin-right: 5px;" type="submit" (click)="gotoSearch()">
+            Back
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

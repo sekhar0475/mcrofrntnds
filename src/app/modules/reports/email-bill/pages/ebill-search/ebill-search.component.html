@@ -1,0 +1,90 @@
+<div class="inner-page-padding">
+    <h2 style="font-size:0.9rem;font-weight: 600;">Email Bill</h2>
+    <app-breadcrumb></app-breadcrumb>
+    <mat-card fxLayout="column" fxFlexFill>
+      <mat-card-content>
+        <form class="create-search" #myForm="ngForm" [formGroup]="createFormGroup">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                      <label class=" input-label">Bill Month</label>
+                    </div>
+                    <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                      <mat-form-field appearance="outline" class="no-padding">
+                        <input matInput class="date-form-control" [matDatepicker]="picker11"
+                          formControlName="billMonthFc"  placeholder="MM-YYYY">
+                        <mat-datepicker-toggle matPrefix [for]="picker11"></mat-datepicker-toggle>
+                        <mat-datepicker startView="multi-year" 
+                        panelClass="safexDatePicker" #picker11
+                        (yearSelected)="chosenYearHandler($event)"
+                        (monthSelected)="chosenMonthHandler($event, picker11)"
+                        
+                        ></mat-datepicker>
+                        <div class="error"
+                          *ngIf="createFormGroup. controls.billMonthFc.invalid && (createFormGroup.controls.billMonthFc.touched || createFormGroup.controls.billMonthFc.dirty) ">
+                          <div class="error" *ngIf="createFormGroup.controls.billMonthFc.errors.required">Mandatory Field
+                          </div>
+                        </div>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="form-group">
+                      <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;white-space:nowrap">
+                        <div >
+                        <label class="asterisk-if-mandatory input-label">Submission Branch</label>
+                        </div>
+                      </div>
+                      <div class=" col-lg-7 col-md-7 col-sm-7 document-search" style="float: left">
+                        <div>
+                          <i class="fa fa-search fa-lg search-icons"></i>
+                          <input class="form-control input-md1" name="submissionBranch" matInput
+                            placeholder="    submission Branch" formControlName="submissionBranchFC"
+                            (click)="openSubMsnBranchesDialog()" readonly />
+                          <div class="error"
+                            *ngIf="createFormGroup.controls.submissionBranchFC.invalid && (createFormGroup.controls.submissionBranchFC.touched || createFormGroup.controls.submissionBranchFC.dirty) ">
+                            <div class="error" *ngIf="createFormGroup.controls.submissionBranchFC.errors.required">Mandatory
+                              Field
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="form-group">
+                        <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                          <label class=" input-label">SFX Code</label>
+                        </div>
+                        <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                          <input class="form-control input-md1" name="sfxCode" matInput placeholder="SFX Code"
+                            formControlName="sfxCodeFc" />
+                          <div class="error"
+                            *ngIf="createFormGroup.controls.sfxCodeFc.invalid && (createFormGroup.controls.sfxCodeFc.touched || createFormGroup.controls.sfxCodeFc.dirty) ">
+                            <div class="error" *ngIf="createFormGroup.controls.sfxCodeFc.errors.required">Mandatory Field</div>
+                          </div>
+          
+                        </div>
+                      </div>
+            </div>
+            </div>
+          <div class="row">
+            <div class="col-md-12 text-center footer-button-padding">
+              <button mat-raised-button color="primary" [disabled]="!myForm.form.valid" (click)="submit()">Submit</button>
+            </div>
+          </div>
+  
+        </form>
+        <app-ebill-result *ngIf="isSearched" [searchRequest]="searchRequest"></app-ebill-result>
+  
+      </mat-card-content>
+  
+  
+    </mat-card>
+  </div>

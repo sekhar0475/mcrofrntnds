@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: "nginx-bff-ingress"
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+  labels:
+    app: bil-common-bff-service
+spec:
+  rules:
+     - http:
+        paths:
+          - path: /billCommonBff/*
+            backend:
+              serviceName: "bil-common-bff-service"
+              servicePort: 80

@@ -1,0 +1,75 @@
+<section>
+    <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+            <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+                <span class="mat-content-label">Write-Off</span>
+            </mat-expansion-panel-header>
+            <hr class="divider">
+            <mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+                <!-- Document Number Column -->
+                <ng-container matColumnDef="documentNumber">
+                    <mat-header-cell *matHeaderCellDef><b>Document Number</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Document Number">{{element.documentNum}}
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Document Type Column -->
+                <ng-container matColumnDef="documentType">
+                    <mat-header-cell *matHeaderCellDef><b>Document Type</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Document Type">{{element.documentType!=null ? element.documentType : docType}}</mat-cell>
+                </ng-container>
+
+                <!-- Out standing Amount Column -->
+                <ng-container matColumnDef="outstandingAmt">
+                    <mat-header-cell *matHeaderCellDef><b>Outstanding Amount</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Outstanding Amount"> {{element.outstandingAmt | number:'1.1-2' }}
+                    </mat-cell>
+                </ng-container>
+
+
+                <!-- Write-Off Amount Column -->
+                <ng-container matColumnDef="writeOffAmt">
+                    <mat-header-cell *matHeaderCellDef><b>Write-Off Amount<span style="color: red">*</span></b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Write-Off Amount">
+                        <input matInput class="form-control input-md1" type="number" [(ngModel)]="element.writeOffAmt"
+                            placeholder="WRITE-OFF AMOUNT">
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Write-Off Reason Column -->
+                <ng-container matColumnDef="writeOffReason">
+                    <mat-header-cell *matHeaderCellDef ><b>Write-Off Reason<span style="color: red">*</span></b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Write-Off Reason">
+                        <ng-select style="min-width: 100%;" appearance="outline" [items]="reasonList" appendTo="body"
+                            class="select-control" role="listbox" bindLabel="reasonDesc" bindValue="reasonValue"
+                            [clearable]="false" name="writeOffReason" placeholder="WRITE-OFF REASON"
+                            [(ngModel)]="element.writeOffReason">
+                        </ng-select>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Remarks Code -->
+                <ng-container matColumnDef="remarks">
+                    <mat-header-cell *matHeaderCellDef><b>Remarks</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Remarks" matTooltip="{{element.remarks}}"
+                    matTooltipPosition="above" matTooltipClass="custom-2-tooltip">
+                        <input matInput class="form-control input-md1" [(ngModel)]="element.remarks"
+                            placeholder="REMARKS" maxlength="254">
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+            </mat-table>
+
+            <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+            
+            <div class="form-row" [style.margin-top]="'12px'">
+                <div class="col-md-12 text-center footer-button-padding" style="margin-bottom: 0.3rem;">
+                    <button *ngIf="writeAccess" mat-raised-button color="primary" (click)="submit()">Submit</button>
+                    <button mat-raised-button style="margin-left: 0.3rem;" color="primary" (click)="clear()">Reset</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</section>

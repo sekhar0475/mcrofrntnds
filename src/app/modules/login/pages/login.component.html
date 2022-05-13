@@ -1,0 +1,36 @@
+<div class="main">
+  <div class="login-wrapper" fxLayout="row" fxLayoutAlign="end center">
+    <mat-card class="box">
+      <mat-card-header>
+        <mat-card-title>
+          <span>
+            <img src="assets/images/propel-i.png" class="login-logo">
+            <h2>BILLING</h2>
+          </span>
+        </mat-card-title>
+      </mat-card-header>
+      <!-- <mat-error >Error: User name is not valid</mat-error> -->
+      <!-- Server error -->
+      <alert></alert>
+      <form class="login-form" [formGroup]="loginForm" (ngSubmit)="loginProcess()">
+        <mat-card-content>
+          <mat-form-field class="login-full-width">
+            <input matInput placeholder="Username" formControlName="email" class="text-style">
+            <mat-error *ngIf="f.email.errors && f.email.errors.required">Username is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="login-full-width">
+            <input matInput placeholder="Password" type="password" formControlName="password">
+            <mat-error *ngIf="f.password.errors && f.password.errors.required">Password is required</mat-error>
+          </mat-form-field>
+        </mat-card-content>
+        <button mat-stroked-button type="submit" color="primary" class="btn-sm">Login</button>
+      </form>
+    </mat-card>
+
+  </div>
+</div>
+<div class = "footerCopyright">
+  Copyright 2021 Safexpress Pvt. Ltd. 
+</div>
+<ngx-spinner size="large" type="ball-spin-clockwise"> </ngx-spinner>

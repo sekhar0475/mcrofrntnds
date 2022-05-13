@@ -1,0 +1,112 @@
+<alert></alert>
+<h2 mat-dialog-title>Resend Emails</h2>
+<mat-dialog-content>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <input
+        class="form-control"
+        placeholder="SEARCH"
+        (keyup)="applyFilter($event.target.value)"
+      />
+    </div>
+  </div>
+  <hr class="divider" />
+  <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z0">
+    <!-- <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        ><b>Select</b>
+      </mat-header-cell>
+      <mat-cell data-label="Select" *matCellDef="let row">
+        <mat-radio-button
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)"
+          [aria-label]="checkboxLabel(row)"
+        ></mat-radio-button>
+      </mat-cell>
+    </ng-container> -->
+
+    <ng-container matColumnDef="msa">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        ><b>MSA</b></mat-header-cell
+      >
+      <mat-cell data-label="Msa" *matCellDef="let row">{{
+        row.msaCode
+      }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="sfxCode">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        ><b>SFX Code</b></mat-header-cell
+      >
+      <mat-cell data-label="sfx code" *matCellDef="let row">{{
+        row.sfxCode
+      }}</mat-cell>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="rateCardCode">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        ><b>Rate Card</b></mat-header-cell
+      >
+      <mat-cell data-label="rate card code" *matCellDef="let row">{{
+        row.rateCardCode
+      }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="documentNumber">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        ><b>Bill Number</b></mat-header-cell
+      >
+      <mat-cell data-label="document number" *matCellDef="let row">{{
+        row.documentNumber
+      }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="partyName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        ><b>Party Name</b></mat-header-cell
+      >
+      <mat-cell data-label="party name" *matCellDef="let row">{{
+        row.partyName
+      }}</mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="submissionBranchName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        ><b>Submission Branch</b></mat-header-cell
+      >
+      <mat-cell data-label="submission branch" *matCellDef="let row">{{
+        row.submissionBranchName
+      }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        ><b>Action</b></mat-header-cell
+      >
+      <mat-cell data-label="action" *matCellDef="let row">
+        <button mat-raised-button color="primary" (click)="resendEmail(row.documentNumber,row.documentType)"
+      >
+        Resend Email
+      </button>
+    
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 15]"
+    showFirstLastButtons
+  ></mat-paginator>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button
+    mat-raised-button
+    color="primary"
+    mat-dialog-close
+  >
+    Ok
+  </button>
+</mat-dialog-actions>

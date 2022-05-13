@@ -1,0 +1,81 @@
+<section>
+    <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+            <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+                <span class="mat-content-label">Write-Off</span>
+            </mat-expansion-panel-header>
+            <hr class="divider">
+            <div class="form-row">
+              <div class="col-md-12" style="text-align: end;">
+                <a (click)="exporter.exportTable('xlsx' ,{fileName:'invoice_write_off_validated_data'})" class="excel-img">
+                  <img class="png-icon" style="height: 20px;" src="../../../../../../assets/icons/icons8-microsoft-excel-52.png"
+                    class="img-icon"/></a>
+                    <label class="excel-label"><b>Export To Excel</b></label>
+              </div>
+            </div>
+            <mat-table matTableExporter [dataSource]="dataSource" class="mat-elevation-z0" #exporter="matTableExporter" matSort>
+                <!-- Document Number Column -->
+                <ng-container matColumnDef="documentNumber">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Document Number</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Document Number">{{element.documentNumber}}</mat-cell>
+                </ng-container>
+
+                <!-- Document Type Column -->
+                <ng-container matColumnDef="documentType">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Document Type</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Document Type">{{element.documentType}}</mat-cell>
+                </ng-container>
+
+                <!-- Outstanding Write-Off Amount Column -->
+                <ng-container matColumnDef="outStandingAmt">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Outstanding Amount</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Write-Off Amount">{{element.outStandingAmt | number:'1.1-2'}}</mat-cell>
+                </ng-container>
+
+                <!-- Write-Off Amount Column -->
+                <ng-container matColumnDef="writeOffAmt">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Write-Off Amount</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Write-Off Amount">{{element.writeOffAmt | number:'1.1-2'}}</mat-cell>
+                </ng-container>
+
+                <!-- Write-Off Reason Column -->
+                <ng-container matColumnDef="writeOffReason">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Write-Off Reason</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Write-Off Reason">{{element.writeOffReason}}</mat-cell>
+                </ng-container>
+
+                <!-- Remarks Code -->
+                <ng-container matColumnDef="remarks">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Remarks</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Remarks"matTooltip="{{element.remarks}}"
+                    matTooltipPosition="above" matTooltipClass="custom-tooltip"><span
+                      class="truncate-text">{{element.remarks}}</span></mat-cell>
+                </ng-container>
+
+                <!-- Status Amount -->
+                <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Status</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Status">{{element.status}}</mat-cell>
+                </ng-container>
+
+                <!-- message Amount -->
+                <ng-container matColumnDef="message">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Message</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Message">{{element.message}} </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+            </mat-table>
+
+            <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+
+            <div class="form-row" [style.margin-top]="'12px'">
+                <div class="col-md-12 text-center footer-button-padding" style="margin-bottom: 0.3rem;">
+                    <button mat-raised-button color="primary" [disabled]="invalidData" (click)="submit()">Submit</button>
+                    <button mat-raised-button style="margin-left: 0.3rem;" color="primary" (click)="clear()">Reset</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</section>

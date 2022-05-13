@@ -1,0 +1,124 @@
+ul li {
+  list-style: none;
+}
+
+.app-header {
+justify-content: space-between;
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+z-index: 2;
+background-color: white;
+min-height: 50px !important;
+}
+
+.mat-toolbar-single-row, .mat-toolbar-row {
+height: 3rem!important;
+}
+
+.profile-pic{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
+img.circle {
+width: 6rem;
+margin-left: 0.5rem;
+margin-right: 1.1rem;
+}
+
+img.circle:focus{
+outline: none;
+}
+
+//css for the logout.
+.profile-class{
+  margin-top: 2px;
+  font-size: 14px;
+  color: #000000;
+  display: grid;
+  flex-direction: row;
+  box-sizing: border-box;
+  place-content: stretch flex-end;
+  align-items: stretch;
+  flex: 1 1 0%;
+  width: 100%;
+}
+
+.profile-inner{
+  float: right; 
+  max-width: 230px; //Added for IE
+}
+
+
+// ::ng-deep .mat-select-value-text{
+//   white-space: normal !important;
+// }
+
+
+::ng-deep .mat-select-trigger{
+  display: block !important;
+}
+
+::ng-deep .customize{
+    margin-top: 38px; 
+}
+
+.custom-mat-select{
+  text-align: center;
+}
+
+.mat-select-value{
+  text-align: right !important
+}
+
+.mat-option.mat-selected {
+  background: white;
+  color:black;
+  
+}
+.mat-option.mat-selected:hover {
+  background-color: #27AE60;
+  color: white;
+}
+
+.mat-option:hover{
+  background-color: #27AE60;
+  color: white;
+}
+
+.custom-divider{
+  border-top-color: #27ae60;
+  border-top-width: 2px;
+}
+
+//for search field.
+.form-control {
+  text-transform: uppercase;
+  border: 0px;
+  border-radius: 0px;
+  height: 1.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  text-align: center;
+ 
+}
+
+.mat-option{
+  font-size:11.52px;
+}
+
+.form-control:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+input:disabled {
+  background-color: transparent;
+}
+

@@ -1,0 +1,169 @@
+<mat-accordion>
+  <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+      <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+        <span class="mat-content-label">Allied Lines</span>
+      </mat-expansion-panel-header>
+      <hr class="divider">
+      <button *ngIf="this.alliedBillVal.alliedBillLevelId == 3 " mat-icon-button aria-label="Add" (click)="addNewLine()">
+        <mat-icon color="primary">add_circle</mat-icon>
+      </button>
+      <form #tableForm="ngForm" novalidate>
+          <mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+
+              <ng-container matColumnDef="lineNumber">
+                  <mat-header-cell *matHeaderCellDef>Line Number</mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="Line Number">{{element.lineNumber}}</mat-cell>
+                  <mat-footer-cell *matFooterCellDef> Sub Total </mat-footer-cell>
+                  <mat-footer-cell *matFooterCellDef> Total </mat-footer-cell>
+              </ng-container>
+              <ng-container matColumnDef="taxTotLbl">
+                <mat-footer-cell *matFooterCellDef >Tax Amount</mat-footer-cell>
+              </ng-container>
+              <ng-container matColumnDef="finTotLbl">
+                <mat-footer-cell *matFooterCellDef >Total Amount</mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="waybill">
+                  <mat-header-cell *matHeaderCellDef>Waybill</mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="Waybill">
+                      {{element.waybill}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="taxWaybill">
+                <mat-footer-cell *matFooterCellDef ></mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="finWaybill">
+                <mat-footer-cell *matFooterCellDef ></mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="reason">
+                  <mat-header-cell *matHeaderCellDef>Reason</mat-header-cell>
+                    <mat-cell *matCellDef="let element; let rowIdx = index;" data-label="SGST">
+                        <ng-select appendTo="body" name="reasonValue" style="min-width: 100%;" appearance="outline"
+                          [items]="billReasonsList" bindLabel="reasonValue" bindValue="reasonValue"
+                          [ngModelOptions]="{standalone: true}" (change)="setReasonAndId(rowIdx,$event)" [(ngModel)]="element.reason" [clearable]="false"
+                          placeholder="SELECT REASON">
+                        </ng-select>
+                  </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="taxReason">
+                <mat-footer-cell *matFooterCellDef ></mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="finReason">
+                <mat-footer-cell *matFooterCellDef ></mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="amount">
+                  <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+                  <mat-cell *matCellDef="let element index as i;" data-label="SGST">
+                    <input matInput style="text-align: right;" maxlength="15" class="form-control input-md1 amount-text-padding" type="number"
+                        [(ngModel)]="element.amount" [ngModelOptions]="{standalone: true}"
+                        [ngModelOptions]="{standalone: true}" (change)="calcTax(i)" required>
+                    </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="taxAmt">
+                <mat-footer-cell *matFooterCellDef ></mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="finAmt">
+                <mat-footer-cell *matFooterCellDef ></mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="remarks">
+                  <mat-header-cell *matHeaderCellDef>Remarks</mat-header-cell>
+                  <mat-cell *matCellDef="let element; let rowIdx = index;" data-label="SGST">
+                    <input matInput class="form-control input-md1" type="text"
+                        [(ngModel)]="element.remarks" [ngModelOptions]="{standalone: true}"
+                        [ngModelOptions]="{standalone: true}" required>
+                </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="taxRemarks">
+                <mat-footer-cell *matFooterCellDef ></mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="finRemarks">
+                <mat-footer-cell *matFooterCellDef ></mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="sgst">
+                  <mat-header-cell *matHeaderCellDef>SGST</mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="Line Number">{{element.sgst}}
+                  </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="sgstTot">
+                <mat-footer-cell *matFooterCellDef >{{getSgstTotal().toFixed(2)}}</mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="finSgst">
+                <mat-footer-cell *matFooterCellDef ></mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="cgst">
+                  <mat-header-cell *matHeaderCellDef>CGST</mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="Line Number">{{element.cgst}}
+                  </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="cgstTot">
+                <mat-footer-cell *matFooterCellDef >{{getCgstTotal().toFixed(2)}}</mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="finCgst">
+                <mat-footer-cell *matFooterCellDef ></mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="igst">
+                <mat-header-cell *matHeaderCellDef>IGST</mat-header-cell>
+                <mat-cell *matCellDef="let element" data-label="Line Number">{{element.igst}}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="igstTot">
+              <mat-footer-cell *matFooterCellDef >{{getIgstTotal().toFixed(2)}}</mat-footer-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="finIgst">
+              <mat-footer-cell *matFooterCellDef ></mat-footer-cell>
+            </ng-container>
+
+              <ng-container matColumnDef="total">
+                  <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
+                  <mat-cell *matCellDef="let element" data-label="total">{{element.total}}
+                  </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="taxTot">
+                <mat-footer-cell *matFooterCellDef >{{getTaxTotal().toFixed(2)}}</mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="finTot">
+                <mat-footer-cell *matFooterCellDef ><b>{{getFinTotal().toFixed(2)}}</b></mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="delete">
+                <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+          <mat-cell *matCellDef="let element;index as i" data-label="Delete Flag">
+            <a mat-icon-button aria-label="Details" (click)="deleteAlliedLines(i)" >
+              <mat-icon color="primary">delete</mat-icon>
+            </a></mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="taxDelete">
+                <mat-footer-cell *matFooterCellDef ></mat-footer-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="finDelete">
+                <mat-footer-cell *matFooterCellDef ></mat-footer-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+              <mat-footer-row class="sticky-footer row-color-blue" *matFooterRowDef="displayedColumnsTaxTotal;"></mat-footer-row>
+              <mat-footer-row class="sticky-footer row-color-blue" *matFooterRowDef="displayedColumnsFinTotal;"></mat-footer-row>
+          </mat-table>
+          <div class="form-row" [style.margin-top]="'12px'">
+              <div class="col-md-12 text-center footer-button-padding" style="margin-bottom:0.3rem;">
+                  <button mat-raised-button color="primary" (click)="createAlliedBill()">SUBMIT</button>
+                  <button mat-raised-button style="margin-left: 0.3rem"  (click)="back()">BACK</button>
+              </div>
+          </div>
+      </form>
+  </mat-expansion-panel>
+</mat-accordion>

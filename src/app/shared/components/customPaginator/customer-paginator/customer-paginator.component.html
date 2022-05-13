@@ -1,0 +1,11 @@
+<nav aria-label="page navigation example" class="float-right">
+  <ul class="pagination">
+    <button style="pointer-events: none; border: none; background: none;" [disabled]="true" ><mat-icon>first_page</mat-icon></button>
+    <li> </li>
+    <button style="pointer-events: none; border: none; background: none;" [disabled]="true"><mat-icon>navigate_before</mat-icon></button>
+    <li>{{activePage}} pages of {{totalPages}} pages</li>
+    <button style="cursor: pointer; border: none; background: none;" [disabled]="activePage == totalPages" (click)="onClickPage(activePage + 1)"><mat-icon>navigate_next</mat-icon></button>
+    <li> </li>
+    <button style="cursor: pointer; border: none; background: none;" [disabled]="activePage == totalPages" (click)="onShowAllClick(totalPages)"><mat-icon>last_page</mat-icon></button>
+  </ul>
+</nav>

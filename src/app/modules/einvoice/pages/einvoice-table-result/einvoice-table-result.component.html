@@ -1,0 +1,196 @@
+<section>
+    <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+            <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+                <span class="mat-content-label">Results</span>
+            </mat-expansion-panel-header>
+
+            <hr class="divider">
+            <div class="form-row">
+                <div class="col-md-12" style="text-align: end;">
+                    <a (click)="export2Excel()" class="excel-img">
+                        <img class="png-icon" style="height: 20px; "
+                            src="../../../../../../assets/icons/icons8-microsoft-excel-52.png" class="img-icon" /></a>
+                    <!-- <label class="excel-label"><b>Export To Excel</b></label> -->
+                    <a (click)="export2Excel()" class="excel-label" style="cursor:pointer">
+                        <b>Export To Excel</b>
+                    </a>
+                </div>
+            </div>
+
+            <hr class="divider">
+            <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z0">
+                <!-- Document Number Column -->
+                <ng-container matColumnDef="documentNumber">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Document Number</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Document Number">
+                        {{element.documentNumber}}
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Document Date Column -->
+                <ng-container matColumnDef="documentDate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Document Date</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Document Date">
+                        {{element.documentDate | date:'dd-MMM-yyyy'}}
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Parent Bill Number Column -->
+                <ng-container matColumnDef="parentBillNumber">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Parent Bill</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Parent Bill Number"
+                        matTooltip="{{element.parentBillNumber}}" matTooltipPosition="above"
+                        matTooltipClass="custom-tooltip">
+                        <span class="truncate-text">
+                            {{element.parentBillNumber}}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+
+                <!-- Customer Name Column -->
+                <ng-container matColumnDef="customerName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Customer Name</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Customer Name" matTooltip="{{element.customerName}}"
+                        matTooltipPosition="above" matTooltipClass="custom-tooltip">
+                        <span class="truncate-text">
+                            {{element.customerName}}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Customer MSA Code Column -->
+                <ng-container matColumnDef="customerMsaCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Customer MSA</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Customer MSA Code"
+                        matTooltip="{{element.customerMsaCode}}" matTooltipPosition="above"
+                        matTooltipClass="custom-tooltip">
+                        <span class="truncate-text">
+                            {{element.customerMsaCode}}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Address Line 1 Code -->
+                <ng-container matColumnDef="address1">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Address Line 1</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Address Line 1" matTooltip="{{element.address1}}"
+                        matTooltipPosition="above" matTooltipClass="custom-tooltip">
+                        <span class="truncate-text">
+                            {{element.address1}}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+                <!-- Address Line 2 Code -->
+                <ng-container matColumnDef="address2">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Address Line 2</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Address Line 2" matTooltip="{{element.address2}}"
+                        matTooltipPosition="above" matTooltipClass="custom-tooltip">
+                        <span class="truncate-text">
+                            {{element.address2}}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+                <!-- Address Line 3 Code -->
+                <ng-container matColumnDef="address3">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Address Line 3</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Address Line 3" matTooltip="{{element.address3}}"
+                        matTooltipPosition="above" matTooltipClass="custom-tooltip">
+                        <span class="truncate-text">
+                            {{element.address3}}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+                <!-- Location -->
+                <ng-container matColumnDef="location">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Location</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Location" matTooltip="{{element.location}}"
+                        matTooltipPosition="above" matTooltipClass="custom-tooltip">
+                        <span class="truncate-text">
+                            {{element.location}}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+                <!-- Pincode -->
+                <ng-container matColumnDef="pincode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Pincode</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Pincode">
+                        {{element.pincode}}
+                    </mat-cell>
+                </ng-container>
+                <!-- State Code -->
+                <ng-container matColumnDef="stateCode">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>State Code</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="State Code">
+                        {{element.stateCode}}
+                    </mat-cell>
+                </ng-container>
+                <!-- IRN Status -->
+                <ng-container matColumnDef="irnStatus">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>IRN Status</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="IRN Status">
+                        {{element.irnStatus}}
+                    </mat-cell>
+                </ng-container>
+                <!-- IGST -->
+                <ng-container matColumnDef="igst">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>IGST</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="IGST">
+                        {{element.igst}}
+                    </mat-cell>
+                </ng-container>
+                <!-- CGST -->
+                <ng-container matColumnDef="cgst">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>CGST</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="CGST">
+                        {{element.cgst}}
+                    </mat-cell>
+                </ng-container>
+                <!-- SGST -->
+                <ng-container matColumnDef="sgst">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>SGST</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="SGST">
+                        {{element.sgst}}
+                    </mat-cell>
+                </ng-container>
+                <!-- Error Message -->
+                <ng-container matColumnDef="errorMessage">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Error Message</b></mat-header-cell>
+                    <mat-cell data-label="Error Message" *matCellDef="let element" matTooltip="{{element.errorMessage}}"
+                        matTooltipPosition="above" matTooltipClass="custom-tooltip">
+                        <span class="truncate-text">
+                            {{ element.errorMessage }}
+                        </span>
+                    </mat-cell>
+                </ng-container>
+                <!-- Action -->
+                <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef><b>Action</b></mat-header-cell>
+                    <mat-cell *matCellDef="let element" data-label="Action">
+                        <a (click)="updateID(element.documentId)" style="cursor: pointer;"  *ngIf="checkIfCredit">
+                            <img class="png-icon" src="../../../../../../assets/icons/icons8-circled-right-24.png"
+                                class="img-icon" />
+                        </a>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+            </mat-table>
+
+            <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+
+            <div class="form-row" [style.margin-top]="'12px'">
+                <div class="col-md-12 text-center footer-button-padding" style="margin-bottom: 0.3rem;">
+                    <button mat-raised-button style="margin-left: 0.3rem;" color="primary"
+                        (click)="clear()">Reset</button>
+                    <button mat-raised-button style="margin-left:0.3rem;" color="primary"
+                         (click)="integrate()" *ngIf = "!checkIfCredit && checkIfBulk" [disabled] = "!correctBulkData">Bulk Integrate with IRP Portal</button>
+                    <button mat-raised-button style="margin-left:0.3rem;" color="primary"
+                         (click)="integrate()" *ngIf = "!checkIfCredit && !checkIfBulk" >Integrate with IRP Portal</button>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</section>

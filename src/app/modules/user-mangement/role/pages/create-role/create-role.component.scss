@@ -1,0 +1,344 @@
+//For each form fields.
+.form-control:hover {
+	border-color: #27ae60;
+	box-shadow: none;
+}
+
+.form-control:focus {
+	box-shadow: none;
+	border: 0.07rem solid #27ae60;
+}
+
+//for text area
+.textareaoutline:hover {
+	border-color: #27ae60;
+	box-shadow: none;
+}
+
+.textareaoutline:focus {
+	box-shadow: none;
+	border: 0.07rem solid #27ae60;
+}
+
+//for form-field hover highlight
+.mat-form-field:hover {
+	border-color: #27ae60;
+	box-shadow: none;
+}
+
+//for form-field focus highlight
+.mat-form-field:focus {
+	box-shadow: none;
+	border: 0.07rem solid #27ae60;
+}
+
+//to center the checkbox 
+.checkbox-control {
+	margin-top: 10px !important;
+}
+
+//header
+h2 {
+	margin-bottom: 0px !important;
+	margin-left: 5px;
+}
+
+//to remove the bootstrap left padding.
+.contol-label {
+	padding-left: 0px;
+}
+
+//for subheadings.
+.mat-content-label {
+	padding-top: 14px;
+	font-weight: bold;
+	font-size: 11.52px;
+}
+
+.add-content-label {
+	padding-top: 14px;
+	font-weight: bold;
+	font-size: 11.52px;
+}
+
+//for mat-date 
+.date-form-control {
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-transform: uppercase;
+	font-size: 11.52px;
+	justify-content: center;
+}
+
+// to ensure date fields fit the cell 100%.
+.mat-form-field {
+	width: 100%;
+}
+
+//for each field
+.form-control {
+	text-transform: uppercase;
+	width: 100%;
+	box-shadow: 0px 0.1rem 0.2rem #00000029;
+	border: 0.05rem solid #6A6868;
+	border-radius: 0px;
+	height: 1.4rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 11.52px;
+	text-transform: uppercase;
+}
+
+.form-control:disabled {
+	background-color: transparent;
+	border: none;
+	box-shadow: none;
+}
+
+//text area 
+.textareaoutline {
+	width: 100%;
+	box-shadow: 0px 0.1rem 0.2rem #00000029;
+	border: 0.05rem solid #6A6868;
+	border-radius: 0px;
+	font-size: 11.52px;
+	text-transform: uppercase;
+}
+
+//for input label field
+.input-label {
+	font-weight: bold;
+	font-size: 11.52px;
+}
+
+.input-md1 {
+	padding-left: .6rem;
+}
+
+//for the label field value
+.input-value {
+	font-size: 11.52px;
+}
+
+//for expansion panel 
+.mat-expansion-panel-header {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: grey;
+	border-radius: 0px;
+	padding: 0px;
+}
+
+mat-expansion-panel-header:hover {
+	background-color: white !important;
+}
+
+.mat-expansion-panel-header.mat-expanded {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #27AE60;
+	;
+	border-radius: 0px;
+	color: #27AE60;
+	;
+}
+
+//for the mat-form date field.
+::ng-deep {
+	.mat-form-field-appearance-outline .mat-form-field-outline {
+		color: white;
+		border: 0.05rem solid #6A6868;
+		box-shadow: 0px 0.1rem 0.2rem #00000029;
+		border-radius: 0px;
+		padding: 0px;
+	}
+	.mat-form-field-appearance-outline .mat-form-field-flex {
+		padding: 0px !important;
+		height: 1.6rem !important;
+		align-items: center !important;
+	}
+	.mat-form-field-appearance-outline .mat-form-field-infix {
+		padding: 0px !important;
+		display: contents;
+	}
+}
+
+::ng-deep .mat-datepicker-toggle-default-icon {
+	margin-bottom: 5px !important;
+}
+
+
+/* focused color */
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+	color: white;
+	box-shadow: none;
+	border: 0.07rem solid #27ae60;
+}
+
+
+/* focused color */
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+	color: white;
+	box-shadow: none;
+	border: 0.07rem solid #27ae60;
+}
+
+//for date field.
+.no-padding {
+	 ::ng-deep .mat-form-field-wrapper {
+		padding-bottom: 0px !important;
+		font-size: 11.52px;
+		justify-content: center;
+	}
+}
+
+// Role Permission
+.mat-cell.mat-column-moduleName {
+	min-width: 15% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-subModuleName {
+	min-width: 15% !important;
+	font-size: 11.52px !important;
+	position: relative !important;
+}
+
+.mat-cell.mat-column-readFlag {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-writeFlag {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-updateFlag {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-expDt {
+	min-width: 15% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-startDt {
+	min-width: 15% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-delete {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-moduleName {
+	min-width: 15% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-subModuleName {
+	min-width: 15% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-readFlag {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-writeFlag {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-updateFlag {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-expDt {
+	min-width: 15% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-startDt {
+	min-width: 15% !important;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-delete {
+	min-width: 10% !important;
+	font-size: 11.52px !important;
+}
+
+// for small screen 
+@media screen and (max-width: 960px) {
+	.mat-table {
+		border: 0;
+		vertical-align: middle
+	}
+	.mat-table caption {
+		font-size: 1em;
+	}
+	.mat-table .mat-header-cell {
+		border: 10px solid;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+	}
+	.mat-table .mat-row {
+		border-bottom: 5px solid #ddd;
+		display: block;
+	}
+	.mat-table .mat-cell {
+		border-bottom: 1px solid #ddd;
+		display: block;
+		text-align: right;
+		font-weight: bold;
+		min-height: 25px;
+		font-size: 11.52px;
+	}
+	.mat-cell.mat-column-readFlag {
+		height: 25px !important
+	}
+	.mat-cell.mat-column-writeFlag {
+		height: 25px !important
+	}
+	.mat-cell.mat-column-updateFlag {
+		height: 25px !important
+	}
+	.mat-cell:first-of-type {
+		padding-left: 0px;
+	}
+	.mat-table .mat-cell:before {
+		content: attr(data-label);
+		float: left;
+		text-transform: inherit;
+		font-weight: normal;
+		font-size: .85em;
+	}
+	.mat-table .mat-cell:last-child {
+		border-bottom: 0;
+	}
+	.mat-table .mat-cell:first-child {
+		margin-top: 4%;
+	}
+}
+
+.ctrlLabel {
+	font-size: 0.9rem;
+	font-weight: 600;
+	font-style: italic;
+	color: #27ae60;
+}

@@ -1,0 +1,443 @@
+<div class="inner-page-padding">
+  <h2 style="font-size:0.9rem;font-weight: 600;">Allied Billing</h2>
+  <app-breadcrumb></app-breadcrumb>
+  <mat-card fxLayout="column" fxFlexFill>
+    <mat-card-content>
+      
+      <form class="create-search" #myForm="ngForm" [formGroup]="createFormGroup">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="asterisk-if-mandatory input-label">Bill Type</label>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <ng-select [items]="billTypeList" [readonly] = 'true' class="select-control" role="listbox" bindLabel="viewValue"
+                  [clearable]="false" name="billType" formControlName="billtypeFC" (change)="selectBillType($event)"
+                  placeholder=""></ng-select>
+                <div class="error"
+                  *ngIf="createFormGroup.controls.billtypeFC.invalid && (createFormGroup.controls.billtypeFC.touched || createFormGroup.controls.billtypeFC.dirty) ">
+                  <div class="error" *ngIf="createFormGroup.controls.billtypeFC.errors.required">Mandatory Field</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="selectedBillType == 1" class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <div *ngIf="billSearched">
+                <label class="asterisk-if-mandatory input-label">Billing Level</label>
+                </div>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <div *ngIf="selectedAlliedBillLevel == 1 && billSearched"><label class="label-value">
+                    {{billDetails[0]?.billingLevel}}</label></div>
+                <div *ngIf="selectedAlliedBillLevel == 2 || selectedAlliedBillLevel == 3">
+                  <ng-select [items]="billingLevelList" [readonly]="!isNext" class="select-control" role="listbox"
+                    bindLabel="viewValue" [clearable]="false" name="viewValue" formControlName="billingLevelFC"
+                    (change)="setBillingLevel($event)" placeholder="BILL LEVEL">
+                  </ng-select>
+                  <div class="error"
+                  *ngIf="createFormGroup.controls.billingLevelFC.invalid && (createFormGroup.controls.billingLevelFC.touched || createFormGroup.controls.billingLevelFC.dirty) ">
+                  <div class="error" *ngIf="createFormGroup.controls.billingLevelFC.errors.required">Mandatory Field</div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="selectedBillType == 2" class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <div *ngIf="billSearched">
+                <label class="asterisk-if-mandatory input-label">PRC/NON PRC</label>
+                </div>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <div *ngIf="selectedAlliedBillLevel == 1 && billSearched">
+                <div *ngIf="billDetails[0]?.prcId; else nonPrc"><label class="label-value">
+                    PRC</label></div>
+                </div>
+                <ng-template #nonPrc>
+                  <div ><label class="label-value">
+                    Non PRC</label></div>
+                </ng-template>
+
+                <div *ngIf="selectedAlliedBillLevel == 2 || selectedAlliedBillLevel == 3">
+                  <mat-radio-group color="primary" formControlName="matRadioFc" (change)="prcRBChange()">
+                    <mat-radio-button value="Y" [disabled]="!isNext" [checked]="true" style="padding-right: 20%;">PRC
+                    </mat-radio-button>
+                    <mat-radio-button [disabled]="!isNext" value="N">NON PRC</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;white-space:nowrap">
+                <div *ngIf="billSearched">
+                <label class="asterisk-if-mandatory input-label">Submission Branch</label>
+                </div>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7 document-search" style="float: left">
+                <div *ngIf="selectedAlliedBillLevel == 1 && billSearched"><label class="label-value">
+                    {{billDetails[0]?.submsnBr}}</label></div>
+                <div *ngIf="selectedAlliedBillLevel == 2 || selectedAlliedBillLevel == 3">
+                  <i class="fa fa-search fa-lg search-icons"></i>
+                  <input class="form-control input-md1" name="submissionBranch" matInput
+                    placeholder="    submission Branch" formControlName="submissionBranchFC"
+                    (click)="openSubMsnBranchesDialog()" readonly />
+                  <div class="error"
+                    *ngIf="createFormGroup.controls.submissionBranchFC.invalid && (createFormGroup.controls.submissionBranchFC.touched || createFormGroup.controls.submissionBranchFC.dirty) ">
+                    <div class="error" *ngIf="createFormGroup.controls.submissionBranchFC.errors.required">Mandatory
+                      Field
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="asterisk-if-mandatory input-label">Allied Bill Level</label>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <ng-select [readonly]="!isNext" [items]="alliedBillLevelsList" class="select-control" role="listbox"
+                  bindLabel="viewValue" [clearable]="false" name="alliedBillLevel" formControlName="alliedBillLevelFC"
+                  (change)="selectAlliedBillingLevel($event)" placeholder="">
+                </ng-select>
+                <div class="error"
+                  *ngIf="createFormGroup.controls.alliedBillLevelFC.invalid && (createFormGroup.controls.alliedBillLevelFC.touched || createFormGroup.controls.alliedBillLevelFC.dirty) ">
+                  <div class="error" *ngIf="createFormGroup.controls.alliedBillLevelFC.errors.required">Mandatory Field
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="selectedBillType == 1" class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <div *ngIf="billSearched">
+                <label class="asterisk-if-mandatory input-label">Billing Level Value</label>
+                </div>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <div *ngIf="selectedAlliedBillLevel == 1 && billSearched"><label class="label-value">
+                    {{billDetails[0]?.billingLevelCode}}</label></div>
+                <div *ngIf="selectedAlliedBillLevel == 2 || selectedAlliedBillLevel == 3">
+                  <input [readonly]="!isNext" (blur)="getCustByBillingLevel()" class="form-control input-md1" type="text" name="billingLevelValue"
+                    matInput placeholder="billing Level Value" formControlName="billingLevelValFC" />
+                    <div class="error"
+                    *ngIf="createFormGroup.controls.billingLevelValFC.invalid && (createFormGroup.controls.billingLevelValFC.touched || createFormGroup.controls.billingLevelValFC.dirty) ">
+                    <div class="error" *ngIf="createFormGroup.controls.billingLevelValFC.errors.required">Mandatory Field</div>
+                  </div>
+                  </div>
+                
+              </div>
+            </div>
+          </div>
+          <div *ngIf="selectedBillType == 2 && isPRC" class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <div *ngIf="billSearched">
+                <label class="asterisk-if-mandatory input-label">PRC Code</label>
+                </div>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <div *ngIf="selectedAlliedBillLevel == 1 && billSearched"><label class="label-value">
+                    {{billDetails[0]?.prcCode}}</label></div>
+                <div *ngIf="selectedAlliedBillLevel == 2 || selectedAlliedBillLevel == 3">
+                  <input class="form-control input-md1" (blur)="validatePrcCust()" [readonly]="!isPRC || !isNext" type="text" name="prcId"
+                    matInput placeholder="PRC Code" formControlName="prcIdFc" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="selectedBillType == 2 && selectedAlliedBillLevel != 1 && !isPRC" class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="asterisk-if-mandatory input-label">Customer Name</label>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <div >
+                  <input class="form-control input-md1" [readonly]="!isNext" type="text" name="custNameFC"
+                    matInput placeholder="Customer Name" formControlName="custNameFC" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <div *ngIf="billSearched">
+                <label class="asterisk-if-mandatory input-label">Collection Branch</label>
+                </div>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7 document-search" style="float: left">
+                <div *ngIf="selectedAlliedBillLevel == 1 && billSearched"><label class="label-value">
+                    {{billDetails[0]?.collBr}}</label></div>
+                <div *ngIf="selectedAlliedBillLevel == 2 || selectedAlliedBillLevel == 3">
+                  <i class="fa fa-search fa-lg search-icons"></i>
+                  <input class="form-control input-md1" name="collectionBranch" matInput
+                    placeholder="    Collection Branch" formControlName="collectionBranchFC"
+                    (click)="openCollBranchesDialog()" readonly />
+                  <div class="error"
+                    *ngIf="createFormGroup.controls.collectionBranchFC.invalid && (createFormGroup.controls.collectionBranchFC.touched || createFormGroup.controls.collectionBranchFC.dirty) ">
+                    <div class="error" *ngIf="createFormGroup.controls.collectionBranchFC.errors.required">Mandatory
+                      Field
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="asterisk-if-mandatory asterisk-if-mandatory input-label">Document Number</label>
+              </div>
+              <div class=" col-lg-8 col-md-8 col-sm-8" style="float: left;display: flex;
+              flex-direction: row;">
+                <div *ngIf="selectedAlliedBillLevel == 1">
+                  <input class="form-control input-md1" [readonly]="!isNext" type="text" name="documentNumber"
+                    formControlName="docNumFC" placeholder="" />
+
+                    <div class="error"
+                    *ngIf="createFormGroup.controls.docNumFC.invalid && (createFormGroup.controls.docNumFC.touched || createFormGroup.controls.docNumFC.dirty) ">
+                    <div class="error" *ngIf="createFormGroup.controls.docNumFC.errors.required">Mandatory Field</div>
+                  </div>
+                </div>
+                <div *ngIf="selectedAlliedBillLevel == 1">
+                  <a mat-button style="padding:0px; margin-top: -10px;" (click)="getCreditBillDetails()">
+                    <img class="png-icon" src="../../../../../../assets/icons/icons8-circled-right-24.png"
+                      class="img-icon" />
+                  </a>
+                </div>
+                <div *ngIf="selectedAlliedBillLevel == 3 || selectedAlliedBillLevel == 2"><label class="label-value">N/A</label></div>
+
+              </div>
+
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <div *ngIf="billSearched">
+                <label class="asterisk-if-mandatory input-label">Billing Branch</label>
+                </div>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7 document-search" style="float: left">
+                <div *ngIf="selectedAlliedBillLevel == 1 && billSearched"><label class="label-value">
+                    {{billDetails[0]?.blngBr}}</label></div>
+                <div *ngIf="selectedAlliedBillLevel == 2 || selectedAlliedBillLevel == 3">
+                  <i class="fa fa-search fa-lg search-icons"></i>
+                  <input class="form-control input-md1" name="billingBranch" matInput placeholder="    Billing Branch"
+                    formControlName="billingBranchFC" (click)="openBlngBranchesDialog()" readonly />
+                    <div class="error"
+                    *ngIf="createFormGroup.controls.billingBranchFC.invalid && (createFormGroup.controls.billingBranchFC.touched || createFormGroup.controls.billingBranchFC.dirty) ">
+                    <div class="error" *ngIf="createFormGroup.controls.billingBranchFC.errors.required">Mandatory Field</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="billSearched" class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="asterisk-if-mandatory input-label">Bill Date</label>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <mat-form-field appearance="outline" class="no-padding">
+                  <input matInput [min]="todayDt" [max]="todayDt" class="date-form-control" [attr.disabled]="!isNext"
+                    [matDatepicker]="picker1" formControlName="billDateFC" placeholder="DD-MMM-YYYY">
+                  <mat-datepicker-toggle matPrefix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker [disabled]="!isNext" panelClass="safexDatePicker" #picker1></mat-datepicker>
+                 
+                </mat-form-field>
+                <div class="error"
+                *ngIf="createFormGroup.controls.billDateFC.invalid && (createFormGroup.controls.billDateFC.touched || createFormGroup.controls.billDateFC.dirty) ">
+                <div class="error" *ngIf="createFormGroup.controls.billDateFC.errors.required">Mandatory Field</div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="asterisk-if-mandatory input-label">Waybill Number</label>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <div *ngIf="selectedAlliedBillLevel != 3">
+                    <textarea class="form-control"   style="height: auto;white-space:pre-wrap"  matInput rows="3" cols="10" [readonly]="!isNext" name="waybillNumber"
+                    placeholder="" formControlName="wbFC"></textarea>
+                  <div class="error"
+                    *ngIf="createFormGroup.controls.wbFC.invalid && (createFormGroup.controls.wbFC.touched || createFormGroup.controls.wbFC.dirty) ">
+                    <div class="error" *ngIf="createFormGroup.controls.wbFC.errors.required">Waybill number is required.</div>
+                  </div>
+                </div>
+                <div *ngIf="selectedAlliedBillLevel == 3"><label class="label-value">N/A</label></div>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <div *ngIf="billSearched">
+                <label class="asterisk-if-mandatory input-label">Bill To Address</label>
+                </div>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <div *ngIf="selectedAlliedBillLevel == 1 && billSearched"><label class="label-value">
+                    {{billDetails[0]?.billToAddr}}</label></div>
+                <div *ngIf="selectedAlliedBillLevel == 2 || selectedAlliedBillLevel == 3">
+                  <input class="form-control input-md1" [readonly]="!isNext" name="billingAddress" matInput
+                    placeholder="Billing Address" formControlName="billingAddressFC" />
+                  <div class="error"
+                    *ngIf="createFormGroup.controls.billingAddressFC.invalid && (createFormGroup.controls.billingAddressFC.touched || createFormGroup.controls.billingAddressFC.dirty) ">
+                    <div class="error" *ngIf="createFormGroup.controls.billingAddressFC.errors.required">Mandatory Field
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="billSearched" class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="asterisk-if-mandatory input-label">Bill Period From</label>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <mat-form-field appearance="outline" class="no-padding">
+                  <input matInput class="date-form-control" [attr.disabled]="!isNext"
+                    [matDatepicker]="picker11" (dateChange)="setDateValue($event)" formControlName="billPeriodfromFC" placeholder="DD-MMM-YYYY">
+                  <mat-datepicker-toggle matPrefix [for]="picker11"></mat-datepicker-toggle>
+                  <mat-datepicker [disabled]="!isNext" panelClass="safexDatePicker" #picker11></mat-datepicker>
+                  
+                </mat-form-field>
+                <div class="error"
+                    *ngIf="createFormGroup.controls.billPeriodfromFC.invalid && (createFormGroup.controls.billPeriodfromFC.touched || createFormGroup.controls.billPeriodfromFC.dirty) ">
+                    <div class="error" *ngIf="createFormGroup.controls.billPeriodfromFC.errors.required">Mandatory Field
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div *ngIf="selectedBillType == 1" class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+               </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+               
+              </div>
+            </div>
+          </div>
+          <div *ngIf="selectedBillType == 2" class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <div *ngIf="billSearched">
+                <label class="asterisk-if-mandatory input-label">Pincode :</label>
+                </div>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <div *ngIf="selectedAlliedBillLevel == 1 && billSearched"><label class="label-value">
+                    {{billDetails[0]?.billToPincode}}</label></div>
+                <div *ngIf="selectedAlliedBillLevel == 2 || selectedAlliedBillLevel == 3">
+                  <input minlength="6" maxlength="6" class="form-control input-md1" [readonly]="!isNext" name="pincode" matInput placeholder="PINCODE"
+                    formControlName="pincodeFC" (blur) = "validatePincode()"/>
+                    <div class="error"
+                    *ngIf="createFormGroup.controls.pincodeFC.invalid && (createFormGroup.controls.pincodeFC.touched || createFormGroup.controls.pincodeFC.dirty) ">
+                    <div class="error" *ngIf="createFormGroup.controls.pincodeFC.errors.required">Mandatory Field</div>
+                    <div class="error" *ngIf="createFormGroup.controls.pincodeFC.errors.minlength">Minimum length must be 6 digit.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <div *ngIf="billSearched">
+                <label class="input-label">GSTIN</label>
+                </div>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <div *ngIf="selectedAlliedBillLevel == 1 && billSearched"><label class="label-value">
+                    {{billDetails[0]?.gstNum}}</label></div>
+                <div *ngIf="selectedAlliedBillLevel == 2 || selectedAlliedBillLevel == 3">
+                  <input class="form-control input-md1" [readonly]="!isNext" name="gstin" matInput placeholder="GSTIN"
+                    formControlName="gstinFC" (blur) ="validateGST()" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="billSearched" class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="asterisk-if-mandatory input-label">Bill Period To</label>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <mat-form-field appearance="outline" class="no-padding">
+                  <input matInput [min]="toDateValue" class="date-form-control" [attr.disabled]="!isNext"
+                    [matDatepicker]="picker111" formControlName="billPeriodtoFC" placeholder="DD-MMM-YYYY">
+                  <mat-datepicker-toggle matPrefix [for]="picker111" ></mat-datepicker-toggle>
+                  <mat-datepicker [disabled]="!isNext" panelClass="safexDatePicker" #picker111 ></mat-datepicker>
+                  
+                </mat-form-field>
+                <div class="error"
+                    *ngIf="createFormGroup.controls.billPeriodtoFC.invalid && (createFormGroup.controls.billPeriodtoFC.touched || createFormGroup.controls.billPeriodtoFC.dirty) ">
+                    <div class="error" *ngIf="createFormGroup.controls.billPeriodtoFC.errors.required">Mandatory Field
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="selectedBillType == 2  && selectedAlliedBillLevel == 3">
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="asterisk-if-mandatory input-label">PAID or TOPAY</label>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <ng-select [readonly]="!isNext" [items]="paidOrToPaylist" class="select-control" role="listbox"
+                  bindLabel="viewValue" [clearable]="false" name="paidOrTopay" formControlName="paidOrTopayFC"
+                  placeholder="">
+                </ng-select>
+                <div class="error"
+                  *ngIf="createFormGroup.controls.paidOrTopayFC.invalid && (createFormGroup.controls.paidOrTopayFC.touched || createFormGroup.controls.paidOrTopayFC.dirty) ">
+                  <div class="error" *ngIf="createFormGroup.controls.paidOrTopayFC.errors.required">Mandatory Field
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         </div>
+        <div class="row">
+          <div class="col-md-12 text-center footer-button-padding">
+            <button mat-raised-button (click)="cancelNext()">Cancel</button>
+            <button mat-raised-button style= "margin-left: 0.3rem" color="primary" [disabled]="!myForm.form.valid"
+              (click)="processNext()">Next</button>
+          </div>
+        </div>
+      </form>
+      <app-lines *ngIf="isHeadValid" [alliedBillVal]="alliedBill" (displayResultComponentChange)="getSavedDataStatus($event)" [documentNumber]="documentNumber"></app-lines>
+    </mat-card-content>
+  </mat-card>
+</div>

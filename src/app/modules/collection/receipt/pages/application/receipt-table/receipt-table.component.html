@@ -1,0 +1,72 @@
+<div class="inner-page-padding">
+  <h2 style="font-size:0.9rem;font-weight: 600;">Receipt Search</h2>
+  <app-breadcrumb></app-breadcrumb>
+  <mat-card fxLayout="column" fxFlexFill>
+    <mat-card-header>
+      <mat-card-title>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <app-receipt-search (receiptSearchVal)="getSearchVal($event)"></app-receipt-search>
+      <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+          <mat-expansion-panel-header *ngIf="unApply" [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <b>Applied Receipt Details</b>
+          </mat-expansion-panel-header>
+          <mat-expansion-panel-header *ngIf="!unApply" [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <b>Unapplied Receipt Details</b>
+          </mat-expansion-panel-header>
+          <hr class="divider">
+          <mat-table [dataSource]="dataSource" class="mat-elevation-z0" matSort>
+            <!-- Receipt Number Column -->
+            <ng-container matColumnDef="receiptNumber">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Receipt Number</b></mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="Receipt Number">{{element.receiptNumber}}</mat-cell>
+            </ng-container>
+            <!-- Receipt Date Column -->
+            <ng-container matColumnDef="receiptDate">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Receipt Date</b></mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="Receipt Date">
+                {{element.receiptDate | date:'dd-MMM-yyyy'}}
+              </mat-cell>
+            </ng-container>
+            <!-- Reference Number Column -->
+            <ng-container matColumnDef="insmtRef">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Reference Number</b></mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="Ref Number">{{element.insmtRef}}</mat-cell>
+            </ng-container>
+            <!-- Customer Column -->
+            <ng-container matColumnDef="customerName">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Customer</b></mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="Customer">{{element.customerName}}</mat-cell>
+            </ng-container>
+            <!-- Outstanding Amount -->
+            <ng-container matColumnDef="outstandingAmt">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Outstanding Amount</b></mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="Outstanding Amt">{{element.outstandingAmt}}</mat-cell>
+            </ng-container>
+            <!-- Applied Amount -->
+            <ng-container matColumnDef="appliedAmt">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Applied Amount</b></mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="Applied Amt">
+                {{element.appliedAmt==null?0:element.appliedAmt}}</mat-cell>
+            </ng-container>
+            <!-- Action -->
+            <ng-container matColumnDef="action">
+              <mat-header-cell *matHeaderCellDef><b>Action</b></mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="Action">
+                <a *ngIf="writeAccess" (click)="applyReceiptWithId(element.receiptId)" style="cursor: pointer;">
+                  <img class="png-icon" src="../../../../../../assets/icons/icons8-circled-right-24.png"
+                    class="img-icon" />
+                </a>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
+</div>

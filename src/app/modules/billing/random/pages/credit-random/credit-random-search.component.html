@@ -1,0 +1,213 @@
+<div class="inner-page-padding">
+    <h2 style="font-size:0.9rem;font-weight: 600;">Random Billing</h2>
+    <app-breadcrumb></app-breadcrumb>
+    <mat-card fxLayout="column" fxFlexFill>
+        <mat-card-content>
+            <form class="create-search" #myForm="ngForm" [formGroup]="createFormGroup">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-2 col-md-2 col-sm-2" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Billing Level</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <ng-select [items]="blngLvlList" class="select-control" role="listbox" bindLabel="viewValue"
+                                [clearable]="false" name="blngLvlValue" placeholder="BILLING LEVEL"
+                                formControlName="billingLevelFC" (change)="selectBillType($event)">
+                            </ng-select>
+                            <div class="error"
+                                *ngIf="createFormGroup.controls.billingLevelFC.invalid && (createFormGroup.controls.billingLevelFC.touched || createFormGroup.controls.billingLevelFC.dirty)">
+                                <div class="error" *ngIf="createFormGroup.controls.billingLevelFC.errors.required">
+                                    Mandatory Field</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-3 col-md-3 col-sm-3" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Billing Level Code</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <input class="form-control input-md1" matInput placeholder="Billing Level Value"
+                                formControlName="billingLevelValFC">
+                            <div class="error"
+                                *ngIf="createFormGroup.controls.billingLevelValFC.invalid && (createFormGroup.controls.billingLevelValFC.touched || createFormGroup.controls.billingLevelValFC.dirty)">
+                                <div class="error" *ngIf="createFormGroup.controls.billingLevelValFC.errors.required">
+                                    Mandatory Field</div>
+                            </div>
+                        </div>
+                        <a mat-button style="margin-top: -10px;" (click)="getCustByBillingLevel()">
+                            <img class="png-icon" src="../../../../../../assets/icons/icons8-circled-right-24.png"
+                              class="img-icon" />
+                          </a>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-2 col-md-2 col-sm-2" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Billing Branch</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 document-search" style="float: left">
+                            <i class="fa fa-search fa-lg search-icons"></i>
+                            <input class="form-control input-md2" name="billingBranch" matInput
+                                placeholder="Billing Branch" formControlName="billingBranchFC"
+                                (click)="openBlngBranchesDialog()" readonly>
+                            <div class="error"
+                                *ngIf="createFormGroup.controls.billingBranchFC.invalid && (createFormGroup.controls.billingBranchFC.touched || createFormGroup.controls.billingBranchFC.dirty) ">
+                                <div class="error" *ngIf="createFormGroup.controls.billingBranchFC.errors.required">
+                                    Mandatory Field
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-3 col-md-3 col-sm-3" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Collection Branch</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 document-search" style="float: left">
+                            <i class="fa fa-search fa-lg search-icons"></i>
+                            <input class="form-control input-md2" name="collectionBranch" matInput
+                                placeholder="Collection Branch" formControlName="collectionBranchFC"
+                                (click)="openCollBranchesDialog()" readonly>
+                            <div class="error"
+                                *ngIf="createFormGroup.controls.collectionBranchFC.invalid && (createFormGroup.controls.collectionBranchFC.touched || createFormGroup.controls.collectionBranchFC.dirty) ">
+                                <div class="error" *ngIf="createFormGroup.controls.collectionBranchFC.errors.required">
+                                    Mandatory Field
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-2 col-md-2 col-sm-2" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Submission Branch</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 document-search" style="float: left">
+                            <i class="fa fa-search fa-lg search-icons"></i>
+                            <input class="form-control input-md2" name="submissionBranch" matInput
+                                placeholder="submission Branch" formControlName="submissionBranchFC"
+                                formControlName="submissionBranchFC" (click)="openSubMsnBranchesDialog()" readonly>
+                            <div class="error"
+                                *ngIf="createFormGroup.controls.submissionBranchFC.invalid && (createFormGroup.controls.submissionBranchFC.touched || createFormGroup.controls.submissionBranchFC.dirty)">
+                                <div class="error" *ngIf="createFormGroup.controls.submissionBranchFC.errors.required">
+                                    Mandatory Field
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-3 col-md-3 col-sm-3" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Bill Date</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <mat-form-field appearance="outline" class="no-padding">
+                                <input matInput class="date-form-control" [matDatepicker]="picker11" matInput placeholder="DD-MMM-YYYY"
+                                    formControlName="billDateFC" readonly>
+                                <mat-datepicker-toggle matPrefix [for]="picker11"></mat-datepicker-toggle>
+                                <mat-datepicker [disabled]="true" panelClass="safexDatePicker" #picker11></mat-datepicker>
+                            </mat-form-field>
+                            <div class="error"
+                                *ngIf="createFormGroup.controls.billDateFC.invalid && (createFormGroup.controls.billDateFC.touched || createFormGroup.controls.billDateFC.dirty) ">
+                                <div class="error" *ngIf="createFormGroup.controls.billDateFC.errors.required">Mandatory
+                                    Field</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-2 col-md-2 col-sm-2" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="input-label">Bill To Address </label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <input class="form-control input-md1" name="billingAddress" matInput
+                                formControlName="billingAddressFC" [(ngModel)]="billingAddress" matTooltip="{{billingAddress}}"
+                                matTooltipPosition="above" matTooltipClass="custom-address-tooltip" readonly />
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-3 col-md-3 col-sm-3" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="input-label">Bill From Date</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <mat-form-field appearance="outline" class="no-padding">
+                                <input matInput class="date-form-control" [min] = "minBillingDate" [disabled]="true" [matDatepicker]="picker12" [matDatepickerFilter]="myFilter" matInput
+                                    placeholder="DD-MMM-YYYY" formControlName="billFromDateFC" (dateChange) = "updateBillDates($event)" readonly>
+                                <mat-datepicker-toggle matPrefix [for]="picker12"></mat-datepicker-toggle>
+                                <mat-datepicker [disabled]="false" panelClass="safexDatePicker" #picker12></mat-datepicker>
+                            </mat-form-field>
+                            <!-- <div class="error"
+                                *ngIf="createFormGroup.controls.billFromDateFC.invalid && (createFormGroup.controls.billFromDateFC.touched || createFormGroup.controls.billFromDateFC.dirty) ">
+                                <div class="error" *ngIf="createFormGroup.controls.billFromDateFC.errors.required">
+                                    Mandatory Field</div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-2 col-md-2 col-sm-2" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="input-label">GST IN</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <input class="form-control input-md1" name="gstin" matInput formControlName="gstinFC"
+                                readonly />
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-3 col-md-3 col-sm-3" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="input-label">Bill To Date</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <mat-form-field appearance="outline" class="no-padding">
+                                <input matInput class="date-form-control" [disabled]="true" [matDatepicker]="picker13" matInput
+                                    placeholder="DD-MMM-YYYY" formControlName="billToDateFC" readonly>
+                                <mat-datepicker-toggle matPrefix [for]="picker13"></mat-datepicker-toggle>
+                                <mat-datepicker [disabled]="true" panelClass="safexDatePicker" #picker13></mat-datepicker>
+                            </mat-form-field>
+                            <!-- <div class="error"
+                                *ngIf="createFormGroup.controls.billToDateFC.invalid && (createFormGroup.controls.billToDateFC.touched || createFormGroup.controls.billToDateFC.dirty) ">
+                                <div class="error" *ngIf="createFormGroup.controls.billToDateFC.errors.required">
+                                    Mandatory Field</div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-2 col-md-2 col-sm-2" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="input-label">Waybill Numbers</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <!-- <input class="form-control input-md1" matInput placeholder="Waybill Numbers"
+                                formControlName="waybillNumbersFC" [disabled]="!showResult"> -->
+                                <textarea class="form-control"   style="height: auto;white-space:pre-wrap"  matInput rows="3" cols="10" 
+                                placeholder="" formControlName="waybillNumbersFC"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center footer-button-padding">
+                        <button mat-raised-button (click)="reset()">Reset</button>
+                        <button mat-raised-button style="margin-left: 0.3rem" color="primary"
+                            [disabled]="!myForm.form.valid" (click)="search()">Next</button>
+                    </div>
+                </div>
+                <app-credit-random-result *ngIf="showResult" [creditCustDetails]="creditCustDetails" [randomSearchParam]="randomSearchParam"
+                [fromDate]="fromDate" [toDate]="toDate" [waybillNumbers]="waybillNumbers" (emitterClearSearchParams)="resetComponent($event)"></app-credit-random-result>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

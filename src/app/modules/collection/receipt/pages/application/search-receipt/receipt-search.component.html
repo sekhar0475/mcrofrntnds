@@ -1,0 +1,50 @@
+<section>
+  <!--Row:1-->
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6">
+      <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+      <div class=" contol-label col-lg-3 col-md-3 col-sm-3" style="float: left; margin-top:0.5rem">
+        <label class="input-label">Period From</label>
+      </div>
+      <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left; margin-top:0.5rem">
+        <mat-form-field appearance="outline" class="no-padding">
+          <input class="date-form-control" matInput [matDatepicker]="picker1" placeholder="DD-MMM-YYYY"
+            [(ngModel)]="searchValues.fromDate" readonly>
+          <mat-datepicker-toggle matPrefix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker panelClass="safexDatePicker" #picker1></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-6">
+      <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left; "> &nbsp; </div>
+      <div class=" contol-label col-lg-3 col-md-3 col-sm-3" style="float: left; margin-top:0.5rem">
+        <label class="input-label">Period To</label>
+      </div>
+      <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left; margin-top:0.5rem">
+        <mat-form-field appearance="outline" class="no-padding">
+          <input class="date-form-control" matInput [min]="searchValues.fromDate" [matDatepicker]="picker2"
+            placeholder="DD-MMM-YYYY" [(ngModel)]="searchValues.toDate" readonly>
+          <mat-datepicker-toggle matPrefix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker panelClass="safexDatePicker" #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <!--Row:1-->
+
+    <!--Row:2-->
+    <div class="col-lg-6 col-md-6 col-sm-6">
+      <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+      <div class=" contol-label col-lg-3 col-md-3 col-sm-3" style="float: left; margin-top: 0.5rem ">
+        <label class="input-label">Receipt Number</label>
+      </div>
+      <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left; margin-top: 0.5rem">
+        <input class="form-control input-md1" matInput placeholder="RECEIPT NUMBER" name="receiptNumber"
+          [(ngModel)]="searchValues.receiptNumber">
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: center;">
+    <button mat-raised-button color="primary" (click)="pushValues()">Search</button>
+  </div>
+</section>

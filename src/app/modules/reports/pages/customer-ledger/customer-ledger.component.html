@@ -1,0 +1,119 @@
+<div class="inner-page-padding">
+  <h2 style="font-size:0.9rem;font-weight: 600;">Customer Ledger</h2>
+  <app-breadcrumb></app-breadcrumb>
+  <mat-card fxLayout="column" fxFlexFill>
+    <mat-card-content>
+      <form class="create-search" #myForm="ngForm" [formGroup]="createFormGroup">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="asterisk-if-mandatory input-label">Customer Name</label>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <input class="form-control input-md1" placeholder="   Customer Name" formControlName="customerNameFC"
+                  [(ngModel)]="customer.msaName" (click)="customerSearch()" readonly>
+                <div class="error"
+                  *ngIf="createFormGroup.controls.customerNameFC.invalid && (createFormGroup.controls.customerNameFC.touched || createFormGroup.controls.customerNameFC.dirty) ">
+                  <div class="error" *ngIf="createFormGroup.controls.customerNameFC.errors.required">Mandatory Field
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="asterisk-if-mandatory input-label">Period From</label>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <mat-form-field appearance="outline" class="no-padding">
+                  <input matInput class="date-form-control" [matDatepicker]="picker11" [(ngModel)]="fromPeriod"
+                    formControlName="billPeriodfromFC" placeholder="DD-MMM-YYYY">
+                  <mat-datepicker-toggle matPrefix [for]="picker11"></mat-datepicker-toggle>
+                  <mat-datepicker panelClass="safexDatePicker" #picker11></mat-datepicker>
+                  <div class="error"
+                    *ngIf="createFormGroup.controls.billPeriodfromFC.invalid && (createFormGroup.controls.billPeriodfromFC.touched || createFormGroup.controls.billPeriodfromFC.dirty) ">
+                    <div class="error" *ngIf="createFormGroup.controls.billPeriodfromFC.errors.required">Mandatory Field
+                    </div>
+                  </div>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="asterisk-if-mandatory input-label">MSA Code</label>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <label class="label-value">{{ customer.propelMsaCode }}</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="asterisk-if-mandatory input-label">Period To</label>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <mat-form-field appearance="outline" class="no-padding">
+                  <input matInput [min]="toDateValue" class="date-form-control" [matDatepicker]="picker111"
+                    [(ngModel)]="toPeriod" formControlName="billPeriodtoFC" placeholder="DD-MMM-YYYY">
+                  <mat-datepicker-toggle matPrefix [for]="picker111"></mat-datepicker-toggle>
+                  <mat-datepicker panelClass="safexDatePicker" #picker111></mat-datepicker>
+                  <div class="error"
+                    *ngIf="createFormGroup.controls.billPeriodtoFC.invalid && (createFormGroup.controls.billPeriodtoFC.touched || createFormGroup.controls.billPeriodtoFC.dirty) ">
+                    <div class="error" *ngIf="createFormGroup.controls.billPeriodtoFC.errors.required">Mandatory Field
+                    </div>
+                  </div>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="sfxAvailable" class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                <label class="asterisk-if-mandatory input-label">SFX Code</label>
+              </div>
+              <div class=" col-lg-7 col-md-7 col-sm-7" style="float: left">
+                <ng-select [items]="sfxCodeList" class="select-control" role="listbox" bindLabel="viewValue"
+                  bindValue="viewValue" [clearable]="false" name="sfxCode"
+                  formControlName="sfxCodeFC" placeholder="SFX CODES"></ng-select>
+                <div class="error"
+                  *ngIf="createFormGroup.controls.sfxCodeFC.invalid && (createFormGroup.controls.sfxCodeFC.touched || createFormGroup.controls.sfxCodeFC.dirty) ">
+                  <div class="error" *ngIf="createFormGroup.controls.sfxCodeFC.errors.required">Mandatory Field
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="form-group">
+              <div class="contol-label col-lg-6 col-md-6 col-sm-6" style="float: left;">
+                <a><label class="text-label" (click)="openJobSearch()"><b>Search Submitted Jobs</b></label></a>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <div class="row">
+          <div class="col-md-12 text-center footer-button-padding">
+            <button mat-raised-button color="primary" (click)="openJobSearch()"><b>Search Submitted Jobs</b></button>
+            <button mat-raised-button style ="margin-left:0.3rem" color="primary" [disabled]="!myForm.form.valid"
+              (click)="submit()">Execute</button>
+          </div>
+        </div>
+  
+      </form>
+      
+    </mat-card-content>
+  
+  
+  </mat-card>
+</div>

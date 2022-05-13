@@ -1,0 +1,71 @@
+<section>
+    <form class="search" #myForm="ngForm" [formGroup]="searchFormGroup">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                    <label class="asterisk-if-mandatory input-label">Document Type</label>
+                </div>
+                <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                    <ng-select [items]="docTypeList" 
+                     bindLabel="lookupDescription" bindValue="lookupVal"
+                        name="lookupDescription" 
+                        placeholder="DOCUMENT TYPE" [(ngModel)]="searchValues.documentType"
+                        formControlName="docTypeFC"></ng-select>
+                    <div class="error"
+                        *ngIf="searchFormGroup.controls.docTypeFC.invalid && searchFormGroup.controls.docTypeFC.touched">
+                        <div>Mandatory Field For Search</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+                <div class=" contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                    <label class="input-label">Document Number</label>
+                </div>
+                <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                    <input class="form-control input-md1" matInput placeholder="DOCUMENT NUMBER"
+                       name="documentNumber" [ngModelOptions]="{standalone: true}" [(ngModel)]="searchValues.documentNumber">
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                <div class=" contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                    <label class="input-label">Period From</label>
+                </div>
+                <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                    <mat-form-field appearance="outline" class="no-padding">
+                        <input class="date-form-control" matInput [matDatepicker]="picker1" placeholder="DD-MMM-YYYY"
+                            [ngModelOptions]="{standalone: true}" [(ngModel)]="searchValues.fromDate" readonly>
+                        <mat-datepicker-toggle matPrefix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker panelClass="safexDatePicker" #picker1></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+                <div class=" contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                    <label class="input-label">Period To</label>
+                </div>
+                <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                    <mat-form-field appearance="outline" class="no-padding">
+                        <input class="date-form-control" matInput [min]="searchValues.fromDate"
+                            [ngModelOptions]="{standalone: true}" [matDatepicker]="picker2" placeholder="DD-MMM-YYYY"
+                            [(ngModel)]="searchValues.toDate" readonly>
+                        <mat-datepicker-toggle matPrefix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker panelClass="safexDatePicker" #picker2></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: center;">
+            <button mat-raised-button [disabled]="!myForm.form.valid" color="primary"
+                (click)="pushValues()">Search</button>
+        </div>
+    </form>
+</section>

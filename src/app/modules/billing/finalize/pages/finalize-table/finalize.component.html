@@ -1,0 +1,124 @@
+<div class="inner-page-padding">
+    <h2 style="font-size:0.9rem;font-weight: 600;">Finalize Bill</h2>
+    <app-breadcrumb></app-breadcrumb>
+    <mat-card fxLayout="column" fxFlexFill>
+        <mat-card-header>
+        </mat-card-header>
+        <mat-card-content>
+            <br>
+            <app-finalize-search (finalizeSearchVal)="getSearchVal($event)" [searchValues]="clearSearchValues">
+            </app-finalize-search>
+            <mat-accordion>
+                <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+                    <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+                        <span class="mat-content-label">Finalize Results</span>
+                    </mat-expansion-panel-header>
+                    <hr class="divider">
+                    <div class="form-row">
+                        <div class="col-md-12 text-left">
+                            <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z0">
+                                <!-- Checkbox Column
+                                <ng-container matColumnDef="select">
+                                    <mat-header-cell *matHeaderCellDef>
+                                        <mat-checkbox (change)="customToggle($event)" [checked]="isAllSelected()">
+                                        </mat-checkbox>
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row">
+                                        <mat-checkbox (change)="changeRow(row,$event)"
+                                            [checked]="checkIfFinalized(row)">
+                                        </mat-checkbox>
+                                    </mat-cell>
+                                </ng-container> -->
+
+                                <!-- Checkbox Column -->
+                                <ng-container matColumnDef="select">
+                                    <mat-header-cell *matHeaderCellDef>
+                                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                                            [checked]="selection.hasValue() && isAllSelected()"
+                                            [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                            [aria-label]="checkboxLabel()">
+                                        </mat-checkbox>
+                                    </mat-header-cell>
+                                    <mat-cell data-label="Select" *matCellDef="let row">
+                                        <mat-checkbox (click)="$event.stopPropagation()"
+                                            (change)="$event ? selection.toggle(row) : null"
+                                            [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                                        </mat-checkbox>
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Batch Number Column -->
+                                <ng-container matColumnDef="batchNum">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Batch Number</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Batch Number">{{ element.batchNum }}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Batch Status Column -->
+                                <ng-container matColumnDef="phase">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Batch Status</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Batch Status">
+                                        {{ element.phase }}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Billing Type Column -->
+                                <ng-container matColumnDef="batchType">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Billing Type</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Billing Type">{{ element.batchType
+                                        }}</mat-cell>
+                                </ng-container>
+
+                                <!-- Request Date Column -->
+                                <ng-container matColumnDef="requestDt">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Request Date</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Request Date">{{ element.requestDt |
+                                        date:'dd-MMM-yyyy' }}
+                                    </mat-cell>
+                                </ng-container>
+
+                                <!-- Billing Cycle Column -->
+                                <ng-container matColumnDef="billingCycle">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Billing Cycle</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Billing Cycle">{{
+                                        element.billingCycle }}</mat-cell>
+                                </ng-container>
+
+                                <!-- Created By Column -->
+                                <ng-container matColumnDef="createdBy">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header><b>Created By</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Created By">{{
+                                        element.createdBy }}</mat-cell>
+                                </ng-container>
+
+                                <!-- Download Errors Column -->
+                                <ng-container matColumnDef="download">
+                                    <mat-header-cell *matHeaderCellDef><b>Download Details</b></mat-header-cell>
+                                    <mat-cell *matCellDef="let element" data-label="Download Details">
+                                        <a class="excel-img">
+                                            <img (click)="generateExcelReport(element.billBatchId)" class="png-icon"
+                                                style="height: 25px;"
+                                                src="../../../../../../assets/icons/icons8-microsoft-excel-52.png"
+                                                class="img-icon" />
+                                        </a>
+                                    </mat-cell>
+                                </ng-container>
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns">
+                                </mat-row>
+                            </mat-table>
+                            <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+                        </div>
+                    </div>
+                    <div class="form-row" [style.margin-top]="'12px'">
+                        <div class="col-md-12 text-center footer-button-padding" style = "margin-bottom:0.3rem;">
+                            <button mat-raised-button (click)="clear()">Reset</button>
+                            <button mat-raised-button style= "margin-left: 0.3rem" *ngIf="writeAccess" color="primary"
+                                (click)="submit()">Finalize</button>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,60 @@
+
+//header
+h2{
+  margin-bottom: 0px !important;
+  margin-left: 5px;
+}
+
+//to remove the bootstrap left padding.
+.contol-label{
+  padding-left: 0px;
+}
+
+//for subheadings.
+.mat-content-label {
+  padding-top: 14px;
+  font-weight: bold;
+  font-size: 11.52px;
+}
+
+//for input label field
+.input-label{
+  font-weight: bold;
+  font-size: 11.52px;
+}
+
+// For label value fields
+.value-label{
+  font-size: 11.52px;
+  text-transform: uppercase;
+}
+
+//for remarks
+.value-label-remarks{
+  font-size: 11.52px;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+ 
+//for expansion panel 
+.mat-expansion-panel-header{
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: grey;
+  border-radius: 0px;
+  padding: 0px;
+  
+}
+
+mat-expansion-panel-header:hover {
+  background-color: white !important;
+}
+
+.mat-expansion-panel-header.mat-expanded{
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color:  #27AE60;;
+  border-radius: 0px;
+  color: #27AE60;;
+}
+

@@ -1,0 +1,121 @@
+<alert></alert>
+<div class="flexcontain">
+  <div  class="welcome-box">
+    <div class=".overlapped">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-9 text-left">
+        <p class="Morning">
+          {{greetings}}, <strong>{{userName}}!</strong>
+        </p>
+      </div>
+       <div class="col-md-1"></div>
+    </div>
+    <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2" class="lateupdatest-">
+      <div class="label-text">
+        <label class="update-text">LATEST UPDATE</label>
+      </div>
+    </div>
+    <div style="padding-left: 0!important; padding-right: 0; width: 70%;">
+    <mat-form-field class="full-width" style="width:100%;">
+      <mat-label style="text-align: left; padding-top: 0.8rem; padding-bottom: 0.5rem; font-weight: 300;font-size: 0.7rem;">{{str}}</mat-label>
+      <mat-select style="height: 1.5rem;" name="msg">
+        <mat-option *ngFor="let msg of broadCastMsgList" style="width: 100%;">
+          <div class= "row">
+            <div style="text-align: left;flex-grow: 1;">
+               <span style="text-align: left; font-size: 0.7rem;padding-inline-start: 1rem;" >{{msg.broadcastMessage}}</span>
+             </div>
+            <div class="float-right" style="text-align: right;flex-grow: 1;">
+               <span style="text-align: right;color: #27ae60;font-weight: 300;font-size: 0.7rem;padding-inline-end: 1rem">{{msg.effectiveDate}}</span>
+             </div>
+           </div>
+           <mat-divider></mat-divider>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    </div>
+    <!-- <div class="col-md-8" style="padding: 0px;">
+      <div>
+        <mat-accordion class="full-width">
+         <mat-expansion-panel >
+            <mat-expansion-panel-header>
+              <mat-panel-title> </mat-panel-title>
+              <mat-panel-description style="text-align: left; padding-top: 0.5rem; padding-bottom: 0.5rem;">
+
+                {{str}}
+              </mat-panel-description>
+              <mat-divider></mat-divider>
+            </mat-expansion-panel-header>
+            <div *ngFor="let msg of broadCastMsgList">
+            <mat-divider></mat-divider>
+            <div class= "row">
+             <div style="text-align: left;flex-grow: 1;">
+                <span style="text-align: left;font-size: 0.7rem" >{{msg.broadcastMessage}}</span>
+              </div>
+             <div class="float-right" style="text-align: right;flex-grow: 1;">
+                <span style="text-align: right;color: #27ae60;font-weight: 300;font-size: 0.7rem;">{{msg.effectiveDate}}</span>
+              </div>
+            </div>
+          <mat-divider></mat-divider>
+          </div>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+     </div> -->
+     <!-- <div class="col-md-1"></div> -->
+     <div class="col-md-2"></div>
+    </div>
+      <div class="right-corner"></div>
+    </div>
+  </div>
+  <div class="container wraper-container">
+  <div class="row icon-row" fxFlexFill >
+    <div fxFlex="25"
+        fxFlex.xs="100"
+        fxFlex.md="100"
+        fxLayoutAlign="center"
+        class="flexbox1" *ngFor="let module of userModules; let idx = index">
+       <mat-accordion class="boxwrapper">
+        <mat-expansion-panel class="mat-elevation-z0 box-radius"
+                             hideToggle="true"
+                             [@.disabled]="true"
+                             (click)="whenClicked(idx)"
+                             [expanded]="closePanel(idx)"
+                             >
+            <mat-expansion-panel-header class="disable_ripple">
+              <mat-panel-title class="title_icons">
+                <div class="active-top">
+                  <span _ngcontent-lok-c19=""
+                    class="material-icons icon-image-preview text-white"
+                    >add</span>
+                </div>
+                <div class="box_width_2">
+                  <mat-icon class = "icon-size" color="primary">{{module.moduleImage}}</mat-icon>
+                  <h2 class="text-center text-success text-size"><b>{{module.moduleName}}</b></h2>
+                </div>
+              </mat-panel-title>
+
+            </mat-expansion-panel-header>
+            <mat-divider class="green-divider"></mat-divider>
+            <div  class="submodule-wrapper" *ngFor="let subModule of module.userSubmoduleList">
+                <div>
+                  <a mat-list-item
+                  routerLinkActive="list-item-active"
+                  routerLink={{subModule.submoduleUrl}}
+                  (click)="OnNavigate(subModule.readFlag,subModule.writeFlag,subModule.writeFlag)"
+                  class="sub-module-link">
+                  <span>{{subModule.submoduleName}}</span>
+                  </a>
+                </div>
+
+                <mat-divider class="green-divider"></mat-divider>
+            </div>
+        </mat-expansion-panel>
+        </mat-accordion>
+   </div>
+  </div>
+  </div>
+</div>

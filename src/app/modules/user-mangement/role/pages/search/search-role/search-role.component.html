@@ -1,0 +1,108 @@
+<div class="flexcontain">
+  <div class="welcome-box">
+    <div class="row">
+      <div class="col-md-12">
+        <a routerLink="/dashboard" style="color: white; font-size:10.08px">Dashboard</a>
+        <i style="font-size:10.08px"> &#x25BA;</i>
+        <a style="color: white; font-size:10.08px"> Role Management</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10">
+        <p class="greetings"> {{greetings}}, <strong>{{userName}}!</strong></p>
+      </div>
+      <div class="col-md-2">
+        <p class="greetings">Administration</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <p class="form-heading">Role Management</p>
+      </div>
+    </div>
+    <div class=".overlapped">
+      <mat-card fxLayout="column" fxFlexFill>
+        <mat-card-header>
+          <button *ngIf="writeAccess" mat-icon-button (click)="gotoCreate(-1)" style="margin-left: auto;">
+            <mat-icon color="primary" style="padding-right: 15px;">add_circle</mat-icon>
+          </button>
+        </mat-card-header>
+        <mat-card-content>
+          <input matInput type="text" class="banner-input" placeholder="SEARCH" (keyup)="doFilter($event.target.value)">
+          <hr class="green-border-heading">
+
+          <mat-table [dataSource]="dataSource" class="mat-elevation-z0" matSort>
+            <!-- Role Name -->
+            <ng-container matColumnDef="roleName">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Role Name</b></mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="Role Name" matTooltip="{{ element.roleName }}"
+                matTooltipPosition="above" matTooltipClass="custom-tooltip">
+                <span class="truncate-text">
+                  {{element.roleName}}
+                </span>
+              </mat-cell>
+            </ng-container>
+
+            <!-- Role Description -->
+            <ng-container matColumnDef="desc">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Description</b></mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="Description" matTooltip="{{ element.desc }}"
+                matTooltipPosition="above" matTooltipClass="custom-tooltip">
+                <span class="truncate-text">
+                  {{element.desc}}
+                </span>
+              </mat-cell>
+            </ng-container>
+
+            <!-- Status -->
+            <ng-container matColumnDef="status">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Status</b></mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="Status"> {{element.status}} </mat-cell>
+            </ng-container>
+
+            <!-- Start date -->
+            <ng-container matColumnDef="effectiveDt">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Start Date</b></mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="Start Date"> {{element.effectiveDt|date:'dd-MMM-yyyy'}}
+              </mat-cell>
+            </ng-container>
+
+            <!-- exp date -->
+            <ng-container matColumnDef="expDt">
+              <mat-header-cell *matHeaderCellDef mat-sort-header><b>Expiry Date</b></mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="Expiry Date"> {{element.expDt|date:'dd-MMM-yyyy'}}
+              </mat-cell>
+            </ng-container>
+
+            <!-- Details -->
+            <ng-container matColumnDef="details">
+              <mat-header-cell *matHeaderCellDef><b>Details</b></mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="Details">
+                <button mat-icon-button aria-label="Details" (click)="gotoCreate(element.roleId)">
+                  <mat-icon color="primary">play_circle_filled</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef><b>View Details</b></mat-header-cell>
+              <mat-cell *matCellDef="let element" data-label="Actions">
+
+                <a class="link-control" (click)=gotoView(element.roleId)>VIEW</a>
+                <i>&nbsp;</i>
+                <i *ngIf="editAccess" style="color:#27ae60;">/</i>
+                <i>&nbsp;</i>
+                <a *ngIf="editAccess" class="link-control" (click)=gotoCreate(element.roleId)>EDIT</a>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SafexBilling</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+		.mainloader {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		.custload {
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			margin: 0 0 5px;
+		}
+		.proloader-img{
+			width:100%;
+			/* display: block; */
+			padding-top: 5px;
+		}
+		.proloader-img img {
+			/* max-width: 200px; */
+			vertical-align: top;
+		}
+
+		.dot {
+			width: 10px;
+			height: 10px;
+			background: #27AE60;
+			border-radius: 100%;
+			display: inline-block;
+			animation: slide 1s infinite;
+			/* margin-bottom: 10px; */
+			margin-right: 2px;
+		}
+
+		.dot:nth-child(1) {
+			animation-delay: 0.1s;
+			background: #27AE60;
+		}
+
+		.dot:nth-child(2) {
+			animation-delay: 0.2s;
+			background: #27AE60;
+		}
+
+		.dot:nth-child(3) {
+			animation-delay: 0.3s;
+			background: #27AE60;
+		}
+
+		.dot:nth-child(4) {
+			animation-delay: 0.4s;
+			background: #27AE60;
+		}
+
+		.dot:nth-child(5) {
+			animation-delay: 0.5s;
+			background: #27AE60;
+		}
+
+		@-moz-keyframes slide {
+			0% {
+				transform: scale(1);
+				-moz-transform: scale(1);
+				-o-transform: scale(1);
+				-ms-transform: scale(1);
+			}
+			50% {
+				opacity: 0.3;
+				transform: scale(2);
+				-moz-transform: scale(2);
+				-o-transform: scale(2);
+				-ms-transform: scale(2);
+			}
+			100% {
+				transform: scale(1);
+				-moz-transform: scale(1);
+				-o-transform: scale(1);
+				-ms-transform: scale(1);
+			}
+		}
+
+		@-webkit-keyframes slide {
+			0% {
+				transform: scale(1);
+				-moz-transform: scale(1);
+				-o-transform: scale(1);
+				-ms-transform: scale(1);
+			}
+			50% {
+				opacity: 0.3;
+				transform: scale(2);
+				-moz-transform: scale(2);
+				-o-transform: scale(2);
+				-ms-transform: scale(2);
+			}
+			100% {
+				transform: scale(1);
+				-moz-transform: scale(1);
+				-o-transform: scale(1);
+				-ms-transform: scale(1);
+			}
+		}
+
+		@-ms-keyframes slide {
+			0% {
+				transform: scale(1);
+				-moz-transform: scale(1);
+				-o-transform: scale(1);
+				-ms-transform: scale(1);
+			}
+			50% {
+				opacity: 0.3;
+				transform: scale(2);
+				-moz-transform: scale(2);
+				-o-transform: scale(2);
+				-ms-transform: scale(2);
+			}
+			100% {
+				transform: scale(1);
+				-moz-transform: scale(1);
+				-o-transform: scale(1);
+				-ms-transform: scale(1);
+			}
+		}
+
+		@-o-keyframes slide {
+			0% {
+				transform: scale(1);
+				-moz-transform: scale(1);
+				-o-transform: scale(1);
+				-ms-transform: scale(1);
+			}
+			50% {
+				opacity: 0.3;
+				transform: scale(2);
+				-moz-transform: scale(2);
+				-o-transform: scale(2);
+				-ms-transform: scale(2);
+			}
+			100% {
+				transform: scale(1);
+				-moz-transform: scale(1);
+				-o-transform: scale(1);
+				-ms-transform: scale(1);
+			}
+		}
+
+		@keyframes slide {
+			0% {
+				transform: scale(1);
+				-moz-transform: scale(1);
+				-o-transform: scale(1);
+				-ms-transform: scale(1);
+			}
+			50% {
+				opacity: 0.3;
+				transform: scale(2);
+				-moz-transform: scale(2);
+				-o-transform: scale(2);
+				-ms-transform: scale(2);
+			}
+			100% {
+				transform: scale(1);
+				-moz-transform: scale(1);
+				-o-transform: scale(1);
+				-ms-transform: scale(1);
+			}
+		}
+	</style>
+	
+  <link rel="icon" type="image/x-icon" href="./assets/icons/SafexpressFavicon.jpg">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <app-root>
+    <div >
+			<div class="mainloader">
+				<div class="proloader-img">
+					<img src="assets/images/loading_logo.png">
+        </div>
+        <div class="custload">
+					<div class="dot"></div>
+					<div class="dot"></div>
+					<div class="dot"></div>
+					<div class="dot"></div>
+					<div class="dot"></div>
+				</div>
+				
+			  </div>
+		</div>
+  </app-root>
+</body>
+</html>

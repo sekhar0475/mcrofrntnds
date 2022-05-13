@@ -1,0 +1,68 @@
+<div class="inner-page-padding">
+    <h2 style="font-size:0.9rem;font-weight: 600;">Update Bill Branch</h2>
+    <app-breadcrumb></app-breadcrumb>
+    <mat-card fxLayout="column" fxFlexFill>
+        <mat-card-header>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="create-search" #myForm="ngForm" [formGroup]="searchFormGroup">
+                <div class="row">
+                    <!--Row 1 Column 1-->
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="input-label">Action</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <label class="value-label">Update Bill Branch</label>
+                        </div>
+                    </div>
+                    <!--Row 1 Column 2-->
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Bill Type</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <ng-select [items]="billTypeList"  class="select-control" role="listbox"
+                                bindLabel="billTypeViewVal" bindValue="billTypeValue" [clearable]="false"
+                                name="billTypeValue" placeholder="BILL TYPE" formControlName="billTypeFc">
+                            </ng-select>
+                            <div class="error"
+                                *ngIf="searchFormGroup.controls.billTypeFc.invalid && searchFormGroup.controls.billTypeFc.touched">
+                                <div class="error" *ngIf="searchFormGroup.controls.billTypeFc.errors.required"> Bill
+                                    Type is required.</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--Row 2 Column 1-->
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Bill Number</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <input class="form-control input-md1" name="billNumber" matInput placeholder="BILL NUMBERS"
+                             formControlName="billNumbersFc">
+                                <div class="error"
+                                *ngIf="searchFormGroup.controls.billNumbersFc.invalid && searchFormGroup.controls.billNumbersFc.touched">
+                                <div class="error" *ngIf="searchFormGroup.controls.billNumbersFc.errors.required"> Bill Numbers 
+                                 is required for Search.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 text-center footer-button-padding">
+                        <button mat-raised-button color="primary" [disabled]="!myForm.form.valid" (click)="submit()">Search</button>
+                    </div>
+                </div>
+            </form>
+        </mat-card-content>
+        <app-update-bill-branch-result *ngIf="displayBillBranchComponent" [searchData]="searchData" 
+        (clearSearchValues)="getClearValue($event)"></app-update-bill-branch-result>
+    </mat-card>
+</div>

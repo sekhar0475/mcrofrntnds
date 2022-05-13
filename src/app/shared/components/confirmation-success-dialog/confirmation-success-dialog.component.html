@@ -1,0 +1,19 @@
+<div mat-dialog-content style="text-align: center;">
+    <img class="png-icon" style="height: 60px; " src="../../../../../../assets/icons/success-icon.png"
+        class="img-icon" />
+    <br>
+    <label class = "success-label">Success!</label>
+    <br>
+    <label class = "message-label">{{data.message}}</label>
+    <br>
+    <label class = "actual-message-label">{{value}}</label>
+    <br>
+    <label class = "free-text-label">Pop-up will automatically redirect to Dashboard in <b>15 Seconds</b>.</label>
+    <br>
+    <label class = "free-text-label"><b>OR</b></label>
+    <br>
+    <label class = "free-text-label">You can click <b>OK</b> to close it now.</label>
+</div>
+<div mat-dialog-actions style="align-items: center;">
+    <button mat-raised-button class="buttons" color="primary" [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+</div>

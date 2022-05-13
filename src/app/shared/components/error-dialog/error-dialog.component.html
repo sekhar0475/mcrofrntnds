@@ -1,0 +1,12 @@
+  <div class="containe">
+    <div mat-dialog-content>
+        <p><b>Please correct the below errors to proceed further with submission:</b></p>  
+        <div *ngFor ="let err of errList">
+            <li>{{err}}</li>
+        </div>   
+      </div>
+      <div mat-dialog-actions>
+         <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button> 
+      </div>
+  </div>
+  

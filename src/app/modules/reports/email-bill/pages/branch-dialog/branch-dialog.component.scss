@@ -1,0 +1,213 @@
+
+//For each form fields.
+.form-control:hover{
+  border-color:  #27ae60;
+  box-shadow: none;
+}
+.form-control:focus{
+  box-shadow: none;
+  border: 0.07rem solid #27ae60;
+}
+
+//for text area
+.textareaoutline:hover{
+  border-color:  #27ae60;
+  box-shadow: none;
+}
+
+.textareaoutline:focus{
+  box-shadow: none;
+  border: 0.07rem solid #27ae60;
+}
+
+//for form-field hover highlight
+.mat-form-field:hover{
+  border-color:  #27ae60;
+  box-shadow: none;
+}
+
+//for form-field focus highlight
+.mat-form-field:focus{
+  box-shadow: none;
+  border: 0.07rem solid #27ae60;
+}
+
+//to center the checkbox
+.checkbox-control{
+  margin-top:10px !important;
+}
+
+//header
+h2{
+  margin-bottom: 0px !important;
+  margin-left: 5px;
+}
+
+//to remove the bootstrap left padding.
+.contol-label{
+  padding-left: 0px;
+}
+// For label value fields
+.value-label{
+  font-size: 11.52px;
+  text-transform: uppercase;
+}
+
+//for mat-date
+.date-form-control{
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  font-size: 11.52px;
+  justify-content: center;
+}
+
+// to ensure date fields fit the cell 100%.
+.mat-form-field{
+  width:100% ;
+}
+
+//for each field
+.form-control {
+  text-transform: uppercase;
+  width: 100%;
+  box-shadow: 0px 0.1rem 0.2rem #00000029;
+  border: 0.05rem solid #6A6868;
+  border-radius: 0px;
+  height: 1.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 11.52px;
+  text-transform: uppercase;
+}
+
+/*.form-control:disabled{
+  background-color: transparent;
+ }*/
+
+//text area
+.textareaoutline {
+  width: 100%;
+  box-shadow: 0px 0.1rem 0.2rem #00000029;
+  border: 0.05rem solid #6A6868;
+  border-radius: 0px;
+  font-size: 11.52px;
+  text-transform: uppercase;
+}
+
+//for input label field
+.input-label{
+  font-weight: bold;
+  font-size: 11.52px;
+}
+
+.input-md1 {
+  padding-left: .6rem;
+}
+
+//for the label field value
+.input-value{
+  font-size: 11.52px;
+}
+
+
+//for the mat-form date field.
+::ng-deep {
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+     color: white;
+     border: 0.05rem solid #6A6868;
+     box-shadow: 0px 0.1rem 0.2rem #00000029;
+     border-radius: 0px;
+     padding: 0px;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-flex {
+     padding: 0px !important;
+     height: 1.6rem !important;
+     align-items: center !important;
+ }
+ .mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 0px !important;
+  display: contents;
+}
+}
+
+.ng-select.ng-select-disabled>.ng-select-container {
+  background-color: red;
+}
+
+.ng-select.ng-select-disabled .ng-arrow-wrapper {
+  display: none;
+}
+
+::ng-deep .mat-datepicker-toggle-default-icon{
+  margin-bottom: 5px !important ;
+}
+
+/* focused color */
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: white;
+  box-shadow: none;
+  border: 0.07rem solid #27ae60;
+}
+
+/* focused color */
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: white;
+  box-shadow: none;
+  border: 0.07rem solid #27ae60;
+}
+
+//for date field.
+.no-padding{
+  ::ng-deep  .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+    font-size: 11.52px;
+    justify-content: center;
+}
+}
+
+.document-search i {
+  padding-top: 4px;
+  padding-left : 2px;
+  position: absolute;
+}
+
+.search-icons{
+color: lightgray;
+}
+
+.input-md2{
+padding-left: 1.2rem;
+}
+
+// set table values
+.mat-header-cell.mat-column-select {
+  min-width: 50% !important;
+  padding-left: 3px;
+  justify-content: left;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-select {
+	min-width: 50% !important;
+  padding-left: 10px;
+  justify-content: left;
+	font-size: 11.52px !important;
+}
+
+.mat-header-cell.mat-column-branchName {
+	min-width: 50% !important;
+  justify-content: left;
+	font-size: 11.52px !important;
+}
+
+.mat-cell.mat-column-branchName {
+	min-width: 50% !important;
+  justify-content: left;
+	font-size: 11.52px !important;
+}
+

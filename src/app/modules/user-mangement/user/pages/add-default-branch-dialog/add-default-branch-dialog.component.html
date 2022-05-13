@@ -1,0 +1,77 @@
+<alert></alert>
+<h2 mat-dialog-title>Select Branches</h2>
+<mat-dialog-content class="mat-typography">
+  <form class="user-search">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="form-group">
+          <div class="contol-label col-lg-2 col-md-2 col-sm-2" style="float: left;">
+            <label class="asterisk-if-mandatory input-label">Search By: </label>
+          </div>
+          <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left; padding-right: 0px; padding-left: 0px;">
+            <ng-select [items]="searchOptions" 
+            bindLabel="name" 
+            bindValue="id"
+            [(ngModel)]="branchSearchBy" 
+            [clearable]="false"
+            (change)="setSearchByName($event)"
+            name="name"></ng-select>
+          </div>
+          <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left; padding-right: 0px; padding-left: 0px;">
+            <ng-select [items]="allFilteredBranches" *ngIf="showForCriteriaSearch"
+                      bindLabel="branchCode" 
+                      bindValue="branchId" 
+                      [clearable]="false"
+                      appendTo="body"
+                      [(ngModel)]="criteriaValue" 
+                      (change)="findByRegion()"
+                      name="regionBranch"></ng-select>            
+            <input class="form-control" 
+                  type="text"  #searchVal 
+            *ngIf="!showForCriteriaSearch"
+            (change)="onchange(searchVal)"
+            (keyup)="onKeyup(searchVal.value.length)"
+            >
+            <div class="error"*ngIf="showError"> Please enter 3 characters</div>
+          </div>
+          <div class=" col-lg-2 col-md-2 col-sm-2 " style="float: left;padding-right: 0px;padding-left: 0px;">
+            <button class="go-button" [disabled]="showError" (click)="onClickGo()" >GO</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+      <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z0">
+        <ng-container matColumnDef="select">
+          <mat-header-cell *matHeaderCellDef mat-sort-header><b>Select</b>
+          </mat-header-cell>
+          <mat-cell data-label="Select" *matCellDef="let row">
+              <mat-radio-button (click)="$event.stopPropagation()"
+              (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)"
+              [aria-label]="checkboxLabel(row)"></mat-radio-button>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Branch Code Column -->
+        <ng-container matColumnDef="branchCode">
+          <mat-header-cell *matHeaderCellDef mat-sort-header><b>Branch Code</b></mat-header-cell>
+          <mat-cell data-label="Branch Id" *matCellDef="let row">{{ row.branchCode }}</mat-cell>
+        </ng-container>
+
+        <!-- Branch Name Column -->
+        <ng-container matColumnDef="branchName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header><b>Branch Name</b></mat-header-cell>
+          <mat-cell data-label="Branch name" *matCellDef="let row">{{ row.branchName }}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns" ></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button class="buttons" mat-dialog-close>Cancel</button>
+  <button mat-raised-button class="buttons" color="primary" [mat-dialog-close]="selection.selected" cdkFocusInitial (click)="AddUserDefBranch()">Ok</button>
+</mat-dialog-actions>

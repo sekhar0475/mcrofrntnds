@@ -1,0 +1,174 @@
+<div class="inner-page-padding">
+    <h2 style="font-size:0.9rem;font-weight: 600;">{{header()}}</h2>
+    <app-breadcrumb></app-breadcrumb>
+    <mat-card fxLayout="column" fxFlexFill>
+        <mat-card-header>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="create-search" #myForm="ngForm" [formGroup]="searchFormGroup">
+                <div class="row">
+                    <!--Row 1 Column 1-->
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="input-label">Action</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <label class="value-label">{{header()}}</label>
+                        </div>
+                    </div>
+
+                    <!--Row 1 Column 2-->
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Document Type</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <ng-select placeholder="DOCUMENT TYPE" [items]="documentTypeList" class="select-control"
+                                role="listbox" bindLabel="documentViewVal" formControlName="documentTypeFc"
+                                bindValue="documentValue" [clearable]="false" name="documentViewVal">
+                            </ng-select>
+                            <div class="error"
+                                *ngIf="searchFormGroup.controls.documentTypeFc.invalid && searchFormGroup.controls.documentTypeFc.touched">
+                                <div class="error" *ngIf="searchFormGroup.controls.documentTypeFc.errors.required">
+                                    Document Type is required for Search.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Row 2 Column 1-->
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="input-label">From Date</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <mat-form-field appearance="outline" class="no-padding">
+                                <input matInput class="date-form-control" [matDatepicker]="picker11"
+                                    placeholder="DD-MMM-YYYY" formControlName="fromDtFc">
+                                <mat-datepicker-toggle matPrefix [for]="picker11"></mat-datepicker-toggle>
+                                <mat-datepicker panelClass="safexDatePicker" #picker11></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <!--Row 2 Column 2-->
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="input-label">To Date</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <mat-form-field appearance="outline" class="no-padding">
+                                <input matInput [min]="searchData.fromDate"  class="date-form-control"
+                                    [matDatepicker]="picker111" placeholder="DD-MMM-YYYY" formControlName="toDtFc">
+                                <mat-datepicker-toggle matPrefix [for]="picker111"></mat-datepicker-toggle>
+                                <mat-datepicker panelClass="safexDatePicker" #picker111></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <!--Row 3 Column 2-->
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Document Branch</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 document-search" style="float: left">
+                            <i class="fa fa-search fa-lg search-icons"></i>
+                            <input class="form-control input-md2" placeholder="SEARCH BRANCH"
+                                formControlName="documentBrFc" (click)="documentBrSearch()" readonly>
+                            <div class="error"
+                                *ngIf="searchFormGroup.controls.documentBrFc.invalid && searchFormGroup.controls.documentBrFc.touched">
+                                <div class="error" *ngIf="searchFormGroup.controls.documentBrFc.errors.required">
+                                    Document Branch is required for Search.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Row 3 Column 1-->
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Document Number</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <input class="form-control input-md1" name="documentNum" matInput
+                                placeholder="DOCUMENT NUMBER" formControlName="documentNumFc">
+                            <div class="error"
+                                *ngIf="searchFormGroup.controls.documentNumFc.invalid && searchFormGroup.controls.documentNumFc.touched">
+                                <div class="error" *ngIf="searchFormGroup.controls.documentNumFc.errors.required">
+                                    Document Number is required for Search.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Row 4 Column 1-->
+                    <div *ngIf="wayBillWriteOff" class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class=" col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Waybill Type</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <ng-select placeholder="WAYBILL TYPE" [items]="waybillTypeList" class="select-control"
+                                role="listbox" bindLabel="waybillViewVal" formControlName="waybillTypeFc"
+                                bindValue="waybillTypeValue" [clearable]="false" name="waybillTypeValue">
+                            </ng-select>
+                            <div class="error"
+                                *ngIf="searchFormGroup.controls.waybillTypeFc.invalid && searchFormGroup.controls.waybillTypeFc.touched">
+                                <div class="error" *ngIf="searchFormGroup.controls.waybillTypeFc.errors.required">
+                                    Waybill Type is required for Search.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <mat-accordion>
+                    <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+                        <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+                            <span class="mat-content-label">{{uploadTag}}</span>
+                        </mat-expansion-panel-header>
+                        <hr class="divider">
+                        <div class="form-row">
+                            <div class="col-md-12" style="text-align: end;">
+                                <a><label class="text-label" (click)="downloadTemplate()"><b>Download
+                                            Template</b></label></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                                <div class=" col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                                <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                                    <label class="asterisk-if-mandatory input-label">Upload File</label>
+                                </div>
+                                <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                                    <input #fileInput type="file" [disabled]="myForm.form.valid"
+                                        (click)="fileInput.value=null" (change)="uploadedFile($event.target.files)"
+                                        placeholder="Upload file" accept=".xlsx">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center footer-button-padding" style = "margin-top:0.5rem">
+                                    <button mat-raised-button  [disabled]="(myForm.form.valid || 
+                                        (searchFormGroup.get('documentTypeFc').invalid || 
+                                        searchFormGroup.get('documentBrFc').invalid) || !fileInput.value)"
+                                        color="primary" (click)="uploadExcel()">Validate and
+                                        Show</button>
+                                    <button mat-raised-button style="margin-left: 0.3rem;" [disabled]="!myForm.form.valid" color="primary"
+                                        (click)="search()">Skip
+                                        Upload and Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </form>
+        </mat-card-content>
+        <app-upload-result *ngIf="displayUploadResult" [uploadData]="uploadData" [documentType]="documentType"
+           [waybillType]="waybillType" [docBranchId]="docBranchId" (clearSearchValues)="getClearValueExcel($event)"></app-upload-result>
+        <app-input-table-result *ngIf="displayInputTable" [invoiceWriteOff]="invoiceWriteOff"
+            [wayBillWriteOff]="wayBillWriteOff" [waybillType]="waybillType" [searchData]="searchData" (clearSearchValues)="getClearValue($event)">
+        </app-input-table-result>
+    </mat-card>
+</div>

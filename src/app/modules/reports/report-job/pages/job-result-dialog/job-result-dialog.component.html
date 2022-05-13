@@ -1,0 +1,72 @@
+<mat-accordion>
+    <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+        <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+            <span class="mat-content-label">Job Search Result</span>
+        </mat-expansion-panel-header>
+        <hr class="divider">
+        <div class="form-row">
+            <div class="col-md-12 text-left">
+                <mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+
+                    <!-- Job Id Column -->
+                    <ng-container matColumnDef="jobId">
+                        <mat-header-cell *matHeaderCellDef><b>Job Id</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Job Id" 
+                            matTooltip="{{element.jobId}}" matTooltipPosition="above" 
+                            matTooltipClass="custom-tooltip">
+                            <span class="truncate-text">
+                                {{element.jobId}}
+                            </span>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Parent Job Id Column -->
+                    <ng-container matColumnDef="parentJobId">
+                        <mat-header-cell *matHeaderCellDef><b>Parent Job Id</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Parent Job Id">{{element.parentJobId}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Job Type Column -->
+                    <ng-container matColumnDef="jobType">
+                        <mat-header-cell *matHeaderCellDef><b>Job Type</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Job Type">
+                            {{element.jobType}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Job status Column -->
+                    <ng-container matColumnDef="status">
+                        <mat-header-cell *matHeaderCellDef><b>Status</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Status">{{element.status}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- message Column -->
+                    <ng-container matColumnDef="message">
+                        <mat-header-cell *matHeaderCellDef><b>Message</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Message" 
+                            matTooltip="{{element.message}}" matTooltipPosition="above" 
+                            matTooltipClass="custom-tooltip">
+                            <span class="truncate-text">
+                                {{element.message}}
+                            </span>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="download">
+                        <mat-header-cell *matHeaderCellDef><b>Download</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element index as i" data-label="Download">
+                            <button mat-raised-button color="primary" [disabled]="element.status!=='COMPLETED'"
+                                (click)="downloadReport(i)">Download</button>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                </mat-table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+            </div>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

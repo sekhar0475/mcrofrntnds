@@ -1,0 +1,126 @@
+<div class="inner-page-padding">
+    <h2 style="font-size:0.9rem;font-weight: 600;">{{header()}}</h2>
+    <app-breadcrumb></app-breadcrumb>
+    <mat-card fxLayout="column" fxFlexFill>
+        <mat-card-header>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="create-search" #myForm="ngForm" [formGroup]="searchFormGroup">
+                <div class="row">
+                    <!--Row 1 Column 1-->
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="input-label">Action</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <label class="value-label">{{header()}}</label>
+                        </div>
+                    </div>
+
+                    <!--Row 1 Column 2-->
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="input-label">Document Type</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <label class="value-label">Receipt</label>
+                        </div>
+                    </div>
+
+                    <!--Row 2 Column 1-->
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="input-label">From Date</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <mat-form-field appearance="outline" class="no-padding">
+                                <input matInput class="date-form-control" [matDatepicker]="picker11"
+                                    placeholder="DD-MMM-YYYY" formControlName="fromDtFc">
+                                <mat-datepicker-toggle matPrefix [for]="picker11"></mat-datepicker-toggle>
+                                <mat-datepicker style="margin-bottom: 5px;" #picker11></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <!--Row 2 Column 2-->
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="input-label">To Date</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <mat-form-field appearance="outline" class="no-padding">
+                                <input matInput [min]="searchData.fromDate" formControlName="toDtFc" class="date-form-control"
+                                    [matDatepicker]="picker111" placeholder="DD-MMM-YYYY">
+                                <mat-datepicker-toggle matPrefix [for]="picker111"></mat-datepicker-toggle>
+                                <mat-datepicker panelClass="safexDatePicker" #picker111></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <!-- Row 3 Column 2 -->
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Document Branch</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 document-search" style="float: left">
+                            <i class="fa fa-search fa-lg search-icons"></i>
+                            <input class="form-control input-md2" placeholder="SEARCH BRANCH"
+                                formControlName="documentBrFc" (click)="documentBrSearch()" readonly>
+                            <div class="error"
+                                *ngIf="searchFormGroup.controls.documentBrFc.invalid && searchFormGroup.controls.documentBrFc.touched">
+                                <div class="error" *ngIf="searchFormGroup.controls.documentBrFc.errors.required">
+                                    Document Branch is required for Search.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Row 3 Column 1-->
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Document Number</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4 " style="float: left">
+                            <input hideRequiredMarker="true" class="form-control input-md1" name="documentNum" matInput
+                                placeholder="DOCUMENT NUMBER" formControlName="documentNumFc"
+                                [disabled]="isDisabledDoc()">
+                        </div>
+                    </div>
+
+                    <!--Row 3 Column 2-->
+                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+                        <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                        <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                            <label class="asterisk-if-mandatory input-label">Cheque Number</label>
+                        </div>
+                        <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                            <input hideRequiredMarker="true" class="form-control input-md1" name="chequeNum" matInput
+                                placeholder="CHEQUE NUMBER" formControlName="chequeNumFc" [disabled]="isDisabledCheq()">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center footer-button-padding">
+                        <button mat-raised-button color="primary" [disabled]="!myForm.form.valid"
+                            (click)="search()">Search</button>
+                        <button mat-raised-button style = "margin-left:0.3rem" (click)="clear()">Reset</button>
+                    </div>
+                </div>
+            </form>
+        </mat-card-content>
+        <app-input-table-result *ngIf="displayInputTable" [searchData]="searchData" [receiptWriteOff]="receiptWriteOff"
+            (clearSearchValues)="getClearValue($event)">
+        </app-input-table-result>
+
+        <app-receipt-cancel-reason *ngIf="displayCancellationComp" [searchData]="searchData"
+            [receiptCancellation]="receiptCancellation" [bankAccounts]="bankAccounts"
+            (clearSearchValues)="getClearValue($event)">
+        </app-receipt-cancel-reason>
+    </mat-card>
+</div>

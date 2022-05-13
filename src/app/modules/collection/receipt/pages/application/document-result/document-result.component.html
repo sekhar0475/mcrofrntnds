@@ -1,0 +1,134 @@
+<section>
+    <app-document-search (documentSearchVal)="getSearchVal($event)"></app-document-search>
+    <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+            <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+                <span class="mat-content-label">Document Result</span>
+            </mat-expansion-panel-header>
+            <hr class="divider">
+            <form #tableForm="ngForm" novalidate>
+                <mat-table [dataSource]="dataSource" class="mat-elevation-z0" matSort>
+                    <!-- Checkbox Column -->
+                    <ng-container matColumnDef="select">
+                        <mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()">
+                            </mat-checkbox>
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+                            </mat-checkbox>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Document Number Column -->
+                    <ng-container matColumnDef="documentNumber">
+                        <mat-header-cell *matHeaderCellDef><b>Document<br>Number</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Document Number">{{element.documentNumber}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Document Date Column -->
+                    <ng-container matColumnDef="documentDate">
+                        <mat-header-cell *matHeaderCellDef><b>Document<br>Date</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Document Date">
+                            {{element.documentDate | date:'dd-MMM-yyyy'}}</mat-cell>
+                    </ng-container>
+
+                    <!-- Customer Name Column -->
+                    <ng-container matColumnDef="customerName">
+                        <mat-header-cell *matHeaderCellDef><b>Customer<br>Name</b></mat-header-cell>
+                         <mat-cell *matCellDef="let element" data-label="Customer Name"
+                            matTooltip="{{element.customerName}}" matTooltipPosition="above"
+                            matTooltipClass="custom-tooltip">
+                            <span class="truncate-text">
+                                {{element.customerName}}
+                            </span>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Customer Column -->
+                    <ng-container matColumnDef="actualorAvail">
+                        <mat-header-cell *matHeaderCellDef><b>Actual O/S Amount |<br> Available O/S Amount</b>
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Actual Available Os">{{element.actualAmount}} |
+                            {{element.outstandingAmount}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Billing Level Code -->
+                    <ng-container matColumnDef="billingLevelCode">
+                        <mat-header-cell *matHeaderCellDef><B>MSA / SFX /<br>RATE CARD</B></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Billinglevel Code">{{element.billingLevelValue}}
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Freight Amount -->
+                    <ng-container matColumnDef="receiptFreightAmt">
+                        <mat-header-cell *matHeaderCellDef><b>Receipt<br>Freight Amount</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element; let rowIdx = index;" data-label="Receipt Freight Amount">
+                            <input matInput class="form-control input-md1" type="number"
+                                [(ngModel)]="element.appliedFrtAmt" [ngModelOptions]="{standalone: true}"
+                                [ngModelOptions]="{standalone: true}" required>
+                            <!-- </mat-form-field> -->
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- TDS Amount -->
+                    <ng-container matColumnDef="tdsAppliedAmt">
+                        <mat-header-cell *matHeaderCellDef><b>TDS<br>Applied Amount</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element; let rowIdx = index;" data-label="TDS Applied Amount">
+                            <input matInput class="form-control input-md1" type="number"
+                                [ngModelOptions]="{standalone: true}" [(ngModel)]="element.appliedFrtTdsAmt" required>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- GST TDS Amount -->
+                    <ng-container matColumnDef="gstTdsAppliedAmt">
+                        <mat-header-cell *matHeaderCellDef><b>GST TDS<br>Applied Amount</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element; let rowIdx = index;" data-label="GST TDS Applied Amount">
+                            <input matInput class="form-control input-md1" [ngModelOptions]="{standalone: true}"
+                                type="number" [(ngModel)]="element.appliedGstTdsAmt" required>
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Partially Applied Reason -->
+                    <ng-container matColumnDef="partAppliedReason">
+                        <mat-header-cell *matHeaderCellDef><b>Partially<br>Applied Reason</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element; let rowIdx = index;" data-label="Partially Applied Reason">
+
+                            <a class="reason-link" (click)="setReason(element)">{{element.reason}}</a>
+
+                        </mat-cell>
+                    </ng-container>
+
+                    <!-- Collection Date -->
+                    <ng-container matColumnDef="expectedCollDate">
+                        <mat-header-cell *matHeaderCellDef><b>Expected<br>Collection Date</b></mat-header-cell>
+                        <mat-cell *matCellDef="let element" data-label="Expected Collection Date">
+                            <mat-form-field appearance="outline" class="no-padding no-date-padding">
+                                <input matInput class="date-form-control" [min]="todayDate" placeholder="DD-MMM-YYYY"
+                                    [matDatepicker]="picker2" [ngModelOptions]="{standalone: true}"
+                                    [(ngModel)]="element.expectedCollDt">
+                                <mat-datepicker-toggle matPrefix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker panelClass="safexDatePicker" #picker2></mat-datepicker>
+                            </mat-form-field>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                </mat-table>
+                <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons></mat-paginator>
+                <div class="form-row" [style.margin-top]="'12px'">
+                    <div class="col-md-12 text-center footer-button-padding" style="margin-bottom: 0.3rem;">
+                        <button mat-raised-button color="primary" (click)="save()">APPLY</button>
+                        <button mat-raised-button style="margin-left:0.3rem" (click)="back()">BACK</button>
+                    </div>
+                </div>
+            </form>
+        </mat-expansion-panel>
+    </mat-accordion>
+</section>

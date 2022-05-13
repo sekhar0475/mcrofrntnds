@@ -1,0 +1,144 @@
+<section>
+    <!-- Row-1 -->
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div>
+                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                    <label class="input-label">Receipt Number</label>
+                </div>
+                <!-- <div class=" col-lg-1 col-md-1 col-sm-1" style="float: left;">:</div> -->
+                <div class=" col-lg-3 col-md-3 col-sm-3" style="float: left; padding-left: 65px;">
+                    <label class="value-label">{{receiptById?.receiptNum}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                <label class="input-label">Remarks</label>
+            </div>
+            <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left; padding-left: 65px;">
+                <label class="value-label-remarks"> {{receiptById?.remarks}}</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Row-2 -->
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+            <div>
+                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                    <label class="input-label">Customer Type</label>
+                </div>
+                <!-- <div class=" col-lg-1 col-md-1 col-sm-1" style="float: left;">:</div> -->
+                <div class=" col-lg-3 col-md-3 col-sm-3" style="float: left; padding-left: 65px;">
+                    <label class="value-label"> {{receiptById?.custType}}</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                <label class="input-label">Customer Name</label>
+            </div>
+            <!-- <div class=" col-lg-1 col-md-1 col-sm-1" style="float: left;">:</div> -->
+            <div class=" col-lg-6 col-md-6 col-sm-6" style="float: left; padding-left: 65px;">
+                <label class="value-label"> {{receiptById?.custName}}</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Row-3 -->
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div>
+                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                    <label class="input-label">Receipt Freight Amount</label>
+                </div>
+                <!-- <div class=" col-lg-1 col-md-1 col-sm-1" style="float: left;">:</div> -->
+                <div class=" col-lg-3 col-md-3 col-sm-3" style="float: left; padding-left: 65px;">
+                    <label class="value-label"> {{receiptById?.totRecFrtAmt}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Row:4-->
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div>
+                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                    <label class="input-label">TDS Amount</label>
+                </div>
+                <!-- <div class=" col-lg-1 col-md-1 col-sm-1" style="float: left;">:</div> -->
+                <div class=" col-lg-3 col-md-3 col-sm-3" style="float: left; padding-left: 65px;">
+                    <label class="value-label"> {{receiptById?.totRecFrtTdsAmt}}</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                <label class="input-label">GST TDS Amount</label>
+            </div>
+            <!-- <div class=" col-lg-1 col-md-1 col-sm-1" style="float: left;">:</div> -->
+            <div class=" col-lg-3 col-md-3 col-sm-3" style="float: left; padding-left: 65px;">
+                <label class="value-label"> {{receiptById?.totRecGstTdsAmt}}</label>
+            </div>
+        </div>
+    </div>
+
+    <!--Row:5-->
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div>
+                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                    <label class="input-label">Available Receipt Freight</label>
+                </div>
+                <!-- <div class=" col-lg-1 col-md-1 col-sm-1" style="float: left;">:</div> -->
+                <div class=" col-lg-3 col-md-3 col-sm-3" style="float: left; padding-left: 65px;">
+                    <label class="value-label"> {{receiptById?.outstandingFrtAmt}}</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                <label class="input-label">Available TDS Amount</label>
+            </div>
+            <!-- <div class=" col-lg-1 col-md-1 col-sm-1" style="float: left;">:</div> -->
+            <div class=" col-lg-3 col-md-3 col-sm-3" style="float: left; padding-left: 65px;">
+                <label class="value-label"> {{receiptById?.outstandingTdsAmt}}</label>
+            </div>
+        </div>
+    </div>
+
+    <!--Row:6-->
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div>
+                <div class="col-lg-1 col-md-1 col-sm-1" style="float: left;"> &nbsp; </div>
+                <div class="contol-label col-lg-4 col-md-4 col-sm-4" style="float: left;">
+                    <label class="input-label">Available GST TDS Amount</label>
+                </div>
+                <!-- <div class=" col-lg-1 col-md-1 col-sm-1" style="float: left;">:</div> -->
+                <div class="col-lg-3 col-md-3 col-sm-3" style="float: left; padding-left: 65px;">
+                    <label class="value-label"> {{receiptById?.outstandingGstTdsAmt}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6" *ngIf='receiptById!=null? receiptById.allowAttachment : false'>
+            <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="input-label">Attachment</label>
+            </div>
+            <!-- <div class=" col-lg-1 col-md-1 col-sm-1" style="float: left;">:</div> -->
+            <div class=" col-lg-3 col-md-3 col-sm-3" style="float: left; padding-left: 65px;">
+              <input type="file" id="file" (change)="handleFileInput($event.target.files)" >
+            </div>
+          </div>
+    </div>
+</section>

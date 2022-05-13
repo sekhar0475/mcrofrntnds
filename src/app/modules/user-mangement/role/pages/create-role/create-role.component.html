@@ -1,0 +1,240 @@
+<div class="inner-page-padding">
+  <h2 style="font-size:0.9rem;font-weight: 600;">Create Role</h2>
+  <!-- <h2 class = "float-right ctrlLabel">For Submit, use Ctrl + s</h2> -->
+  <app-breadcrumb></app-breadcrumb>
+  <mat-card fxLayout="column" fxFlexFill>
+    <mat-card-content>
+      <form class="create-search" #myForm="ngForm" [formGroup]="createFormGroup">
+        <div class="row">
+          <!-- (keydown) = "onKeyDown($event)" -->
+          <!--Row:1 Column:1-->
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="form-group">
+              <div class="contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+                <label class="asterisk-if-mandatory input-label">Role Name</label>
+              </div>
+              <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left">
+                <input name="roleName" class="form-control input-md1" matInput placeholder="ROLE NAME" id="name"
+                  formControlName="roleNameFC" [(ngModel)]="role.roleName">
+                <div class="error"
+                  *ngIf="createFormGroup.controls.roleNameFC.invalid && (createFormGroup.controls.roleNameFC.touched || createFormGroup.controls.roleNameFC.dirty) ">
+                  <div class="error" *ngIf="createFormGroup.controls.roleNameFC.errors.required">Mandatory Field</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Row:1 Column 2-->
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+            <div class=" contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="input-label">Status</label>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;">
+              <label class="input-value">{{role.status}}</label>
+            </div>
+          </div>
+          <!-- Row:2 Column 1-->
+          <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class=" contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="asterisk-if-mandatory input-label">Description</label>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;">
+              <textarea matInput class="input-md1 textareaoutline" placeholder="DESCRIPTION"
+                formControlName="descriptionFC" [(ngModel)]="role.desc" cols="20" rows="2" maxlength="100"></textarea>
+              <div class="error"
+                *ngIf="createFormGroup.controls.descriptionFC.invalid && (createFormGroup.controls.descriptionFC.touched || createFormGroup.controls.descriptionFC.dirty)">
+                <div class="error" *ngIf="createFormGroup.controls.descriptionFC.errors.required">Mandatory Field</div>
+              </div>
+            </div>
+          </div>
+          <!-- Row:2 Column 2-->
+          <div *ngIf="editable" class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+            <div class=" contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="asterisk-if-mandatory input-label">Start Date</label>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;">
+              <mat-form-field appearance="outline" class="no-padding">
+                <input matInput class="date-form-control" [disabled]="editable" [matDatepicker]="picker111"
+                  placeholder="DD-MMM-YYYY" formControlName="startDateFC" [(ngModel)]="role.effectiveDt">
+                <mat-datepicker-toggle matPrefix [for]="picker111"></mat-datepicker-toggle>
+                <mat-datepicker panelClass="safexDatePicker" #picker111></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Row:2 Column 2-->
+          <div *ngIf="!editable" class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+            <div class=" contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="asterisk-if-mandatory input-label">Start Date</label>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;">
+              <mat-form-field appearance="outline" class="no-padding">
+                <input matInput [min]="todayDate" class="date-form-control" [matDatepicker]="picker111"
+                  placeholder="DD-MMM-YYYY" formControlName="startDateFC" [(ngModel)]="role.effectiveDt">
+                <mat-datepicker-toggle matPrefix [for]="picker111"></mat-datepicker-toggle>
+                <mat-datepicker panelClass="safexDatePicker" #picker111></mat-datepicker>
+                <div class="error"
+                  *ngIf="createFormGroup.controls.startDateFC.invalid && (createFormGroup.controls.startDateFC.touched || createFormGroup.controls.startDateFC.dirty)">
+                  <div class="error" *ngIf="createFormGroup.controls.startDateFC.errors.required">Mandatory Field</div>
+                </div>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="col-sm-6"></div>
+          <!-- Row:3 Column 2 -->
+          <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 0.5rem;">
+            <div class=" col-lg-4 col-md-4 col-sm-4" style="float: left;"> &nbsp; </div>
+            <div class=" contol-label col-lg-3 col-md-3 col-sm-3" style="float: left;">
+              <label class="input-label">Expiry Date</label>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4" style="float: left;">
+              <mat-form-field appearance="outline" class="no-padding">
+                <input matInput [min]=setMinExpiryDate(role.effectiveDt) class="date-form-control"
+                  [matDatepicker]="picker11" placeholder="DD-MMM-YYYY" formControlName="expiryDateFC"
+                  [(ngModel)]="role.expDt">
+                <mat-datepicker-toggle matPrefix [for]="picker11"></mat-datepicker-toggle>
+                <mat-datepicker panelClass="safexDatePicker" #picker11></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <!--End of Row-->
+
+        <mat-accordion>
+          <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+            <mat-expansion-panel-header [collapsedHeight]="'auto'" [expandedHeight]="'auto'">
+              <span class="mat-content-label">Permissions</span>
+            </mat-expansion-panel-header>
+            <span class="add-content-label">Add Permissions</span>
+            <button mat-icon-button aria-label="Add" (click)="addPermission()" [disabled]="!myForm.form.valid">
+              <mat-icon color="primary">add_circle</mat-icon>
+            </button>
+            <br>
+            <div class="row">
+              <div class="col-md-12 text-left">
+                <div class="data-container mat-elevation-z">
+                  <mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+                    <!-- Module Name -->
+                    <ng-container matColumnDef="moduleName" style="position: relative">
+                      <mat-header-cell *matHeaderCellDef><b>Module Name</b></mat-header-cell>
+                      <mat-cell *matCellDef="let element index as i" data-label="Module Name">
+                        <ng-select [disabled]="element.moduleAssignId" appendTo="body" name="moduleName" role="listbox"
+                          style="min-width: 100%;" appearance="outline" [items]="moduleList"
+                          [ngModelOptions]="{standalone: true}" [(ngModel)]="element.moduleId" bindLabel="moduleName"
+                          bindValue="moduleId" [clearable]="false" placeholder="SELECT MODULE"
+                          (ngModelChange)="onModuleChange(i)">
+                        </ng-select>
+                      </mat-cell>
+                    </ng-container>
+                    <!-- SubModule Name -->
+                    <ng-container matColumnDef="subModuleName">
+                      <mat-header-cell *matHeaderCellDef><b>Submodule Name</b></mat-header-cell>>
+                      <mat-cell *matCellDef="let element" data-label="SubModule Name">
+                        <ng-select [disabled]="element.moduleAssignId" appendTo="body" name="submoduleName"
+                          role="listbox" style="min-width: 100%;" appearance="outline"
+                          [items]="subModuleMasterList | advancedFilters: element.moduleId"
+                          [ngModelOptions]="{standalone: true}" [(ngModel)]="element.submoduleId"
+                          bindLabel="submoduleName" bindValue="submoduleId" [clearable]="false"
+                          placeholder="SELECT SUB-MODULE"></ng-select>
+                      </mat-cell>
+                    </ng-container>
+                    <!-- Read FLag -->
+                    <ng-container matColumnDef="readFlag">
+                      <mat-header-cell *matHeaderCellDef><b>Read</b></mat-header-cell>>
+                      <mat-cell *matCellDef="let element" data-label="Read Flag">
+                        <mat-checkbox disabled [checked]='element.readFlag? element.readFlag=="Y" ? true: false : false'
+                          (change)="readFlagChange(element,$event)" class="checkbox-control"></mat-checkbox>
+                      </mat-cell>
+                    </ng-container>
+                    <!-- Write FLag -->
+                    <ng-container matColumnDef="writeFlag">
+                      <mat-header-cell *matHeaderCellDef><b>Write</b></mat-header-cell>
+                      <mat-cell *matCellDef="let element" data-label="Write Flag">
+                        <mat-checkbox [checked]='element.writeFlag? element.writeFlag=="Y" ? true: false : false'
+                          (change)="writeFlagChange(element,$event)" class="checkbox-control"></mat-checkbox>
+                      </mat-cell>
+                    </ng-container>
+                    <!-- Update FLag -->
+                    <ng-container matColumnDef="updateFlag">
+                      <mat-header-cell *matHeaderCellDef><b>Update</b></mat-header-cell>
+                      <mat-cell *matCellDef="let element" data-label="Update Flag">
+                        <mat-checkbox [checked]='element.updFlag? element.updFlag=="Y" ? true: false : false'
+                          (change)="updFlagChange(element,$event)" class="checkbox-control">
+                        </mat-checkbox>
+                      </mat-cell>
+                    </ng-container>
+                    <!-- Start Date -->
+                    <ng-container *ngIf="editable" matColumnDef="startDt">
+                      <mat-header-cell *matHeaderCellDef><b>Start Date</b></mat-header-cell>
+                      <mat-cell *matCellDef="let element" data-label="Start Date">
+                        <mat-form-field appearance="outline" class="no-padding">
+                          <input matInput class="date-form-control" readonly
+                            [disabled]="validPermiStartDate(element.effectiveDt)" [ngModelOptions]="{standalone: true}"
+                            [min]="role.effectiveDt" [max]="role.expDt" placeholder="DD-MMM-YYYY"
+                            [matDatepicker]="picker1" [(ngModel)]="element.effectiveDt">
+                          <mat-datepicker-toggle matPrefix [for]="picker1"></mat-datepicker-toggle>
+                          <mat-datepicker panelClass="safexDatePicker" #picker1></mat-datepicker>
+                        </mat-form-field>
+                      </mat-cell>
+                    </ng-container>
+                    <ng-container *ngIf="!editable" matColumnDef="startDt">
+                      <mat-header-cell *matHeaderCellDef><b>Start Date</b></mat-header-cell>
+                      <mat-cell *matCellDef="let element" data-label="Start Date">
+                        <mat-form-field appearance="outline" class="no-padding">
+                          <input matInput class="date-form-control" [ngModelOptions]="{standalone: true}"
+                            [min]="role.effectiveDt" [max]="role.expDt" placeholder="DD-MMM-YYYY"
+                            [matDatepicker]="picker1" [(ngModel)]="element.effectiveDt">
+                          <mat-datepicker-toggle matPrefix [for]="picker1"></mat-datepicker-toggle>
+                          <mat-datepicker panelClass="safexDatePicker" #picker1></mat-datepicker>
+                        </mat-form-field>
+                      </mat-cell>
+                    </ng-container>
+                    <!-- Expiry Date -->
+                    <ng-container matColumnDef="expDt">
+                      <mat-header-cell *matHeaderCellDef><b>Expiry Date</b></mat-header-cell>
+                      <mat-cell *matCellDef="let element" data-label="Expiry Date">
+                        <mat-form-field appearance="outline" class="no-padding">
+                          <input matInput class="date-form-control" [ngModelOptions]="{standalone: true}"
+                            [min]=setMinExpiryDate(element.effectiveDt) [max]="role.expDt" placeholder="DD-MMM-YYYY"
+                            [matDatepicker]="picker2" [(ngModel)]="element.expDt">
+                          <mat-datepicker-toggle matPrefix [for]="picker2"></mat-datepicker-toggle>
+                          <mat-datepicker panelClass="safexDatePicker" #picker2></mat-datepicker>
+                        </mat-form-field>
+                      </mat-cell>
+                    </ng-container>
+                    <!-- Delete -->
+                    <ng-container matColumnDef="delete">
+                      <mat-header-cell *matHeaderCellDef> <b>Delete</b></mat-header-cell>
+                      <mat-cell *matCellDef="let element;index as i" data-label="Delete Flag">
+                        <a mat-icon-button aria-label="Details" (click)="deletePermission(element.moduleAssignId,i)"
+                          *ngIf="!element.moduleAssignId">
+                          <mat-icon color="primary">delete</mat-icon>
+                        </a>
+                      </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                  </mat-table>
+                  <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <br>
+        <div class="form-row">
+          <div class="col-md-12 text-center footer-button-padding">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.form.valid"
+              (click)="submit()">Submit</button>
+            <button mat-raised-button style="margin-left:0.3rem" class="secondary-btn" (click)="back()">Back</button>
+          </div>
+        </div>
+        <br>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
